@@ -1,0 +1,128 @@
+{
+  "metadata": {
+    "source": "Particle Data Group 2024",
+    "url": "https://pdg.lbl.gov",
+    "retrieved": "2025-11-28",
+    "notes": "MS-bar masses at 2 GeV for light quarks, pole masses for heavy quarks"
+  },
+  "quarks_GeV": {
+    "u": {
+      "value": 0.00216,
+      "uncertainty": 0.00049,
+      "scheme": "MS-bar at 2 GeV"
+    },
+    "d": {
+      "value": 0.00467,
+      "uncertainty": 0.00048,
+      "scheme": "MS-bar at 2 GeV"
+    },
+    "s": {
+      "value": 0.0934,
+      "uncertainty": 0.0080,
+      "scheme": "MS-bar at 2 GeV"
+    },
+    "c": {
+      "value": 1.27,
+      "uncertainty": 0.02,
+      "scheme": "MS-bar at m_c"
+    },
+    "b": {
+      "value": 4.18,
+      "uncertainty": 0.03,
+      "scheme": "MS-bar at m_b"
+    },
+    "t": {
+      "value": 172.69,
+      "uncertainty": 0.30,
+      "scheme": "Pole mass"
+    }
+  },
+  "leptons_GeV": {
+    "e": {
+      "value": 0.000510998950,
+      "uncertainty": 0.000000000044,
+      "scheme": "Pole mass"
+    },
+    "mu": {
+      "value": 0.1056583755,
+      "uncertainty": 0.0000000023,
+      "scheme": "Pole mass"
+    },
+    "tau": {
+      "value": 1.77686,
+      "uncertainty": 0.00012,
+      "scheme": "Pole mass"
+    }
+  },
+  "pmns_mixing_deg": {
+    "theta12": {
+      "value": 33.44,
+      "uncertainty": 0.78,
+      "notes": "Solar mixing angle"
+    },
+    "theta23": {
+      "value": 49.0,
+      "uncertainty": 1.4,
+      "notes": "Atmospheric mixing angle (normal ordering)"
+    },
+    "theta13": {
+      "value": 8.57,
+      "uncertainty": 0.12,
+      "notes": "Reactor mixing angle"
+    }
+  },
+  "ckm_mixing_deg": {
+    "theta12": {
+      "value": 13.04,
+      "uncertainty": 0.05,
+      "notes": "Cabibbo angle"
+    },
+    "theta23": {
+      "value": 2.38,
+      "uncertainty": 0.06,
+      "notes": "cb mixing"
+    },
+    "theta13": {
+      "value": 0.201,
+      "uncertainty": 0.011,
+      "notes": "ub mixing"
+    }
+  },
+  "neutrino_mass_splittings_eV2": {
+    "dm2_21": {
+      "value": 7.53e-5,
+      "uncertainty": 0.18e-5,
+      "notes": "Solar mass splitting"
+    },
+    "dm2_31": {
+      "value": 2.453e-3,
+      "uncertainty": 0.034e-3,
+      "notes": "Atmospheric mass splitting (normal ordering)"
+    }
+  },
+  "higgs": {
+    "mass_GeV": {
+      "value": 125.25,
+      "uncertainty": 0.17
+    },
+    "vev_GeV": {
+      "value": 246.22,
+      "notes": "v = (sqrt(2) G_F)^(-1/2)"
+    }
+  },
+  "gauge_couplings_at_MZ": {
+    "alpha_em": {
+      "value": 0.00729735256,
+      "uncertainty": 0.00000000067,
+      "notes": "1/137.035999084"
+    },
+    "sin2_theta_W": {
+      "value": 0.23121,
+      "uncertainty": 0.00004
+    },
+    "alpha_s": {
+      "value": 0.1179,
+      "uncertainty": 0.0009
+    }
+  }
+}

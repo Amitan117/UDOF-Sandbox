@@ -1,0 +1,71 @@
+{
+  "version": "2.3.5_H4_ULTRA_WIDE",
+  "description": "H4 Icosahedral Symmetry Exact Eigenvalues + Ultra-Wide Optimized",
+  "cosmology": {
+    "H0": 67.4,
+    "Om": 0.294,
+    "Ob": 0.0493,
+    "rd_Mpc": 147.09
+  },
+  "ese_map": {
+    "ell_IR": 4.7e-05,
+    "ell_star": 2e-15,
+    "k": 1.5,
+    "blend": "log"
+  },
+  "fermion_masses": {
+    "lambda_0": 0.5931386921464596,
+    "beta_ql": 1.6214006567601995,
+    "higgs_vev_GeV": 246.0,
+    "renorm_scale_GeV": 173.0,
+    "gamma": [
+      1.469331,
+      1.75,
+      1.594506
+    ],
+    "sigma": [
+      0.118172,
+      1.651012,
+      3.416979
+    ],
+    "a_u": -0.6825280277986697,
+    "b_u": 3.456207839323256,
+    "a_d": 2.076995670202104,
+    "b_d": 1.9735669287176074,
+    "a_e": 1.2580627785433611,
+    "b_e": 3.1292659928542936,
+    "c_tau": 2.325920549818307
+  },
+  "pmns_mixing": {
+    "epsilon_comm": -2.000082277364097,
+    "epsilon_diff": -0.9576239196736189,
+    "Delta_a": 0.46774550986231506,
+    "Delta_b": 5.641001373829542
+  },
+  "neutrino_masses": {
+    "a_nu": 1.0249,
+    "b_nu": 0.7644,
+    "S_nu": 9.475e-13
+  },
+  "rg_initial": {
+    "mu_ref_GeV": 100.0,
+    "g1": 0.3572,
+    "g2": 0.6515,
+    "g3": 1.2136,
+    "lambda_h": 0.1169,
+    "y_t": 0.6076,
+    "y_b": 0.0139,
+    "y_tau": 0.036
+  },
+  "ward_safety": {
+    "ell0_m": 0.0001,
+    "p_U1": 4
+  },
+  "strong_field": {
+    "K_ref": 10000000000.0,
+    "S_ref": 1.0,
+    "zeta_K": 1.0,
+    "zeta_S": 1.0,
+    "kappa": 5.0
+  }
+}

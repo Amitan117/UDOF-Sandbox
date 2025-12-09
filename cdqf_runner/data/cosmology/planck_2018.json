@@ -1,0 +1,51 @@
+{
+  "metadata": {
+    "source": "Planck Collaboration 2018",
+    "arxiv": "1807.06209",
+    "retrieved": "2025-11-28",
+    "notes": "TT,TE,EE+lowE+lensing"
+  },
+  "parameters": {
+    "H0": {
+      "value": 67.4,
+      "uncertainty": 0.5,
+      "unit": "km/s/Mpc"
+    },
+    "Omega_m": {
+      "value": 0.315,
+      "uncertainty": 0.007,
+      "notes": "Total matter density"
+    },
+    "Omega_b_h2": {
+      "value": 0.02237,
+      "uncertainty": 0.00015,
+      "notes": "Baryon density"
+    },
+    "Omega_c_h2": {
+      "value": 0.1200,
+      "uncertainty": 0.0012,
+      "notes": "Cold dark matter density"
+    },
+    "n_s": {
+      "value": 0.9649,
+      "uncertainty": 0.0042,
+      "notes": "Scalar spectral index"
+    },
+    "sigma_8": {
+      "value": 0.811,
+      "uncertainty": 0.006,
+      "notes": "Matter fluctuation amplitude"
+    },
+    "tau_reio": {
+      "value": 0.054,
+      "uncertainty": 0.007,
+      "notes": "Optical depth to reionization"
+    },
+    "r_d": {
+      "value": 147.09,
+      "uncertainty": 0.26,
+      "unit": "Mpc",
+      "notes": "Sound horizon at drag epoch"
+    }
+  }
+}

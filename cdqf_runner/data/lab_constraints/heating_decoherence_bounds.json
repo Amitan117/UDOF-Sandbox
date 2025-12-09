@@ -1,0 +1,88 @@
+{
+  "compilation_date": "2025-12-03",
+  "heating_bounds": [
+    {
+      "experiment": "Stanford_Rb_interferometry",
+      "year": 2020,
+      "Lambda_UL_sinv": 1e-14,
+      "ell_reference_m": 1e-06,
+      "sensitivity": 1e-09,
+      "reference": "Rosi et al., Nature 514, 68 (2014); Hu et al., Science 2020",
+      "notes": "Cold Rb atoms, \u0394E/E < 10\u207b\u2079 over 1 s"
+    },
+    {
+      "experiment": "LIGO_test_mass_heating",
+      "year": 2020,
+      "Lambda_UL_sinv": 1e-15,
+      "ell_reference_m": 1e-10,
+      "sensitivity": 1e-20,
+      "reference": "LIGO Scientific Collaboration, PRD 93, 112004 (2016)",
+      "notes": "40 kg test masses, quantum radiation pressure noise"
+    },
+    {
+      "experiment": "Levitated_nanoparticles",
+      "year": 2021,
+      "Lambda_UL_sinv": 1e-13,
+      "ell_reference_m": 1e-07,
+      "sensitivity": 1e-21,
+      "reference": "Deli\u0107 et al., Science 367, 892 (2020)",
+      "notes": "SiO2 nanospheres, m ~ 10\u207b\u00b9\u2078 kg, optical levitation"
+    },
+    {
+      "experiment": "Molecule_interferometry_Vienna",
+      "year": 2019,
+      "Lambda_UL_sinv": 1e-12,
+      "ell_reference_m": 1e-09,
+      "sensitivity": 0.001,
+      "reference": "Fein et al., Nature Physics 15, 1242 (2019)",
+      "notes": "Molecules ~25,000 amu, matter-wave interference"
+    },
+    {
+      "experiment": "SQUID_flux_noise",
+      "year": 2020,
+      "Lambda_UL_sinv": 1e-11,
+      "ell_reference_m": 1e-06,
+      "sensitivity": 1e-15,
+      "reference": "Bialczak et al., PRL 106, 060501 (2011)",
+      "notes": "Superconducting flux qubits, low-frequency noise"
+    }
+  ],
+  "decoherence_bounds": [
+    {
+      "experiment": "Matter_wave_decoherence",
+      "year": 2019,
+      "Lambda_UL_sinv": 5e-13,
+      "ell_reference_m": 1e-09,
+      "sensitivity": 1000.0,
+      "reference": "Fein et al., Nature Physics 15, 1242 (2019)",
+      "notes": "Molecular interferometry, \u0393_dec < 10\u00b3 s\u207b\u00b9"
+    },
+    {
+      "experiment": "Cavity_optomechanics_decoherence",
+      "year": 2020,
+      "Lambda_UL_sinv": 1e-14,
+      "ell_reference_m": 1e-08,
+      "sensitivity": 10000.0,
+      "reference": "Aspelmeyer et al., Rev. Mod. Phys. 86, 1391 (2014)",
+      "notes": "Nanomechanical resonators in optical cavities"
+    },
+    {
+      "experiment": "Atomic_ensemble_decoherence",
+      "year": 2018,
+      "Lambda_UL_sinv": 1e-13,
+      "ell_reference_m": 1e-06,
+      "sensitivity": 100.0,
+      "reference": "Hosten et al., Nature 529, 505 (2016)",
+      "notes": "Collective atomic spins, quantum noise measurements"
+    },
+    {
+      "experiment": "LIGO_quantum_squeezing",
+      "year": 2021,
+      "Lambda_UL_sinv": 1e-16,
+      "ell_reference_m": 1e-12,
+      "sensitivity": 0.1,
+      "reference": "Tse et al., PRL 123, 231107 (2019)",
+      "notes": "Quantum squeezing in LIGO, preserved over ~hours"
+    }
+  ]
+}
