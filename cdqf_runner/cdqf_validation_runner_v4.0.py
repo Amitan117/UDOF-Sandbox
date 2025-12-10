@@ -670,7 +670,7 @@ class CDQFFormulas:
         Returns:
             Growth factor D(z)
         """
-        # Try ProperCorrectedGrowth if requested
+        # Try upstream ProperCorrectedGrowth first (requires CLASS but more complete)
         if use_proper:
             try:
                 # Add boltzmann_mcmc to path
@@ -700,8 +700,31 @@ class CDQFFormulas:
                 a = 1.0 / (1.0 + z)
                 return cdqf.growth_factor(a)
             except (ImportError, Exception):
-                # Fallback to simple growth
-                pass
+                # Fallback: try integrated standalone version (no CLASS required)
+                try:
+                    from integrated_modules import ProperGrowthStandalone
+
+                    # Get dark sector params
+                    dark_sector = self.locks.get('dark_sector', {})
+                    Omega_geom_0 = dark_sector.get('Omega_geom_0', 0.3266)
+                    alpha_geom = dark_sector.get('alpha_geom', -0.1885)
+                    p_op = dark_sector.get('p_op', 0.7577)
+
+                    growth = ProperGrowthStandalone(
+                        H0=self.cosmo['H0'],
+                        Omega_m=self.cosmo['Om'],
+                        Omega_b=0.046,
+                        Omega_geom_0=Omega_geom_0,
+                        alpha_geom=alpha_geom,
+                        p_op=p_op,
+                        a_pivot=0.95,
+                        beta_ESE=-0.10,
+                        use_mu_eff=True
+                    )
+                    return growth.growth_factor(z)
+                except (ImportError, Exception):
+                    # Fallback to simple growth
+                    pass
 
         # Simple ΛCDM growth (fallback)
         if quad is None:
@@ -741,6 +764,7 @@ class CDQFFormulas:
             R_X value (1.0 if computation fails)
         """
         try:
+            # Try upstream TSESEResponseDerivation first (requires CLASS via ProperCorrectedGrowth)
             # Add boltzmann_mcmc to path
             boltzmann_dir = PROJECT_ROOT / "boltzmann_mcmc"
             if str(boltzmann_dir) not in sys.path:
@@ -764,7 +788,27 @@ class CDQFFormulas:
             )
             return rx.R_X(a, np.array([k]), use_constraint=True)[0]
         except (ImportError, Exception):
-            return 1.0  # Fallback: no suppression
+            # Fallback: try integrated standalone version (no CLASS required)
+            try:
+                from integrated_modules import RXResponseStandalone
+
+                # Get dark sector params
+                dark_sector = self.locks.get('dark_sector', {})
+                Omega_geom_0 = dark_sector.get('Omega_geom_0', 0.3266)
+                alpha_geom = dark_sector.get('alpha_geom', -0.1885)
+                p_op = dark_sector.get('p_op', 0.7577)
+
+                rx = RXResponseStandalone(
+                    H0=self.cosmo['H0'],
+                    Omega_m=self.cosmo['Om'],
+                    Omega_b=0.046,
+                    Omega_geom_0=Omega_geom_0,
+                    alpha_geom=alpha_geom,
+                    p_op=p_op
+                )
+                return rx.R_X(a, k, use_constraint=True)
+            except (ImportError, Exception):
+                return 1.0  # Fallback: no suppression
 
     # =========================================================================
     # CP VIOLATION - JARLSKOG INVARIANT
@@ -1403,8 +1447,11 @@ class CDQFTests:
         # NEW in v4.0: Test separated formula if enabled
         if self.sparc_formula == 'separated':
             try:
-                # Try to use proper S_ESE computation
-                from prime0.toe.sparc_campaign.compute_proper_s_ese import compute_S_ESE_proper
+                # Try integrated compute_S_ESE_proper first
+                from integrated_modules import compute_S_ESE_proper, ESE_MODULES_AVAILABLE
+
+                if not ESE_MODULES_AVAILABLE:
+                    raise ImportError("ESE modules not available")
 
                 # Test on a few galaxies
                 test_galaxies = (good if good else galaxies)[:10]
@@ -1449,11 +1496,57 @@ class CDQFTests:
                     ))
                     result.n_skip += 1
             except ImportError:
-                result.tests.append(TestResult(
-                    test_name="sparc_separated_formula", status="SKIP",
-                    value=None, notes="compute_proper_s_ese not available"
-                ))
-                result.n_skip += 1
+                # Fallback: try upstream module if available
+                try:
+                    from prime0.toe.sparc_campaign.compute_proper_s_ese import compute_S_ESE_proper
+
+                    # Test on a few galaxies
+                    test_galaxies = (good if good else galaxies)[:10]
+                    k_gal = 0.5  # h/Mpc
+                    R_X_gal = self.formulas.compute_R_X(k_gal, a=1.0)
+
+                    s_ese_values = []
+                    for gal in test_galaxies:
+                        try:
+                            L36 = float(
+                                gal.get('L[3.6]', gal.get('L3_6', gal.get('Lum', 0))))
+                            Rdisk = float(
+                                gal.get('Rdisk', gal.get('R_disk', gal.get('Rd', 1))))
+                            MHI = gal.get('MHI', gal.get('M_gas', 0))
+                            M_star = L36 * 1e9 * 0.5  # M☉
+                            M_gas = MHI * 1e9 if MHI > 0 else 0.2 * M_star
+
+                            # Compute S_ESE at characteristic radius
+                            r_test = np.array([2.2 * Rdisk])
+                            S_ESE = compute_S_ESE_proper(
+                                r_test, M_star, M_gas, Rdisk,
+                                locks=self.locks, method='gradient'
+                            )
+                            if len(S_ESE) > 0 and S_ESE[0] > 0:
+                                s_ese_values.append(S_ESE[0])
+                        except Exception:
+                            continue
+
+                    if len(s_ese_values) > 0:
+                        median_s_ese = np.median(s_ese_values)
+                        result.tests.append(TestResult(
+                            test_name="sparc_separated_formula", status="PASS",
+                            value=median_s_ese, expected="> 0",
+                            notes=f"Separated formula: S_ESE median={median_s_ese:.4f}, R_X={R_X_gal:.4f} (A=0, B free)"
+                        ))
+                        result.n_pass += 1
+                    else:
+                        result.tests.append(TestResult(
+                            test_name="sparc_separated_formula", status="SKIP",
+                            value=None, notes="S_ESE computation unavailable"
+                        ))
+                        result.n_skip += 1
+                except ImportError:
+                    result.tests.append(TestResult(
+                        test_name="sparc_separated_formula", status="SKIP",
+                        value=None, notes="compute_proper_s_ese not available"
+                    ))
+                    result.n_skip += 1
 
         return result
 
