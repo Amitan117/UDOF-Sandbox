@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "D:\CDQF-Sandbox\cdqf_runner\run_full_validation.py", line 16, in <module>
+    spec.loader.exec_module(runner_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "D:\CDQF-Sandbox\cdqf_runner\cdqf_validation_runner_v4.0.py", line 130, in <module>
+    @dataclass
+     ^^^^^^^^^
+  File "C:\Users\ianma\AppData\Local\Programs\Python\Python312\Lib\dataclasses.py", line 1275, in dataclass
+    return wrap(cls)
+           ^^^^^^^^^
+  File "C:\Users\ianma\AppData\Local\Programs\Python\Python312\Lib\dataclasses.py", line 1265, in wrap
+    return _process_class(cls, init, repr, eq, order, unsafe_hash,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ianma\AppData\Local\Programs\Python\Python312\Lib\dataclasses.py", line 983, in _process_class
+    and _is_type(type, cls, dataclasses, dataclasses.KW_ONLY,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ianma\AppData\Local\Programs\Python\Python312\Lib\dataclasses.py", line 749, in _is_type
+    ns = sys.modules.get(cls.__module__).__dict__
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute '__dict__'. Did you mean: '__dir__'?
