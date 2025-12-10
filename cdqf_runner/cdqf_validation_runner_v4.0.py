@@ -1110,6 +1110,7 @@ class CDQFTests:
         result = DomainResult(domain_name="gauge_symmetry")
 
         # Use gauge unification derivation
+        structure = None  # Initialize to None; will be set if derivation succeeds
         try:
             import sys
             from pathlib import Path
@@ -1117,14 +1118,17 @@ class CDQFTests:
             # Try multiple possible paths
             script_dir = Path(__file__).resolve().parent
             possible_paths = [
-                Path("D:/CDQF Prime-0 Physics Engine"),  # Direct path (most reliable)
+                # Direct path (most reliable)
+                Path("D:/CDQF Prime-0 Physics Engine"),
             ]
             # Try parents path only if we have enough parents
             if len(script_dir.parents) > 3:
-                possible_paths.insert(0, script_dir.parents[3] / "CDQF Prime-0 Physics Engine")
+                possible_paths.insert(
+                    0, script_dir.parents[3] / "CDQF Prime-0 Physics Engine")
             if len(script_dir.parents) > 1:
-                possible_paths.append(script_dir.parent.parent / "CDQF Prime-0 Physics Engine")
-            
+                possible_paths.append(
+                    script_dir.parent.parent / "CDQF Prime-0 Physics Engine")
+
             main_project = None
             for p in possible_paths:
                 if p and p.exists():
@@ -1184,39 +1188,49 @@ class CDQFTests:
             result.n_error += 1
 
         # CP preservation from Lindblad operators
-        try:
-            # Check if CP preservation check is in validation results
-            cp_check = structure.validation.get('cp_preservation', None)
-            if cp_check and cp_check.get('cp_preserving', False):
+        # Only check if structure was successfully derived
+        if structure is not None:
+            try:
+                # Check if CP preservation check is in validation results
+                cp_check = structure.validation.get('cp_preservation', None)
+                if cp_check and cp_check.get('cp_preserving', False):
+                    result.tests.append(TestResult(
+                        test_name="lindblad_cp", status="PASS",
+                        value=True, expected="CP preservation verified",
+                        notes=f"DERIVED: CPTP verified - {cp_check['n_operators']} operators, "
+                        f"min eigval={cp_check.get('min_eigenvalue', 'N/A'):.2e}, "
+                        f"trace preserving={cp_check.get('trace_preserving', False)}"
+                    ))
+                    result.n_pass += 1
+                elif cp_check:
+                    result.tests.append(TestResult(
+                        test_name="lindblad_cp", status="FAIL",
+                        value=False, expected="CP preservation verified",
+                        notes=f"DERIVED: CPTP check failed - {cp_check.get('method', 'N/A')}"
+                    ))
+                    result.n_fail += 1
+                else:
+                    result.tests.append(TestResult(
+                        test_name="lindblad_cp", status="SKIP",
+                        value=None, expected="CP preservation from Lindblad operators",
+                        notes="REQUIRES: CP preservation check not computed"
+                    ))
+                    result.n_skip += 1
+            except Exception as e:
                 result.tests.append(TestResult(
-                    test_name="lindblad_cp", status="PASS",
-                    value=True, expected="CP preservation verified",
-                    notes=f"DERIVED: CPTP verified - {cp_check['n_operators']} operators, "
-                          f"min eigval={cp_check.get('min_eigenvalue', 'N/A'):.2e}, "
-                          f"trace preserving={cp_check.get('trace_preserving', False)}"
-                ))
-                result.n_pass += 1
-            elif cp_check:
-                result.tests.append(TestResult(
-                    test_name="lindblad_cp", status="FAIL",
-                    value=False, expected="CP preservation verified",
-                    notes=f"DERIVED: CPTP check failed - {cp_check.get('method', 'N/A')}"
-                ))
-                result.n_fail += 1
-            else:
-                result.tests.append(TestResult(
-                    test_name="lindblad_cp", status="SKIP",
+                    test_name="lindblad_cp", status="ERROR",
                     value=None, expected="CP preservation from Lindblad operators",
-                    notes="REQUIRES: CP preservation check not computed"
+                    notes=f"ERROR: {str(e)}"
                 ))
-                result.n_skip += 1
-        except Exception as e:
+                result.n_error += 1
+        else:
+            # Structure derivation failed, so skip CP check
             result.tests.append(TestResult(
-                test_name="lindblad_cp", status="ERROR",
+                test_name="lindblad_cp", status="SKIP",
                 value=None, expected="CP preservation from Lindblad operators",
-                notes=f"ERROR: {str(e)}"
+                notes="REQUIRES: Gauge unification derivation failed or module unavailable"
             ))
-            result.n_error += 1
+            result.n_skip += 1
 
         return result
 
@@ -2163,14 +2177,17 @@ class CDQFTests:
             # Try multiple possible paths
             script_dir = Path(__file__).resolve().parent
             possible_paths = [
-                Path("D:/CDQF Prime-0 Physics Engine"),  # Direct path (most reliable)
+                # Direct path (most reliable)
+                Path("D:/CDQF Prime-0 Physics Engine"),
             ]
             # Try parents path only if we have enough parents
             if len(script_dir.parents) > 3:
-                possible_paths.insert(0, script_dir.parents[3] / "CDQF Prime-0 Physics Engine")
+                possible_paths.insert(
+                    0, script_dir.parents[3] / "CDQF Prime-0 Physics Engine")
             if len(script_dir.parents) > 1:
-                possible_paths.append(script_dir.parent.parent / "CDQF Prime-0 Physics Engine")
-            
+                possible_paths.append(
+                    script_dir.parent.parent / "CDQF Prime-0 Physics Engine")
+
             main_project = None
             for p in possible_paths:
                 if p and p.exists():
@@ -2452,7 +2469,8 @@ class CDQFValidationRunner:
                 self.log(f"  {test.test_name:30s} {status:12s} = {val}")
                 # Log notes if present (especially for errors)
                 if test.notes and (test.status in ['ERROR', 'FAIL'] or 'ERROR' in test.notes):
-                    notes_short = test.notes[:120] if len(test.notes) > 120 else test.notes
+                    notes_short = test.notes[:120] if len(
+                        test.notes) > 120 else test.notes
                     self.log(f"    {notes_short}")
 
             n = result.n_pass + result.n_fail + result.n_error + \
