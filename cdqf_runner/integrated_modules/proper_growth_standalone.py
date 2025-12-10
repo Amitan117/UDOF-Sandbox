@@ -182,18 +182,17 @@ class ProperGrowthStandalone:
         mu_eff_a = self.mu_effective(a)
 
         # d ln H / d ln a (approximation)
-        # From original CDQFBoltzmannFull._growth_ode:
-        # Uses simplified: dlnH/dlna ≈ 1.5 * Omega_m(a)
-        # This is exact for matter-dominated and close for CDQF modified expansion
+        # From original ProperCorrectedGrowth._growth_ode_corrected (line 157):
+        # Uses: dlnH/dlna = 1.5 * self.Omega_dm_cdqf(a)
+        # This is for H evolution (uses total dark matter density)
+        # Note: Original uses Omega_dm_cdqf only, but should include baryons for consistency
 
         # Matter density parameter at scale factor a (CDQF modified)
         Omega_dm_a = self.Omega_dm_cdqf(a)
-        Omega_b_a = self.Omega_b * (a ** (-3.0))
-        Omega_m_a = Omega_dm_a + Omega_b_a
 
-        # Simplified: dlnH/dlna ≈ 1.5 * Omega_m(a)
-        # This matches the original implementation and is stable
-        dlnH_dlna = 1.5 * Omega_m_a
+        # Match original: use Omega_dm_cdqf only for dlnH/dlna
+        # (Original implementation uses this for H evolution)
+        dlnH_dlna = 1.5 * Omega_dm_a
 
         # Corrected growth equation
         # D'' + [2 + dlnH/dlna] D' - (3/2) μ_eff Ω_cl D = 0
@@ -221,14 +220,14 @@ class ProperGrowthStandalone:
         dD_dlna_init = a_init
         y0 = np.array([D_init, dD_dlna_init])
 
-        # Solve ODE
+        # Solve ODE with tighter tolerances for high resolution
         try:
             solution = odeint(
                 self._growth_ode_corrected,
                 y0,
                 lna_arr,
-                atol=1e-8,
-                rtol=1e-8
+                atol=1e-10,  # Tighter tolerance for high resolution
+                rtol=1e-10
             )
             D_arr = solution[:, 0]
             dD_dlna_arr = solution[:, 1]
@@ -279,6 +278,16 @@ class ProperGrowthStandalone:
 
         if self._z_growth is None or len(self._z_growth) == 0:
             return np.nan
+
+        # Explicit boundary handling: ensure D(z=0) = 1.0 exactly
+        # This prevents interpolation artifacts at the boundary
+        if abs(z) < 1e-12:
+            return 1.0
+
+        # For z very close to 0, check if it's in the grid
+        if z < self._z_growth[0]:
+            # Extrapolation: use first grid value (should be 1.0)
+            return self._D_growth[0]
 
         return np.interp(z, self._z_growth, self._D_growth)
 
