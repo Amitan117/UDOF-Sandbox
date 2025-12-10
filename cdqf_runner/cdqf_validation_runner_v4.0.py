@@ -7,8 +7,25 @@ CDQF UNIVERSAL VALIDATION RUNNER v4.0
 Complete validation framework for CDQF unified physics model.
 ALL TESTS ARE COMPUTED - no placeholders, no hardcoded results.
 
+AUDIT STATUS (2025-12-XX):
+- Critical audit fixes in progress
+- Removing hardcoded PASS results
+- Computing all values from first principles
+- Failing loudly on missing dependencies
+
 VERSION: 4.0.0
 DATE: 2025-12-XX
+
+CITATIONS:
+This runner uses external data sources and software. Please see CITATIONS.md
+for complete bibliographic information:
+- DESI DR1 BAO data (DESI Collaboration 2024)
+- Pantheon+SH0ES supernova data (Scolnic et al. 2022)
+- SPARC galaxy catalog (Lelli et al. 2016)
+- Planck 2018 cosmological parameters (Planck Collaboration 2020)
+- PDG 2024 particle masses (Workman et al. 2024)
+- CAMB for CMB power spectra (Lewis & Challinor 2011)
+- NumPy (Harris et al. 2020), SciPy (Virtanen et al. 2020)
 
 UPDATES FROM v3.3:
 - MCMC-validated parameters (H0=70.21, Omega_m=0.3185, etc.)
@@ -210,24 +227,26 @@ DEFAULT_LOCKS = {
 def load_locks() -> Dict:
     """Load locks from file or use defaults."""
     locks = DEFAULT_LOCKS.copy()
-    
+
     # Try to load main locks file
     if LOCKS_PATH.exists():
         with open(LOCKS_PATH, 'r') as f:
             file_locks = json.load(f)
             # Merge file locks into defaults
             locks.update(file_locks)
-    
+
     # Try to load dark sector locks (MCMC-validated)
     if DARK_SECTOR_LOCKS_PATH.exists():
         with open(DARK_SECTOR_LOCKS_PATH, 'r') as f:
             dark_locks = json.load(f)
             # Extract dark sector params
             if 'params' in dark_locks:
-                locks.setdefault('dark_sector', {}).update(dark_locks['params'])
+                locks.setdefault('dark_sector', {}).update(
+                    dark_locks['params'])
             if 'metadata' in dark_locks and 'H0' in dark_locks['metadata']:
-                locks.setdefault('cosmology', {})['H0'] = dark_locks['metadata']['H0']
-    
+                locks.setdefault('cosmology', {})[
+                    'H0'] = dark_locks['metadata']['H0']
+
     return locks
 
 # ============================================================================
@@ -643,11 +662,11 @@ class CDQFFormulas:
     def growth_factor(self, z: float, use_proper: bool = True) -> float:
         """
         Linear growth factor D(z) normalized to D(0) = 1.
-        
+
         Parameters:
             z: Redshift
             use_proper: If True, use ProperCorrectedGrowth (if available)
-        
+
         Returns:
             Growth factor D(z)
         """
@@ -658,15 +677,15 @@ class CDQFFormulas:
                 boltzmann_dir = PROJECT_ROOT / "boltzmann_mcmc"
                 if str(boltzmann_dir) not in sys.path:
                     sys.path.insert(0, str(boltzmann_dir))
-                
+
                 from cdqf_boltzmann_corrected import ProperCorrectedGrowth
-                
+
                 # Get dark sector params
                 dark_sector = self.locks.get('dark_sector', {})
                 Omega_geom_0 = dark_sector.get('Omega_geom_0', 0.3266)
                 alpha_geom = dark_sector.get('alpha_geom', -0.1885)
                 p_op = dark_sector.get('p_op', 0.7577)
-                
+
                 cdqf = ProperCorrectedGrowth(
                     H0=self.cosmo['H0'],
                     Omega_m=self.cosmo['Om'],
@@ -683,7 +702,7 @@ class CDQFFormulas:
             except (ImportError, Exception):
                 # Fallback to simple growth
                 pass
-        
+
         # Simple ΛCDM growth (fallback)
         if quad is None:
             return 1.0 / (1 + z)
@@ -709,15 +728,15 @@ class CDQFFormulas:
         D_0 *= E(0)
 
         return D_a / D_0 if D_0 > 0 else 1.0
-    
+
     def compute_R_X(self, k: float, a: float = 1.0) -> float:
         """
         Compute R_X(a,k) scale-dependent response function.
-        
+
         Parameters:
             k: Wavenumber [h/Mpc]
             a: Scale factor (default: 1.0 for z=0)
-        
+
         Returns:
             R_X value (1.0 if computation fails)
         """
@@ -726,15 +745,15 @@ class CDQFFormulas:
             boltzmann_dir = PROJECT_ROOT / "boltzmann_mcmc"
             if str(boltzmann_dir) not in sys.path:
                 sys.path.insert(0, str(boltzmann_dir))
-            
+
             from ruthless_analysis.phase2_theory.response_model.derive_from_ese_kernel import TSESEResponseDerivation
-            
+
             # Get dark sector params
             dark_sector = self.locks.get('dark_sector', {})
             Omega_geom_0 = dark_sector.get('Omega_geom_0', 0.3266)
             alpha_geom = dark_sector.get('alpha_geom', -0.1885)
             p_op = dark_sector.get('p_op', 0.7577)
-            
+
             rx = TSESEResponseDerivation(
                 H0=self.cosmo['H0'],
                 Omega_m=self.cosmo['Om'],
@@ -833,7 +852,7 @@ class DataLoader:
 # ============================================================================
 
 class CDQFTests:
-    def __init__(self, locks: Dict, data_root: Path, 
+    def __init__(self, locks: Dict, data_root: Path,
                  cosmology_method: str = 'proper',
                  use_rx: bool = True,
                  sparc_formula: str = 'separated',
@@ -1038,19 +1057,28 @@ class CDQFTests:
     # DOMAIN 6: GAUGE SYMMETRY
     # =========================================================================
     def test_gauge_symmetry(self) -> DomainResult:
+        """
+        Gauge symmetry tests.
+
+        NOTE: These tests require full CDQF gauge theory implementation.
+        Currently marked as SKIP until proper computation is available.
+        """
         result = DomainResult(domain_name="gauge_symmetry")
 
+        # FIXED: Removed hardcoded PASS - requires actual computation
         result.tests.append(TestResult(
-            test_name="lindblad_cp", status="PASS",
-            value=True, expected=True, notes="13 Lindblad operators preserve CP"
+            test_name="lindblad_cp", status="SKIP",
+            value=None, expected="CP preservation from Lindblad operators",
+            notes="REQUIRES: Full CDQF gauge theory implementation - not yet computed"
         ))
-        result.n_pass += 1
+        result.n_skip += 1
 
         result.tests.append(TestResult(
-            test_name="gauge_groups", status="PASS",
-            value=['SU(3)', 'SU(2)', 'U(1)'], expected=['SU(3)', 'SU(2)', 'U(1)']
+            test_name="gauge_groups", status="SKIP",
+            value=None, expected="SU(3)×SU(2)×U(1) emergence",
+            notes="REQUIRES: Gauge group derivation from CDQF - not yet computed"
         ))
-        result.n_pass += 1
+        result.n_skip += 1
 
         return result
 
@@ -1277,7 +1305,7 @@ class CDQFTests:
     def test_sparc(self) -> DomainResult:
         """
         SPARC galaxy rotation curves - test ESE activation at galactic scales.
-        
+
         NEW in v4.0:
         - Uses separated formula: v² = v_bar²[1 + A S_ESE(r)][1 + B R_X(k)]
         - A=0 (from analysis), B free per galaxy
@@ -1377,23 +1405,26 @@ class CDQFTests:
             try:
                 # Try to use proper S_ESE computation
                 from prime0.toe.sparc_campaign.compute_proper_s_ese import compute_S_ESE_proper
-                
+
                 # Test on a few galaxies
                 test_galaxies = (good if good else galaxies)[:10]
                 k_gal = 0.5  # h/Mpc
                 R_X_gal = self.formulas.compute_R_X(k_gal, a=1.0)
-                
+
                 s_ese_values = []
                 for gal in test_galaxies:
                     try:
-                        L36 = float(gal.get('L[3.6]', gal.get('L3_6', gal.get('Lum', 0))))
-                        Rdisk = float(gal.get('Rdisk', gal.get('R_disk', gal.get('Rd', 1))))
+                        L36 = float(
+                            gal.get('L[3.6]', gal.get('L3_6', gal.get('Lum', 0))))
+                        Rdisk = float(
+                            gal.get('Rdisk', gal.get('R_disk', gal.get('Rd', 1))))
                         MHI = gal.get('MHI', gal.get('M_gas', 0))
                         M_star = L36 * 1e9 * 0.5  # M☉
                         M_gas = MHI * 1e9 if MHI > 0 else 0.2 * M_star
-                        
+
                         # Compute S_ESE at characteristic radius
-                        r_test = np.array([2.2 * Rdisk])  # Characteristic radius
+                        # Characteristic radius
+                        r_test = np.array([2.2 * Rdisk])
                         S_ESE = compute_S_ESE_proper(
                             r_test, M_star, M_gas, Rdisk,
                             locks=self.locks, method='gradient'
@@ -1402,7 +1433,7 @@ class CDQFTests:
                             s_ese_values.append(S_ESE[0])
                     except Exception:
                         continue
-                
+
                 if len(s_ese_values) > 0:
                     median_s_ese = np.median(s_ese_values)
                     result.tests.append(TestResult(
@@ -1435,7 +1466,7 @@ class CDQFTests:
 
         At galactic scales: ESE active (σ >> 1 km/s, mixing present) → dark matter effects
         At cosmic scales: ESE inactive (no local mixing) → ΛCDM recovered
-        
+
         NEW in v4.0: Includes R_X(k) scale-dependent response at halo scales.
         """
         result = DomainResult(domain_name="dark_matter")
@@ -1468,7 +1499,7 @@ class CDQFTests:
                 k_gal = 0.5  # h/Mpc (galaxy-scale characteristic wavenumber)
                 R_X_gal = self.formulas.compute_R_X(k_gal, a=1.0)
                 rx_ok = 0.95 < R_X_gal < 1.05  # Should be close to 1 at k=0.5
-                
+
                 result.tests.append(TestResult(
                     test_name="rx_galaxy_scale", status="PASS" if rx_ok else "FAIL",
                     value=R_X_gal, expected="≈ 1.0",
@@ -1498,14 +1529,37 @@ class CDQFTests:
             test_name="de_dominance", status="PASS" if OL > Om else "FAIL",
             value=OL, expected=f"> {Om}"
         ))
-        result.n_pass += 1
+        result.n_pass += 1 if OL > Om else 0
+        result.n_fail += 0 if OL > Om else 1
 
-        # w = -1 from ESE at s->0
-        result.tests.append(TestResult(
-            test_name="w_eos", status="PASS",
-            value=-1.0, expected=-1.0, notes="ESE -> Lambda at cosmic scales"
-        ))
-        result.n_pass += 1
+        # FIXED: Compute w from CDQF dark sector parameters
+        try:
+            dark_sector = self.locks.get('dark_sector', {})
+            alpha_geom = dark_sector.get('alpha_geom', -0.1885)
+            p_op = dark_sector.get('p_op', 0.7577)
+
+            # w_eff = -1 - (α_geom × p_op) / 3
+            w_eff = -1.0 - (alpha_geom * p_op) / 3.0
+            w_obs = -1.0  # Observed dark energy EOS
+
+            error = abs(w_eff - w_obs)
+            passed = error < 0.1  # Allow 10% deviation from -1
+
+            result.tests.append(TestResult(
+                test_name="w_eos", status="PASS" if passed else "FAIL",
+                value=w_eff, expected=f"{w_obs} (observed)",
+                error=error,
+                notes=f"COMPUTED: w = -1 - (α_geom×p_op)/3 = {w_eff:.4f} (α={alpha_geom:.4f}, p_op={p_op:.4f})"
+            ))
+            result.n_pass += 1 if passed else 0
+            result.n_fail += 0 if passed else 1
+        except Exception as e:
+            result.tests.append(TestResult(
+                test_name="w_eos", status="ERROR",
+                value=None, expected="-1.0",
+                notes=f"COMPUTATION FAILED: {str(e)}"
+            ))
+            result.n_error += 1
 
         return result
 
@@ -1532,12 +1586,13 @@ class CDQFTests:
         result.n_pass += 1 if passed else 0
         result.n_fail += 0 if passed else 1
 
+        # FIXED: Removed hardcoded PASS - BBN preservation requires computation
         result.tests.append(TestResult(
-            test_name="bbn_preserved", status="PASS",
-            value="Standard BBN", expected="Standard BBN",
-            notes="ESE doesn't affect nuclear physics"
+            test_name="bbn_preserved", status="SKIP",
+            value=None, expected="Standard BBN predictions",
+            notes="REQUIRES: BBN computation with CDQF dark sector - not yet implemented"
         ))
-        result.n_pass += 1
+        result.n_skip += 1
 
         return result
 
@@ -1558,25 +1613,29 @@ class CDQFTests:
         result.n_pass += 1 if passed else 0
         result.n_fail += 0 if passed else 1
 
+        # FIXED: Removed hardcoded PASS - structure transition requires computation
         result.tests.append(TestResult(
-            test_name="structure_transition", status="PASS",
-            value="S = δ²/(1+δ²)", expected="Smooth transition"
+            test_name="structure_transition", status="SKIP",
+            value=None, expected="Smooth transition scale",
+            notes="REQUIRES: Structure transition computation - not yet implemented"
         ))
-        result.n_pass += 1
+        result.n_skip += 1
 
         # COMPUTED: Growth factor D(z) at z=1
         try:
             use_proper = (self.cosmology_method == 'proper')
             D_1 = self.formulas.growth_factor(1.0, use_proper=use_proper)
             # Growth factor with D(0)=1 normalization
-            # For Ωm=0.294, ΩΛ=0.706: D(1) ~ 0.61-0.62
-            # (Higher than matter-only due to dark energy suppression of growth)
+            # Use actual parameters from locks
+            Om = self.locks['cosmology']['Om']
+            OL = 1 - Om
+            # Expected range: 0.55-0.70 for typical cosmology
             passed = 0.55 < D_1 < 0.70
 
             result.tests.append(TestResult(
                 test_name="growth_factor_D1", status="PASS" if passed else "FAIL",
                 value=D_1, expected="0.55-0.70",
-                notes=f"COMPUTED: D(1) = {D_1:.4f} from Friedmann (Ωm=0.294, ΩΛ=0.706)"
+                notes=f"COMPUTED: D(1) = {D_1:.4f} (Ωm={Om:.4f}, ΩΛ={OL:.4f})"
             ))
             result.n_pass += 1 if passed else 0
             result.n_fail += 0 if passed else 1
@@ -1584,18 +1643,47 @@ class CDQFTests:
             result.tests.append(TestResult(
                 test_name="growth_factor_D1", status="ERROR",
                 value=None, expected="0.55-0.70",
-                notes=f"ERROR: {str(e)}"
+                notes=f"COMPUTATION FAILED: {str(e)}"
             ))
-            result.n_fail += 1
+            result.n_error += 1
 
-        # σ₈
-        sigma8 = 0.811  # CDQF → ΛCDM at linear scales
-        result.tests.append(TestResult(
-            test_name="sigma_8", status="PASS",
-            value=sigma8, expected="0.811 ± 0.006",
-            notes="CDQF → ΛCDM at linear scales"
-        ))
-        result.n_pass += 1
+        # FIXED: Compute σ₈ from growth factor and power spectrum normalization
+        try:
+            # σ₈(z=0) = σ₈₀ from Planck
+            # For now, use Planck value as reference, but should compute from power spectrum
+            # σ₈² = (1/(2π²)) ∫ P(k) W₈(k) k² dk, where W₈ is top-hat filter at 8 Mpc/h
+            # Since we can't compute full power spectrum here, use growth-normalized value
+
+            # Get σ₈₀ from Planck (if in locks) or use standard value
+            planck_data = None
+            try:
+                planck_file = DATA_ROOT / "cosmology" / "planck_2018.json"
+                if planck_file.exists():
+                    import json
+                    with open(planck_file, 'r') as f:
+                        planck_data = json.load(f)
+            except:
+                pass
+
+            sigma8_0_ref = 0.811
+            if planck_data and 'parameters' in planck_data and 'sigma_8' in planck_data['parameters']:
+                sigma8_0_ref = planck_data['parameters']['sigma_8']['value']
+
+            # NOTE: This is still approximate - full computation requires power spectrum
+            # Mark as requiring full implementation
+            result.tests.append(TestResult(
+                test_name="sigma_8", status="SKIP",
+                value=sigma8_0_ref, expected="0.811 ± 0.006",
+                notes=f"REQUIRES: Full power spectrum computation - using reference value {sigma8_0_ref:.3f}"
+            ))
+            result.n_skip += 1
+        except Exception as e:
+            result.tests.append(TestResult(
+                test_name="sigma_8", status="ERROR",
+                value=None, expected="0.811 ± 0.006",
+                notes=f"COMPUTATION FAILED: {str(e)}"
+            ))
+            result.n_error += 1
 
         return result
 
@@ -1618,13 +1706,13 @@ class CDQFTests:
         result.n_pass += 1 if gr_ok else 0
         result.n_fail += 0 if gr_ok else 1
 
-        # GW170817 constraint
+        # FIXED: GW speed constraint requires computation from CDQF GW theory
         result.tests.append(TestResult(
-            test_name="gw_speed", status="PASS",
-            value=1.0, expected="1.0 +/- 1e-15",
-            notes="c_GW/c from GW170817 + GRB170817A"
+            test_name="gw_speed", status="SKIP",
+            value=None, expected="1.0 +/- 1e-15 (GW170817)",
+            notes="REQUIRES: CDQF GW theory computation - not yet implemented"
         ))
-        result.n_pass += 1
+        result.n_skip += 1
 
         return result
 
@@ -1668,13 +1756,15 @@ class CDQFTests:
         result.n_pass += 1 if cassini_ok else 0
         result.n_fail += 0 if cassini_ok else 1
 
-        for name in ["lunar_ranging", "binary_pulsars"]:
+        # FIXED: Removed hardcoded PASS - requires actual constraint computation
+        for name, constraint in [("lunar_ranging", "PPN γ from lunar laser ranging"),
+                                 ("binary_pulsars", "PPN γ from binary pulsar timing")]:
             result.tests.append(TestResult(
-                test_name=name, status="PASS",
-                value="GR prediction", expected="GR prediction",
-                notes="ESE inactive / strong-field suppression"
+                test_name=name, status="SKIP",
+                value=None, expected=constraint,
+                notes="REQUIRES: PPN parameter computation from ESE suppression - not yet implemented"
             ))
-            result.n_pass += 1
+            result.n_skip += 1
 
         return result
 
@@ -1701,24 +1791,98 @@ class CDQFTests:
         result.n_pass += 1 if passed else 0
         result.n_fail += 0 if passed else 1
 
-        # CMB power spectrum computation requires CAMB
+        # CMB power spectrum computation with CAMB
         try:
             import camb
-            # If CAMB is available, we could compute the full power spectrum
-            # For now, just check that CDQF predicts LCDM at CMB scales
-            result.tests.append(TestResult(
-                test_name="cmb_power_spectrum", status="PASS",
-                value="LCDM (s=0)", expected="LCDM",
-                notes="ESE off at CMB → standard LCDM power spectrum"
-            ))
-            result.n_pass += 1
+            import numpy as np
+
+            # Get CDQF cosmological parameters
+            locks = self.locks
+            cosmo = locks.get('cosmology', {})
+            dark = locks.get('dark_sector', {})
+
+            H0 = cosmo.get('H0', 70.21)
+            Omega_m = cosmo.get('Om', 0.3185)
+            # For CAMB, we need Omega_b and Omega_cdm separately
+            # Approximate: Omega_b ≈ 0.05 (standard baryon fraction)
+            Omega_b = cosmo.get('Ob', 0.05)
+            Omega_cdm = Omega_m - Omega_b
+
+            # Dark energy equation of state (CDQF approximation)
+            # w(a) ≈ w0 + wa*(1-a) where w0 ≈ -1.0 for CDQF
+            w0 = -1.0 - (dark.get('alpha_geom', -0.1885)
+                         * dark.get('p_op', 0.7577)) / 3.0
+            wa = 0.0  # Approximate (CDQF w(a) is approximately constant)
+
+            # Set up CAMB parameters
+            pars = camb.CAMBparams()
+            pars.set_cosmology(
+                H0=H0,
+                ombh2=Omega_b * (H0/100.0)**2,
+                omch2=Omega_cdm * (H0/100.0)**2,
+                mnu=0.06,  # Standard neutrino mass
+                omk=0.0    # Flat universe
+            )
+
+            # Set dark energy equation of state
+            pars.set_dark_energy(w=w0, wa=wa)
+
+            # Compute CMB power spectrum up to ell=2500
+            pars.set_for_lmax(2500, lens_potential_accuracy=1)
+            results = camb.get_results(pars)
+
+            # Extract TT power spectrum
+            cl = results.get_cmb_power_spectra(pars, CMB_unit='muK')
+            ell = np.arange(len(cl['total']))
+            cl_tt = cl['total'][:, 0]  # TT spectrum
+
+            # Find first acoustic peak (should be around ell ~ 220)
+            # Look for maximum in range ell=150-300
+            peak_range = (ell >= 150) & (ell <= 300)
+            if np.any(peak_range):
+                peak_idx = np.argmax(cl_tt[peak_range])
+                ell_peak = ell[peak_range][peak_idx]
+                cl_peak = cl_tt[peak_range][peak_idx]
+
+                # Expected first peak: ell ~ 220, amplitude ~ 5000-6000 μK²
+                expected_ell_peak = 220.0
+                ell_peak_error = abs(
+                    ell_peak - expected_ell_peak) / expected_ell_peak
+
+                # Check if peak is in reasonable range (10% tolerance)
+                passed = ell_peak_error < 0.10 and 4000 < cl_peak < 7000
+
+                result.tests.append(TestResult(
+                    test_name="cmb_power_spectrum", status="PASS" if passed else "FAIL",
+                    value=f"ℓ_peak={ell_peak:.1f}, C_ℓ={cl_peak:.0f} μK²",
+                    expected=f"ℓ_peak≈220, C_ℓ≈5000-6000 μK²",
+                    notes=f"CDQF cosmology (H0={H0:.2f}, Ωm={Omega_m:.4f}, w={w0:.3f})"
+                ))
+                result.n_pass += 1 if passed else 0
+                result.n_fail += 0 if passed else 1
+            else:
+                result.tests.append(TestResult(
+                    test_name="cmb_power_spectrum", status="FAIL",
+                    value="No peak found in expected range",
+                    expected="First acoustic peak at ℓ≈220",
+                    notes="Power spectrum computed but peak detection failed"
+                ))
+                result.n_fail += 1
+
         except ImportError:
             result.tests.append(TestResult(
-                test_name="cmb_power_spectrum", status="SKIP",
-                value=None, expected="LCDM prediction",
-                notes="CAMB not installed (pip install camb)"
+                test_name="cmb_power_spectrum", status="ERROR",
+                value=None, expected="LCDM power spectrum",
+                notes="REQUIRED DEPENDENCY MISSING: camb (pip install camb) - cannot compute CMB spectrum"
             ))
-            result.n_skip += 1
+            result.n_error += 1
+        except Exception as e:
+            result.tests.append(TestResult(
+                test_name="cmb_power_spectrum", status="ERROR",
+                value=None, expected="LCDM power spectrum",
+                notes=f"COMPUTATION ERROR: {str(e)}"
+            ))
+            result.n_error += 1
 
         return result
 
@@ -1837,18 +2001,33 @@ class CDQFTests:
         """
         result = DomainResult(domain_name="microphysics")
 
+        # FIXED: Compute actual ESE suppression at collider scales
         # Collider environment: high density but NO astrophysical mixing
-        # ESE is a gravitational effect at astrophysical scales, not particle physics
-        # So we mark sigma_g as very low - particle physics is pristine
-        s_collider = self.formulas.compute_s(
-            1e10, 1e15, sigma_g=1.0)  # No mixing
+        # Compute s at LHC/CERN scales to verify ESE is suppressed
+        try:
+            # Typical collider: Sigma ~ 1e10 kg/m² (very dense), but no mixing
+            sigma_g_collider = 1.0  # m/s - effectively no mixing
+            s_collider = self.formulas.compute_s(
+                1e10, 1e15, sigma_g=sigma_g_collider)
 
-        result.tests.append(TestResult(
-            test_name="sm_preserved", status="PASS",
-            value=s_collider, expected="0 (no ESE at particle scales)",
-            notes="ESE only affects gravity at astrophysical scales with mixing"
-        ))
-        result.n_pass += 1
+            # ESE should be completely suppressed (s ≈ 0) at particle physics scales
+            passed = s_collider < 1e-6
+
+            result.tests.append(TestResult(
+                test_name="sm_preserved", status="PASS" if passed else "FAIL",
+                value=s_collider, expected="< 1e-6 (ESE suppressed)",
+                error=s_collider,
+                notes=f"COMPUTED: s = {s_collider:.2e} at collider scales (σ_g={sigma_g_collider} m/s, no mixing)"
+            ))
+            result.n_pass += 1 if passed else 0
+            result.n_fail += 0 if passed else 1
+        except Exception as e:
+            result.tests.append(TestResult(
+                test_name="sm_preserved", status="ERROR",
+                value=None, expected="< 1e-6",
+                notes=f"COMPUTATION FAILED: {str(e)}"
+            ))
+            result.n_error += 1
 
         return result
 
@@ -2059,25 +2238,25 @@ Examples:
   # Use standard SPARC formula
   python cdqf_validation_runner_v3.3.py --sparc-formula standard
         """)
-    parser.add_argument('--domain', '-d', nargs='+', 
-                       help='Domain(s) to test (default: all)')
+    parser.add_argument('--domain', '-d', nargs='+',
+                        help='Domain(s) to test (default: all)')
     parser.add_argument('--quiet', '-q', action='store_true',
-                       help='Suppress progress output')
+                        help='Suppress progress output')
     parser.add_argument('--list-domains', action='store_true',
-                       help='List available domains and exit')
+                        help='List available domains and exit')
     parser.add_argument('--version', '-v', action='store_true',
-                       help='Show version and exit')
+                        help='Show version and exit')
     parser.add_argument('--cosmology-method', choices=['simple', 'proper'],
-                       default='proper',
-                       help='Cosmology method: simple (ΛCDM) or proper (ProperCorrectedGrowth)')
+                        default='proper',
+                        help='Cosmology method: simple (ΛCDM) or proper (ProperCorrectedGrowth)')
     parser.add_argument('--no-rx', action='store_true',
-                       help='Disable R_X response model (use R_X=1)')
+                        help='Disable R_X response model (use R_X=1)')
     parser.add_argument('--sparc-formula', choices=['standard', 'separated'],
-                       default='separated',
-                       help='SPARC formula: standard or separated (v² = v_bar²[1+A S][1+B R_X])')
+                        default='separated',
+                        help='SPARC formula: standard or separated (v² = v_bar²[1+A S][1+B R_X])')
     parser.add_argument('--sparc-b-prediction', action='store_true',
-                       help='Use multivariate B prediction (0-param model)')
-    
+                        help='Use multivariate B prediction (0-param model)')
+
     args = parser.parse_args()
 
     if args.version:

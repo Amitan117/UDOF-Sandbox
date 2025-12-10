@@ -1,7 +1,10 @@
 # CDQF Validation Runner Data Manifest
 
-**Last Updated:** 2025-11-29  
-**Runner Version:** 3.3.0
+**Last Updated:** 2025-12-10  
+**Runner Version:** 4.0.0
+
+**Citations:** See `CITATIONS.md` in the root directory for complete 
+bibliographic information for all data sources.
 
 ## Directory Structure
 
@@ -23,20 +26,30 @@ cdqf_runner/data/
 ## File Inventory
 
 ### BAO Data (Domain: `bao`)
-| File | Size | Description | Source |
-|------|------|-------------|--------|
-| `bao/desi_dr1_all/mean.txt` | 0.37 KB | DESI DR1 BAO mean measurements | DESI Collaboration |
-| `bao/desi_dr1_all/cov.txt` | 2.12 KB | DESI DR1 BAO covariance matrix | DESI Collaboration |
+| File | Size | Description | Source | Citation |
+|------|------|-------------|--------|----------|
+| `bao/desi_dr1_all/mean.txt` | 0.37 KB | DESI DR1 BAO mean measurements | DESI Collaboration | DESI Collaboration (2024), arXiv:2404.03002 |
+| `bao/desi_dr1_all/cov.txt` | 2.12 KB | DESI DR1 BAO covariance matrix | DESI Collaboration | DESI Collaboration (2024), arXiv:2404.03002 |
 
 ### Supernova Data (Domain: `sne`)
-| File | Size | Description | Source |
-|------|------|-------------|--------|
-| `sne/pantheon_plus/Pantheon+SH0ES.dat` | 565.71 KB | Pantheon+SH0ES catalog | Scolnic et al. 2022 |
+| File | Size | Description | Source | Citation |
+|------|------|-------------|--------|----------|
+| `sne/pantheon_plus/Pantheon+SH0ES.dat` | 565.71 KB | Pantheon+SH0ES catalog | Scolnic et al. 2022 | Scolnic et al. (2022), ApJ 938, 113, arXiv:2112.03863 |
 
 ### SPARC Galaxy Data (Domain: `sparc`)
-| File | Size | Description | Source |
-|------|------|-------------|--------|
-| `sparc/sparc_full_catalog.csv` | 26.13 KB | SPARC galaxy catalog | Lelli et al. 2016 |
+| File | Size | Description | Source | Citation |
+|------|------|-------------|--------|----------|
+| `sparc/sparc_full_catalog.csv` | 26.13 KB | SPARC galaxy catalog | Lelli et al. 2016 | Lelli et al. (2016), AJ 152, 157, arXiv:1606.09251 |
+
+### Cosmological Parameters (Domain: `cosmology`)
+| File | Size | Description | Source | Citation |
+|------|------|-------------|--------|----------|
+| `cosmology/planck_2018.json` | ~few KB | Planck 2018 cosmological parameters | Planck Collaboration | Planck Collaboration (2020), A&A 641, A6, arXiv:1807.06209 |
+
+### Particle Data (Domain: `pdg`)
+| File | Size | Description | Source | Citation |
+|------|------|-------------|--------|----------|
+| `pdg/pdg_masses_2024.json` | ~few KB | PDG 2024 particle masses | Particle Data Group | Workman et al. (2024), PTEP 2024, 083C01 |
 
 ## Data Verification
 

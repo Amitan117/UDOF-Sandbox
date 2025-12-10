@@ -1,0 +1,16 @@
+# CDQF Validation Runner Dependencies
+# Core requirements
+numpy>=1.20.0
+
+# Optional but recommended (for full functionality)
+scipy>=1.7.0
+
+# Optional (for CMB power spectrum test)
+camb>=1.3.0
+
+# Note: Some tests require additional CDQF modules from parent project:
+# - boltzmann_mcmc.cdqf_boltzmann_corrected (ProperCorrectedGrowth)
+# - boltzmann_mcmc.ruthless_analysis.phase2_theory.response_model (R_X)
+# - prime0.toe.sparc_campaign (SPARC separated formula)
+# These will gracefully degrade if not available.
+
