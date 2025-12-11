@@ -1,16 +1,18 @@
 {
-  "version": "2.3.5_H4_ULTRA_WIDE",
-  "description": "H4 Icosahedral Symmetry Exact Eigenvalues + Ultra-Wide Optimized",
+  "version": "CDQF_MASTER_LOCK_v3_SPARC",
+  "description": "Consolidated CDQF lock after rd=147.09 Mpc refit, 2-loop + thresholds RG, TSI fermions, TSI neutrinos, and dark sector v3 (rd147).",
   "cosmology": {
-    "H0": 67.4,
-    "Om": 0.294,
-    "Ob": 0.0493,
+    "H0": 66.03,
+    "Om": 0.2932,
+    "Ob": 0.0486,
     "rd_Mpc": 147.09
   },
   "ese_map": {
     "ell_IR": 4.7e-05,
     "ell_star": 2e-15,
-    "k": 1.5,
+    "k": 1.1190412939023862,
+    "X0": 10.0,
+    "A": 1.9,
     "blend": "log"
   },
   "fermion_masses": {
@@ -67,5 +69,23 @@
     "zeta_K": 1.0,
     "zeta_S": 1.0,
     "kappa": 5.0
+  },
+  "dark_sector": {
+    "ese": {
+      "k": 1.1190412939023862,
+      "X0": 10.0,
+      "A": 1.9,
+      "k_previous": 1.5,
+      "X0_previous": 0.9166,
+      "source": "SPARC-derived from Phase C/D/E"
+    },
+    "cdqf_entropy": {
+      "Omega_geom0": 0.2791,
+      "alpha_geom": 0.1782,
+      "p_op": -0.0439,
+      "H0_km_per_s_Mpc": 69.64,
+      "chi2_total": 8211.35,
+      "notes": "entropy-extended CDQF dark sector lock; w_eff ~ -1 with mild scale dependence"
+    }
   }
 }

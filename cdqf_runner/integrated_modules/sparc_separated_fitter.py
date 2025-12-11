@@ -91,23 +91,29 @@ def compute_rotation_curve_cdqf(
     # For exponential disk: M_enc(r) = M * (1 - (1 + r/R_d)*exp(-r/R_d))
     from scipy.special import gammainc
     
+    # Input masses are in M☉
     M_tot = M_star + M_gas  # M☉
     M_tot_kg = M_tot * 1.989e30  # kg
     
-    G_SI = 6.67430e-11
-    kpc_to_m = 3.086e19
+    G_SI = 6.67430e-11  # m³/(kg·s²)
+    kpc_to_m = 3.086e19  # meters per kpc
     
-    r_m = r_kpc * kpc_to_m
-    R_d_m = R_d * kpc_to_m
+    r_m = r_kpc * kpc_to_m  # meters
     
     # Enclosed mass (exponential disk approximation)
+    # M_enc(r) = M_tot * (1 - (1 + r/R_d)*exp(-r/R_d))
     x = r_kpc / R_d
+    # Avoid division by zero for R_d = 0
+    x = np.where(R_d > 0, x, r_kpc)
     M_enc_frac = 1.0 - (1.0 + x) * np.exp(-x)
+    M_enc_frac = np.maximum(M_enc_frac, 0.0)  # Ensure non-negative
     M_enc_kg = M_tot_kg * M_enc_frac
     
-    # Baryonic velocity
-    v_baryon_mps = np.sqrt(G_SI * M_enc_kg / r_m)
-    v_baryon_kms = v_baryon_mps / 1000.0
+    # Baryonic velocity: v² = G * M_enc / r
+    # Avoid division by zero for r = 0
+    r_m_safe = np.maximum(r_m, 1.0)  # Minimum 1 meter to avoid division by zero
+    v_baryon_mps = np.sqrt(G_SI * M_enc_kg / r_m_safe)
+    v_baryon_kms = v_baryon_mps / 1000.0  # Convert to km/s
     
     # CDQF velocity: v² = v_baryon² * (1 + S_ESE)
     v_sq_cdqf = v_baryon_kms**2 * (1.0 + S_ESE)
@@ -290,7 +296,8 @@ def fit_all_sparc_galaxies(
     valid_fits = 0
     
     for idx, row in df.iterrows():
-        galaxy_name = row.get('Galaxy', row.get('galaxy', f'SPARC_{idx}'))
+        # SPARC catalog uses 'Name' column
+        galaxy_name = row.get('Name', row.get('Galaxy', row.get('galaxy', f'SPARC_{idx}')))
         
         # Load rotation curve data
         rc_data = load_sparc_rotation_curve(galaxy_name, rotation_curves_dir)
@@ -308,26 +315,50 @@ def fit_all_sparc_galaxies(
             continue
         
         # Extract galaxy parameters from catalog
-        M_star = row.get('Mstar', row.get('logMstar', np.nan))
-        if pd.isna(M_star):
-            M_star = 10.0  # Default
+        # SPARC catalog has L3_6 (3.6μm luminosity in 10^9 L☉) and MHI (HI mass in 10^9 M☉)
+        # Convert luminosity to stellar mass: M/L at 3.6μm ≈ 0.6 M☉/L☉ (Meidt+ 2014)
+        L3_6 = row.get('L3_6', np.nan)
+        if not pd.isna(L3_6):
+            # L3_6 is in 10^9 L☉, convert to stellar mass in M☉
+            M_L_ratio_3_6 = 0.6  # M☉/L☉ at 3.6μm
+            M_star = L3_6 * 1e9 * M_L_ratio_3_6  # M☉
         else:
-            # If log mass, convert to linear
-            if M_star < 20:
-                M_star = 10.0**M_star  # Convert log10(M/M☉) to M☉
-            M_star = M_star * 1e9  # Convert to M☉ if needed
+            # Fallback: try Mstar column (if exists)
+            M_star_raw = row.get('Mstar', row.get('logMstar', np.nan))
+            if not pd.isna(M_star_raw):
+                # If log mass, convert to linear
+                if M_star_raw < 20:
+                    M_star = 10.0**M_star_raw  # log10(M/M☉) to M☉
+                else:
+                    M_star = M_star_raw  # Already linear
+            else:
+                # Default: assume ~10^8 M☉ (small galaxy)
+                M_star = 1e8
         
-        M_gas = row.get('Mgas', row.get('logMgas', 0.0))
-        if not pd.isna(M_gas):
-            if M_gas < 20:
-                M_gas = 10.0**M_gas
-            M_gas = M_gas * 1e9  # Convert to M☉ if needed
+        # Gas mass: SPARC catalog has MHI in 10^9 M☉
+        MHI = row.get('MHI', np.nan)
+        if not pd.isna(MHI) and MHI > 0:
+            # MHI is in 10^9 M☉
+            M_gas = MHI * 1e9  # Convert to M☉
         else:
-            M_gas = 0.1 * M_star  # Default: 10% of stellar mass
+            # Fallback: try Mgas column
+            M_gas_raw = row.get('Mgas', row.get('logMgas', np.nan))
+            if not pd.isna(M_gas_raw):
+                if M_gas_raw < 20:
+                    M_gas = 10.0**M_gas_raw
+                else:
+                    M_gas = M_gas_raw
+            else:
+                # Default: 10% of stellar mass
+                M_gas = 0.1 * M_star
         
-        R_d = row.get('Rdisk', row.get('Rd', 1.0))  # kpc
+        # Disk scale length
+        R_d = row.get('Rdisk', row.get('Rd', np.nan))  # kpc
         if pd.isna(R_d) or R_d <= 0:
-            R_d = 2.0  # Default scale length
+            # Fallback: use effective radius
+            R_d = row.get('Reff', 2.0)  # kpc
+            if pd.isna(R_d) or R_d <= 0:
+                R_d = 2.0  # Default
         
         # Get rotation curve data
         r_obs = rc_data['r_kpc'].values
@@ -335,10 +366,11 @@ def fit_all_sparc_galaxies(
         v_err = rc_data['v_err'].values if 'v_err' in rc_data.columns else v_obs * 0.05
         
         # Fit single galaxy
+        # Note: compute_rotation_curve_cdqf expects masses in M☉
         result = fit_single_galaxy(
             galaxy_name, r_obs, v_obs, v_err,
-            M_star / 1e9,  # Convert back to 1e9 M☉ units if needed
-            M_gas / 1e9,
+            M_star,   # Already in M☉
+            M_gas,    # Already in M☉
             R_d,
             locks=locks
         )

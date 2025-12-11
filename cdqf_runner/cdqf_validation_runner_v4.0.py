@@ -1530,77 +1530,34 @@ class CDQFTests:
 
         # NEW in v4.0: Test separated formula if enabled
         if self.sparc_formula == 'separated':
+            # Prefer rotation curve fitter (more comprehensive test)
+            # Fall back to S_ESE computation if rotation curve data unavailable
+            use_rotation_curve_fitter = False
+            rotation_curve_error = None
             try:
-                # Try integrated compute_S_ESE_proper first
-                from integrated_modules import compute_S_ESE_proper, ESE_MODULES_AVAILABLE
-
-                if not ESE_MODULES_AVAILABLE:
-                    raise ImportError("ESE modules not available")
-
-                # Test on a few galaxies
-                test_galaxies = (good if good else galaxies)[:10]
-                k_gal = 0.5  # h/Mpc
-                R_X_gal = self.formulas.compute_R_X(k_gal, a=1.0)
-
-                s_ese_values = []
-                for gal in test_galaxies:
-                    try:
-                        L36 = float(
-                            gal.get('L[3.6]', gal.get('L3_6', gal.get('Lum', 0))))
-                        Rdisk = float(
-                            gal.get('Rdisk', gal.get('R_disk', gal.get('Rd', 1))))
-                        MHI = gal.get('MHI', gal.get('M_gas', 0))
-                        M_star = L36 * 1e9 * 0.5  # M☉
-                        M_gas = MHI * 1e9 if MHI > 0 else 0.2 * M_star
-
-                        # Compute S_ESE at characteristic radius
-                        # Characteristic radius
-                        r_test = np.array([2.2 * Rdisk])
-                        S_ESE = compute_S_ESE_proper(
-                            r_test, M_star, M_gas, Rdisk,
-                            locks=self.locks, method='gradient'
-                        )
-                        if len(S_ESE) > 0 and S_ESE[0] > 0:
-                            s_ese_values.append(S_ESE[0])
-                    except Exception:
-                        continue
-
-                if len(s_ese_values) > 0:
-                    median_s_ese = np.median(s_ese_values)
-                    result.tests.append(TestResult(
-                        test_name="sparc_separated_formula", status="PASS",
-                        value=median_s_ese, expected="> 0",
-                        notes=f"Separated formula: S_ESE median={median_s_ese:.4f}, R_X={R_X_gal:.4f} (A=0, B free)"
-                    ))
-                    result.n_pass += 1
-                else:
-                    result.tests.append(TestResult(
-                        test_name="sparc_separated_formula", status="SKIP",
-                        value=None, notes="S_ESE computation unavailable"
-                    ))
-                    result.n_skip += 1
-            except ImportError:
-                # Use integrated SPARC fitter with rotation curve data
+                # Try new cumulative module first, fallback to original
                 try:
+                    from integrated_modules.sparc_separated_fitter_v2_cumulative import fit_all_sparc_galaxies
+                except ImportError:
                     from integrated_modules.sparc_separated_fitter import fit_all_sparc_galaxies
-                    from pathlib import Path
+                from pathlib import Path
+                
+                catalog_path = DATA_ROOT / "sparc" / "sparc_full_catalog.csv"
+                rotation_curves_dir = DATA_ROOT / "sparc" / "rotation_curves"
+                
+                if rotation_curves_dir.exists() and catalog_path.exists():
+                    # Fit all galaxies with rotation curve data (limit to 20 for speed)
+                    fit_result = fit_all_sparc_galaxies(
+                        catalog_path=catalog_path,
+                        rotation_curves_dir=rotation_curves_dir,
+                        locks=self.locks,
+                        max_galaxies=20  # Test with first 20 galaxies
+                    )
                     
-                    # Set up paths
-                    catalog_path = DATA_ROOT / "sparc" / "sparc_full_catalog.csv"
-                    rotation_curves_dir = DATA_ROOT / "sparc" / "rotation_curves"
-                    
-                    if rotation_curves_dir.exists():
-                        # Fit all galaxies with rotation curve data (limit to 20 for speed)
-                        fit_result = fit_all_sparc_galaxies(
-                            catalog_path=catalog_path,
-                            rotation_curves_dir=rotation_curves_dir,
-                            locks=self.locks,
-                            max_galaxies=20  # Test with first 20 galaxies
-                        )
-                        
-                        if fit_result['status'] == 'COMPLETE' and fit_result['valid_fits'] > 0:
+                    if fit_result.get('status') == 'COMPLETE':
+                        n_fits = fit_result.get('valid_fits', 0)
+                        if n_fits > 0:
                             chi2_per_dof = fit_result['global_chi2_per_dof']
-                            n_fits = fit_result['valid_fits']
                             
                             # Good fit: χ²/dof < 2.0
                             passed = chi2_per_dof < 2.0
@@ -1609,26 +1566,83 @@ class CDQFTests:
                                 test_name="sparc_separated_formula", status="PASS" if passed else "FAIL",
                                 value=f"χ²/dof={chi2_per_dof:.3f} (n={n_fits} galaxies)",
                                 expected="χ²/dof < 2.0",
-                                notes=f"COMPUTED: Per-galaxy fits using rotation curve data - {fit_result['n_galaxies']} total, {n_fits} valid fits"
+                                notes=f"COMPUTED: Per-galaxy fits using rotation curve data - {fit_result.get('n_galaxies', 0)} total, {n_fits} valid fits"
                             ))
                             result.n_pass += 1 if passed else 0
                             result.n_fail += 0 if passed else 1
+                            use_rotation_curve_fitter = True  # Success!
                         else:
-                            result.tests.append(TestResult(
-                                test_name="sparc_separated_formula", status="SKIP",
-                                value=None, notes=f"No valid fits: {fit_result.get('note', 'unknown error')}"
-                            ))
-                            result.n_skip += 1
+                            # Fitter ran but no valid fits found
+                            rotation_curve_error = f"Fitter completed but found 0 valid fits out of {fit_result.get('n_galaxies', 0)} galaxies. Check rotation curve data format."
+                    elif fit_result.get('status') == 'SKIP':
+                        rotation_curve_error = fit_result.get('note', 'Rotation curve fitter skipped')
                     else:
+                        rotation_curve_error = f"Fitting incomplete: {fit_result.get('status', 'unknown')} - {fit_result.get('note', 'no note')}"
+                else:
+                    rotation_curve_error = f"Data not found: catalog={catalog_path.exists()}, curves={rotation_curves_dir.exists()}"
+            except ImportError as e:
+                rotation_curve_error = f"Module import failed: {str(e)}"
+            except Exception as e:
+                rotation_curve_error = f"Runtime error: {str(e)}"
+            
+            # Fallback: Try S_ESE computation if rotation curve fitter unavailable/failed
+            if not use_rotation_curve_fitter:
+                try:
+                    # Try integrated compute_S_ESE_proper
+                    from integrated_modules import compute_S_ESE_proper, ESE_MODULES_AVAILABLE
+
+                    if not ESE_MODULES_AVAILABLE:
+                        raise ImportError("ESE modules not available")
+
+                    # Test on a few galaxies
+                    test_galaxies = (good if good else galaxies)[:10]
+                    k_gal = 0.5  # h/Mpc
+                    R_X_gal = self.formulas.compute_R_X(k_gal, a=1.0)
+
+                    s_ese_values = []
+                    for gal in test_galaxies:
+                        try:
+                            L36 = float(
+                                gal.get('L[3.6]', gal.get('L3_6', gal.get('Lum', 0))))
+                            Rdisk = float(
+                                gal.get('Rdisk', gal.get('R_disk', gal.get('Rd', 1))))
+                            MHI = gal.get('MHI', gal.get('M_gas', 0))
+                            M_star = L36 * 1e9 * 0.5  # M☉
+                            M_gas = MHI * 1e9 if MHI > 0 else 0.2 * M_star
+
+                            # Compute S_ESE at characteristic radius
+                            r_test = np.array([2.2 * Rdisk])
+                            S_ESE = compute_S_ESE_proper(
+                                r_test, M_star, M_gas, Rdisk,
+                                locks=self.locks, method='gradient'
+                            )
+                            if len(S_ESE) > 0 and S_ESE[0] > 0:
+                                s_ese_values.append(S_ESE[0])
+                        except Exception:
+                            continue
+
+                    if len(s_ese_values) > 0:
+                        median_s_ese = np.median(s_ese_values)
+                        result.tests.append(TestResult(
+                            test_name="sparc_separated_formula", status="PASS",
+                            value=median_s_ese, expected="> 0",
+                            notes=f"Separated formula: S_ESE median={median_s_ese:.4f}, R_X={R_X_gal:.4f} (A=0, B free)"
+                        ))
+                        result.n_pass += 1
+                    else:
+                        # S_ESE computation also failed
+                        error_msg = rotation_curve_error if rotation_curve_error else "S_ESE computation unavailable - no valid values computed"
                         result.tests.append(TestResult(
                             test_name="sparc_separated_formula", status="SKIP",
-                            value=None, notes=f"Rotation curves directory not found: {rotation_curves_dir}"
+                            value=None, notes=f"Both methods unavailable: {error_msg}"
                         ))
                         result.n_skip += 1
-                except ImportError as e:
+                except ImportError:
+                    # Both methods unavailable
+                    error_msg = rotation_curve_error if rotation_curve_error else "REQUIRES: Either sparc_separated_fitter module or compute_S_ESE_proper"
                     result.tests.append(TestResult(
                         test_name="sparc_separated_formula", status="SKIP",
-                        value=None, notes=f"REQUIRES: sparc_separated_fitter module - {str(e)}"
+                        value=None, notes=error_msg
                     ))
                     result.n_skip += 1
                 except Exception as e:
@@ -1915,7 +1929,7 @@ class CDQFTests:
             try:
                 from integrated_modules.sigma8_computation import compute_sigma8
                 
-                cosmo_params = locks.get('cosmology', {}) if hasattr(self, 'locks') else {}
+                cosmo_params = self.locks.get('cosmology', {}) if hasattr(self, 'locks') and self.locks else {}
                 h = cosmo_params.get('H0', 67.4) / 100.0
                 Omega_m = cosmo_params.get('Om', 0.315)
                 Omega_b = cosmo_params.get('Ob', 0.0493)

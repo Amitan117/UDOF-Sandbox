@@ -1,0 +1,261 @@
+{
+  "version": "CDQF_MASTER_LOCK_v3_SPARC",
+  "description": "Consolidated CDQF lock after rd=147.09 Mpc refit, 2-loop + thresholds RG, TSI fermions, TSI neutrinos, and dark sector v3 (rd147).",
+  "rd_Mpc": 147.09,
+  "fermions_tsi": {
+    "family": "tsi_v1_full",
+    "params": {
+      "Top": 0.9953822494,
+      "Eop": 0.7370656133,
+      "Sop": 0.053732153,
+      "a_u": 0.9001618624,
+      "b_u": 2.4458799362,
+      "a_d": 2.5521020889,
+      "b_d": 1.4932316542,
+      "a_e": 2.0461301804,
+      "b_e": 1.5361510515,
+      "c_tau": 1.4212117197,
+      "c_s": 0.0994922817,
+      "lambda_0": 0.5402843356,
+      "beta_ql": 0.2490199059,
+      "eps_u": -0.08057,
+      "eps_d": -0.39986
+    },
+    "observables": {
+      "chi2_charged": 0.0440366082,
+      "within_2x": 9
+    }
+  },
+  "neutrinos_tsi": {
+    "family": "tsi_neutrino_v1",
+    "params": {
+      "a_nu": 0.7605450153,
+      "b_nu": 0.9570662379,
+      "log10_kappa": -11.9468135834,
+      "theta12_input_deg": 44.5057449341,
+      "theta23_input_deg": 63.1785163879,
+      "theta13_input_deg": 5.6373305321
+    },
+    "observables": {
+      "dm2_21_eV2": 6.86e-05,
+      "dm2_31_eV2": 0.00254,
+      "masses_eV": [
+        0.000577,
+        0.0083,
+        0.0504
+      ],
+      "sum_masses_eV": 0.059,
+      "theta12_deg": 33.45,
+      "theta23_deg": 45.27,
+      "theta13_deg": 9.27,
+      "chi2_neutrino": 1.7646387815
+    }
+  },
+  "rg": {
+    "one_loop": {
+      "mu_ref_GeV": 100.0,
+      "g_ref": [
+        0.35718,
+        0.65149,
+        1.21362
+      ],
+      "yt_ref": 0.6076,
+      "lambda_ref": 0.129,
+      "source": "rg_sm_diagnostics.json"
+    },
+    "two_loop": {
+      "mu_ref_GeV": 100.0,
+      "g_ref": [
+        0.35718,
+        0.65149,
+        1.21362
+      ],
+      "g_at_1e4_GeV": [
+        0.36662,
+        0.62736,
+        0.95905
+      ],
+      "g_at_1e8_GeV": [
+        0.38799,
+        0.58619,
+        0.72476
+      ],
+      "g_at_1e12_GeV": [
+        0.41361,
+        0.5522,
+        0.6063
+      ],
+      "g_at_1e16_GeV": [
+        0.44506,
+        0.5235,
+        0.53173
+      ],
+      "pair_crossings": {
+        "g1_eq_g2_mu_GeV": null,
+        "g1_eq_g3_mu_GeV": null,
+        "g2_eq_g3_mu_GeV": 2.4e+16
+      },
+      "triple_meet_within_5percent": false,
+      "gauge_landau_pole": {
+        "exists": false,
+        "which": null,
+        "mu_GeV": null
+      },
+      "lambda_two_loop_threshold": {
+        "mu_low_GeV": 2.0,
+        "mu_high_GeV": 1e+19,
+        "lambda_min": 0.102,
+        "lambda_negative": false,
+        "mu_crossing_GeV": null
+      },
+      "notes": "2-loop+threshold running with TSI neutrino Yukawas"
+    }
+  },
+  "cosmology": {
+    "source": "cosmo_locks_rd147_v2.json",
+    "H0_km_per_s_Mpc": 66.03,
+    "Omega_m0": 0.2932,
+    "Omega_b0": 0.0486,
+    "Omega_L0": 0.7068,
+    "ns": 0.969,
+    "sigma8": 0.804,
+    "chi2_sne": 3070.1,
+    "chi2_bao": 21.5,
+    "chi2_cmb": 3.8,
+    "chi2_total": 3095.4,
+    "status": "PASS"
+  },
+  "dark_sector": {
+    "version": "dark_sector_v3_rd147",
+    "source": "dark_sector_locks_v3_rd147.json",
+    "lcdm": {
+      "Omega_m0": 0.2932,
+      "H0_km_per_s_Mpc": 66.03,
+      "chi2_total": 8211.41
+    },
+    "cdqf_entropy": {
+      "Omega_geom0": 0.2791,
+      "alpha_geom": 0.1782,
+      "p_op": -0.0439,
+      "H0_km_per_s_Mpc": 69.64,
+      "chi2_total": 8211.35,
+      "notes": "entropy-extended CDQF dark sector lock; w_eff ~ -1 with mild scale dependence"
+    },
+    "ese": {
+      "k": 1.1190412939023862,
+      "X0": 10.0,
+      "k_previous": 1.5,
+      "X0_previous": 0.9166,
+      "universal_kernel": {
+        "form": "hybrid",
+        "alpha": 1.3874402584991146,
+        "beta": 0.6537382080058989,
+        "n": 1.3125657542081448,
+        "equation": "F(x) = 1.387 * [sqrt(1 + x^(-1.313)) - 1]^0.654",
+        "chi2_per_point": 5.454600628876427
+      },
+      "A_parameter": {
+        "value": 1.9,
+        "formula": "(ell_IR / ell_star)^0.026878",
+        "source": "Phase C/D derivation from first principles",
+        "physical_meaning": "Dimensionless coupling constant connecting ESE gradient energy to rotation curves"
+      },
+      "improvement": {
+        "chi2_reduction": 19.652349668439346,
+        "rms_improvement": 4.433097074105117
+      }
+    }
+  },
+  "gravity": {
+    "local_suite": {
+      "status": "PASS_STRONG",
+      "tests": [
+        "Kepler GM",
+        "Mercury perihelion",
+        "Light deflection (PPN \u00ce\u00b3)",
+        "GPS clock redshift",
+        "Shapiro delay (b \u00e2\u2030\u02c6 2.6 R_sun)"
+      ]
+    },
+    "astro_suite": {
+      "status": "PASS_STRONG",
+      "ringdown": {
+        "M_solar": 30.0,
+        "a_star": 0.7,
+        "f_model_Hz": 604.21,
+        "tau_model_s": 0.001811,
+        "status": "PASS"
+      },
+      "lensing": {
+        "M_lens_Msun": 1000000000000.0,
+        "z_L": 0.3,
+        "z_S": 1.0,
+        "theta_E_arcsec": 2.018,
+        "status": "PASS"
+      },
+      "cluster": {
+        "M200_Msun": 1000000000000000.0,
+        "R200_Mpc": 1.5,
+        "sigma_model_kms": 1197.4,
+        "status": "PASS"
+      }
+    }
+  },
+  "microphysics": {
+    "status": "COMPLETE",
+    "sources": [
+      "MICROPHYSICS_COMPLETION_SUMMARY.md",
+      "microphysics_observables_from_tsi.json",
+      "qcd_running_summary.json",
+      "neutrino_rg_consistency.json",
+      "open_systems_qed_test_summary.json"
+    ],
+    "notes": "QCD running, QED open-systems tests, TSI Yukawas at mu_ref, and neutrino RG consistency all validated."
+  },
+  "unitarity_envelope": {
+    "max_gauge_coupling": 1.22,
+    "max_yukawa": 0.7,
+    "lambda_min": 0.1,
+    "lambda_sign_changes": 0,
+    "landau_poles_up_to_GeV": null,
+    "comment": "All couplings remain perturbative and Higgs quartic stays positive from 2 GeV to 1e19 GeV for the current CDQF lock."
+  },
+  "status": {
+    "fermions": "PASS",
+    "neutrinos": "PASS",
+    "rg_two_loop_threshold": "PASS",
+    "cosmology_joint": "PASS",
+    "dark_sector": "PASS",
+    "gravity_local": "PASS_STRONG",
+    "gravity_astro": "PASS_STRONG",
+    "microphysics": "PASS",
+    "overall": "CDQF_TOE_CANDIDATE_V2"
+  },
+  "last_updated": "2025-12-11T13:36:33.000493",
+  "sparc_integration": {
+    "date": "2025-12-11T13:36:33.000493",
+    "source": "SPARC Phase A-E complete derivation",
+    "parameters": {
+      "ese_optimized": {
+        "k": 1.1190412939023862,
+        "X0": 10.0,
+        "A": 7.383231511403296
+      },
+      "universal_kernel": {
+        "alpha": 1.3874402584991146,
+        "beta": 0.6537382080058989,
+        "n": 1.3125657542081448,
+        "chi2_per_point": 5.454600628876427
+      },
+      "A_derived": {
+        "value": 1.9,
+        "formula": "(ell_IR / ell_star)^0.026878",
+        "source": "Phase C/D derivation from first principles"
+      },
+      "improvement": {
+        "chi2_reduction": 19.652349668439346,
+        "rms_improvement": 4.433097074105117
+      }
+    }
+  }
+}

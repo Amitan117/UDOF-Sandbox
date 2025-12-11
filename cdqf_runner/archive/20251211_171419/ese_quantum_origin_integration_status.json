@@ -1,0 +1,44 @@
+{
+  "date": "2025-12-11",
+  "status": "COMPLETE",
+  "derivation": {
+    "source": "Collapse kernel K(x,y) from operational framework",
+    "result": "ESE scalar field action with first-principles coefficients",
+    "chain": "K(x,y) \u2192 \u2113_corr(x) \u2192 s(x) \u2192 S_ESE"
+  },
+  "coefficients": {
+    "kappa": {
+      "value": 1.1835634316700568e+17,
+      "formula": "\u03ba = c\u00b2 \u2113_IR\u00b2 / (8\u03c0G)",
+      "units": "kg\u00b7m",
+      "verified": true
+    },
+    "V0": {
+      "value": 6.478961988620901e-09,
+      "formula": "V\u2080 = \u210fc / \u2113_IR\u2074",
+      "units": "J/m\u00b3",
+      "verified": true
+    }
+  },
+  "action_form": "S_ESE = \u222b d\u2074x \u221a(-g) [-\u00bd\u03ba(\u2207s)\u00b2 - V\u2080(1-s)\u00b2]",
+  "significance": {
+    "before": "ESE was constraint-based with Lagrange multipliers",
+    "after": "ESE is proper scalar field action derived from collapse kernel",
+    "key_point": "No free parameters - all coefficients from first principles"
+  },
+  "files": {
+    "derivation": "prime0/toe/ese_from_collapse_kernel.py",
+    "master_action": "prime0/toe/master_action_total.py",
+    "documentation": "ESE_QUANTUM_ORIGIN_COMPLETE.md",
+    "summary": "ESE_DERIVATION_SUMMARY.md"
+  },
+  "integration": {
+    "master_action_updated": true,
+    "coefficients_verified": true,
+    "next_steps": [
+      "Use derived ESE action in all calculations",
+      "Verify field equations match previous results",
+      "Check consistency with SPARC-derived parameters"
+    ]
+  }
+}

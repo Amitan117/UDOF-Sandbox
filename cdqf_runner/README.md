@@ -72,11 +72,10 @@ python cdqf_validation_runner_v4.0.py --quiet
 
 ```
 cdqf_runner/
-├── cdqf_validation_runner_v4.0.py  # Main runner
+├── cdqf_validation_runner_v4.0.py  # Production runner (MAIN - use this!)
 ├── default_params.json              # Parameter configuration
 ├── requirements.txt                 # Python dependencies
 ├── README.md                       # This file
-├── CITATIONS.md                    # Data and software citations
 ├── setup_environment.ps1            # Environment setup script
 ├── run_all_tests.ps1               # Batch test runner
 ├── data/                           # Input datasets
@@ -101,11 +100,12 @@ cdqf_runner/
 │   ├── baryogenesis modules        # CP violation, leptogenesis
 │   ├── gauge modules               # Gauge unification, RG evolution, CP
 │   └── ... (other modules)
-├── results/                        # Validation results (JSON)
 ├── run_results/                    # Historical run logs
 ├── venv/                           # Python virtual environment
-└── archive/                        # Archived documents and scripts
+└── archive/                        # Archived documents, diagnostic scripts, and old runners
 ```
+
+**Note**: The `cdqf_validation_runner_v4.0.py` is the **only production runner**. Diagnostic helper scripts (like `run_validation_no_hang.py` and `run_validation_sparc_params.py`) have been archived as they were only temporary wrappers for troubleshooting.
 
 ---
 

@@ -1,0 +1,32 @@
+Sandbox Archive - 20251211_171419
+================================================================================
+
+Date: 2025-12-11 17:14:19
+
+Archived Files:
+  - ese_quantum_origin_integration_status.json
+  - lensing_clustering_integration_status.json
+  - nbody_lss_integration_status.json
+  - run_results
+  - sparc_integration_status.json
+  - test_sparc_output.txt
+  - validation_output.txt
+  - validation_quiet_output.txt
+  - VALIDATION_REPORT.md
+  - validation_results.txt
+  - validation_results_cmb_fix.txt
+  - validation_results_sparc_fix.txt
+  - VALIDATION_RESULTS_SPARC_PARAMS.md
+  - validation_run_20251211_135641.txt
+  - validation_run_output.txt
+
+Essential Files Kept:
+  - cdqf_validation_runner_v4.0.py
+  - data
+  - default_params.json
+  - integrated_modules
+  - README.md
+  - run_all_tests.ps1
+  - run_validation_no_hang.py
+  - run_validation_sparc_params.py
+  - setup_environment.ps1

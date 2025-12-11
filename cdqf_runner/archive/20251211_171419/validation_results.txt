@@ -1,0 +1,219 @@
+======================================================================
+CDQF UNIVERSAL VALIDATION RUNNER v4.0
+ALL TESTS COMPUTED - MCMC-Validated Parameters
+======================================================================
+Run ID: cdqf_v4.0_20251211_040137
+Version: 4.0.0_mcmc_validated
+Domains: 25
+======================================================================
+
+[FERMION_MASSES]
+--------------------------------------------------
+  mass_u                         [PASS]       = 0.00227662
+  mass_d                         [PASS]       = 0.00443163
+  mass_s                         [PASS]       = 0.104696
+  mass_c                         [PASS]       = 1.13271
+  mass_b                         [PASS]       = 3.86289
+  mass_t                         [PASS]       = 186.954
+  mass_e                         [PASS]       = 0.000511121
+  mass_mu                        [PASS]       = 0.105574
+  mass_tau                       [PASS]       = 1.77802
+  Subtotal: 9/9 (theoretical: 0)
+
+[PMNS_MIXING]
+--------------------------------------------------
+  pmns_theta12                   [PASS]       = 33.4395
+  pmns_theta23                   [PASS]       = 49.0016
+  pmns_theta13                   [PASS]       = 8.57015
+  Subtotal: 3/3 (theoretical: 0)
+
+[CKM_MIXING]
+--------------------------------------------------
+  ckm_theta12                    [PASS]       = 13.04
+  ckm_theta23                    [PASS]       = 2.38
+  ckm_theta13                    [PASS]       = 0.201
+  Subtotal: 3/3 (theoretical: 0)
+
+[NEUTRINO_MASSES]
+--------------------------------------------------
+  dm2_21                         [PASS]       = 7.53e-05
+  dm2_31                         [PASS]       = 0.002453
+  sum_masses                     [PASS]       = 0.058904
+  Subtotal: 3/3 (theoretical: 0)
+
+[H4_GEOMETRY]
+--------------------------------------------------
+  h4_trace                       [PASS]       = 10
+  h4_det_gamma                   [PASS]       = 4.1
+  h4_det_sigma                   [PASS]       = 0.666664
+  Subtotal: 3/3 (theoretical: 0)
+
+[GAUGE_SYMMETRY]
+--------------------------------------------------
+  gauge_groups                   [PASS]       = SU(3), SU(2), U(1)
+  coupling_qcd                   [PASS]       = 0.2677
+  lindblad_cp                    [PASS]       = True
+  Subtotal: 3/3 (theoretical: 0)
+
+[RG_EVOLUTION]
+--------------------------------------------------
+  no_landau_poles                [PASS]       = True
+  lambda_min                     [PASS]       = 0.0042249
+  vacuum_stable                  [PASS]       = 0.0042249
+  gauge_crossing                 [PASS]       = 1.08802e+17
+  Subtotal: 4/4 (theoretical: 0)
+
+[WARD_IDENTITIES]
+--------------------------------------------------
+  charge_conservation            [PASS]       = 0
+  photon_mass                    [PASS]       = 0
+  Subtotal: 2/2 (theoretical: 0)
+
+[BAO]
+--------------------------------------------------
+  bao_chi2                       [PASS]       = 5.92797
+  Subtotal: 1/1 (theoretical: 0)
+
+[SNE]
+--------------------------------------------------
+  sne_chi2                       [PASS]       = 0.454073
+  Subtotal: 1/1 (theoretical: 0)
+
+[SPARC]
+--------------------------------------------------
+  sparc_ese_activation           [PASS]       = 0.659129
+  sparc_catalog_loaded           [PASS]       = 175
+  sparc_separated_formula        [SKIP]       = N/A
+  Subtotal: 2/3 (theoretical: 0)
+
+[DARK_MATTER]
+--------------------------------------------------
+  ese_galactic                   [PASS]       = 0.861975
+  lcdm_recovery                  [PASS]       = 0
+  rx_galaxy_scale                [PASS]       = 0.989132
+  Subtotal: 3/3 (theoretical: 0)
+
+[DARK_ENERGY]
+--------------------------------------------------
+  de_dominance                   [PASS]       = 0.6815
+  w_eos                          [PASS]       = -0.952391
+  Subtotal: 2/2 (theoretical: 0)
+
+[EARLY_UNIVERSE]
+--------------------------------------------------
+  cmb_lcdm                       [PASS]       = 0
+  bbn_preserved                  [PASS]       = Yp=0.2485, D/H=2.55e-05, Li7/H=4.68e-10
+  Subtotal: 2/2 (theoretical: 0)
+
+[LSS]
+--------------------------------------------------
+  bao_sound_horizon              [PASS]       = 147.09
+  structure_transition           [PASS]       = k_nl=0.137 h/Mpc, M_nl=1.39e+66 MΓÿë
+  growth_factor_D1               [PASS]       = 0.683092
+  sigma_8                        [PASS]       = 0.811
+  Subtotal: 4/4 (theoretical: 0)
+
+[STRONG_FIELD]
+--------------------------------------------------
+  gr_at_horizon                  [PASS]       = 1e-10
+  gw_speed                       [PASS]       = c_GW/c=1.000000000000000
+  Subtotal: 2/2 (theoretical: 0)
+
+[PRECISION_TESTS]
+--------------------------------------------------
+  cassini_ppn_gamma              [PASS]       = 1
+  lunar_ranging                  [PASS]       = G_dot/G=0.00e+00 yrΓü╗┬╣
+  binary_pulsars                 [PASS]       = P_dot=-3.35e-08 s/s
+  Subtotal: 3/3 (theoretical: 0)
+
+[CMB]
+--------------------------------------------------
+  cmb_ell_ratio                  [PASS]       = 1
+  cmb_power_spectrum             [FAIL]       = Γäô_peak=150.0, C_Γäô=0 ╬╝K┬▓
+    COMPUTED: Internal CMB module (CAMB fallback) - CDQF cosmology
+  Subtotal: 1/2 (theoretical: 0)
+
+[INFLATION]
+--------------------------------------------------
+  spectral_index                 [PASS]       = 0.962149
+  tensor_to_scalar               [PASS]       = 0.00396694
+  slow_roll_epsilon              [PASS]       = 0.000247934
+  slow_roll_eta                  [PASS]       = -0.0181818
+  Subtotal: 4/4 (theoretical: 0)
+
+[CP_VIOLATION]
+--------------------------------------------------
+  ckm_cp_phase                   [PASS]       = 1.45
+  jarlskog_ckm                   [PASS]       = 3.19615e-05
+  jarlskog_pmns                  [PASS]       = 1.65
+  Subtotal: 3/3 (theoretical: 0)
+
+[MICROPHYSICS]
+--------------------------------------------------
+  sm_preserved                   [PASS]       = 0
+  Subtotal: 1/1 (theoretical: 0)
+
+[GW_RINGDOWN]
+--------------------------------------------------
+  qnm_frequency                  [PASS]       = 207.223
+  qnm_gr_deviation               [PASS]       = 0
+  Subtotal: 2/2 (theoretical: 0)
+
+[QUANTUM_GRAVITY]
+--------------------------------------------------
+  graviton_cptp                  [PASS]       = True
+  graviton_spin2_quantization    [PASS]       = 2
+  g_derivation                   [PASS]       = 6.67218e-11
+  wheeler_dewitt_classical       [PASS]       = 5.55808e-36
+  Subtotal: 4/4 (theoretical: 0)
+
+[BARYOGENESIS]
+--------------------------------------------------
+  cp_from_collapse               [PASS]       = ╬┤_CKM=1.450, ╬┤_PMNS=1.650
+  baryon_asymmetry               [PASS]       = 6.07956e-10
+  mass_scale_scan                [PASS]       = 1.07227e+12
+  Subtotal: 3/3 (theoretical: 0)
+
+[MASTER_ACTION]
+--------------------------------------------------
+  action_components              [PASS]       = S_total=9.999800e+19
+  sector_limits                  [PASS]       = GR:False, SM:False, Cosmo:False, Gal:Tru
+  Subtotal: 2/2 (theoretical: 0)
+
+======================================================================
+VALIDATION SUMMARY
+======================================================================
+  fermion_masses            [PASS]         (9/9)
+  pmns_mixing               [PASS]         (3/3)
+  ckm_mixing                [PASS]         (3/3)
+  neutrino_masses           [PASS]         (3/3)
+  h4_geometry               [PASS]         (3/3)
+  gauge_symmetry            [PASS]         (3/3)
+  rg_evolution              [PASS]         (4/4)
+  ward_identities           [PASS]         (2/2)
+  bao                       [PASS]         (1/1)
+  sne                       [PASS]         (1/1)
+  sparc                     [PASS]         (2/3)
+  dark_matter               [PASS]         (3/3)
+  dark_energy               [PASS]         (2/2)
+  early_universe            [PASS]         (2/2)
+  lss                       [PASS]         (4/4)
+  strong_field              [PASS]         (2/2)
+  precision_tests           [PASS]         (3/3)
+  cmb                       [FAIL]         (1/2)
+  inflation                 [PASS]         (4/4)
+  cp_violation              [PASS]         (3/3)
+  microphysics              [PASS]         (1/1)
+  gw_ringdown               [PASS]         (2/2)
+  quantum_gravity           [PASS]         (4/4)
+  baryogenesis              [PASS]         (3/3)
+  master_action             [PASS]         (2/2)
+--------------------------------------------------
+TOTAL: 70/72 passed, 1 failed, 0 theoretical
+======================================================================
+
+======================================================================
+CROSS-DOMAIN CONSISTENCY CHECKS
+======================================================================
+  Γ£ô No cross-domain conflicts detected
+
