@@ -1,7 +1,7 @@
 """
 Lunar Laser Ranging (LLR) Precision Gravity
 
-Computes G_dot/G constraint from CDQF.
+Computes G_dot/G constraint from UDOF.
 At Solar System scales, ESE inactive (s→0) → GR recovered → G_dot/G ≈ 0.
 """
 
@@ -20,9 +20,9 @@ def compute_g_dot_g(
     Lambda_rate: float = 1e23
 ) -> Dict[str, float]:
     """
-    Compute G_dot/G from CDQF.
+    Compute G_dot/G from UDOF.
     
-    In CDQF:
+    In UDOF:
     - At Solar System scales, ESE inactive (s→0) → no G variation
     - G_dot/G ≈ 0 (consistent with LLR bound)
     
@@ -41,14 +41,14 @@ def compute_g_dot_g(
     """
     # LLR bound: |G_dot/G| < 7×10⁻¹⁴ yr⁻¹
     
-    # In CDQF, G variation comes from ESE effects
+    # In UDOF, G variation comes from ESE effects
     # At Solar System: s→0 (no mixing, ESE off) → G_dot/G → 0
     
     if abs(s) < 1e-10:
         # Solar System limit: no ESE → no G variation
         G_dot_G = 0.0
     else:
-        # In principle, CDQF could have G variation from ell_eff evolution
+        # In principle, UDOF could have G variation from ell_eff evolution
         # But at Solar System scales with s→0, this is negligible
         # Simplified model: G_dot/G ~ s * (Lambda_rate / year_scale)
         
@@ -71,7 +71,7 @@ def compute_g_dot_g(
         'LLR_bound': LLR_bound,  # yr⁻¹
         'compliant': compliant,
         's': float(s),
-        'method': 'CDQF G variation (Solar System: s→0 → G_dot/G→0)'
+        'method': 'UDOF G variation (Solar System: s→0 → G_dot/G→0)'
     }
 
 
@@ -83,7 +83,7 @@ def compute_perihelion_precession(
     Compute perihelion precession rate.
     
     In GR: Δω_per_orbit = 6πGM/(c²a(1-e²)) per orbit
-    In CDQF with s→0: Same as GR
+    In UDOF with s→0: Same as GR
     
     Parameters:
     -----------
@@ -97,7 +97,7 @@ def compute_perihelion_precession(
     dict with precession info
     """
     # Mercury perihelion precession: 43 arcsec/century from GR
-    # CDQF prediction: Same as GR in Solar System (s→0)
+    # UDOF prediction: Same as GR in Solar System (s→0)
     
     # If s≠0, there could be additional precession
     # But at Solar System, s→0 → GR recovered
@@ -105,24 +105,24 @@ def compute_perihelion_precession(
     GR_precession_arcsec_century = 43.0  # arcsec/century
     
     if abs(s) < 1e-10:
-        cdqf_precession = GR_precession_arcsec_century
+        udof_precession = GR_precession_arcsec_century
         deviation = 0.0
     else:
         # Additional precession from ESE (negligible at Solar System)
         additional_precession = s * 0.1  # Small correction
-        cdqf_precession = GR_precession_arcsec_century + additional_precession
+        udof_precession = GR_precession_arcsec_century + additional_precession
         deviation = additional_precession
     
     observed = 42.98  # arcsec/century (observed)
-    error = abs(cdqf_precession - observed)
+    error = abs(udof_precession - observed)
     
     return {
-        'precession_arcsec_century': float(cdqf_precession),
+        'precession_arcsec_century': float(udof_precession),
         'GR_precession': GR_precession_arcsec_century,
         'deviation_from_GR': float(deviation),
         'observed': observed,
         'error': float(error),
         's': float(s),
-        'method': 'CDQF perihelion precession (Solar System: s→0 → GR)'
+        'method': 'UDOF perihelion precession (Solar System: s→0 → GR)'
     }
 

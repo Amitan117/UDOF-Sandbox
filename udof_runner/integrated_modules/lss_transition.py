@@ -2,7 +2,7 @@
 LSS Transition / Structure Growth
 
 Computes structure transition scale and growth factor D(z) including
-CDQF structure factor S_struct = δ²/(1+δ²).
+UDOF structure factor S_struct = δ²/(1+δ²).
 """
 
 import numpy as np
@@ -16,7 +16,7 @@ H0_SI = 67.4 * 1000.0 / 3.086e22  # s⁻¹ (H0 in km/s/Mpc)
 
 def compute_structure_factor(delta: float) -> float:
     """
-    Compute CDQF structure factor S_struct = δ²/(1+δ²).
+    Compute UDOF structure factor S_struct = δ²/(1+δ²).
     
     This factor modulates the growth at different density contrasts.
     
@@ -171,7 +171,7 @@ def compute_structure_transition(
     Parameters:
     -----------
     locks : dict, optional
-        CDQF parameter locks
+        UDOF parameter locks
     z : float
         Redshift
     
@@ -195,6 +195,6 @@ def compute_structure_transition(
     return {
         **transition,
         'f_growth_rate': float(f_transition),
-        'method': 'CDQF structure transition computation'
+        'method': 'UDOF structure transition computation'
     }
 

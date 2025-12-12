@@ -1,7 +1,7 @@
 """
 Gravitational Wave Propagation Speed
 
-Computes c_GW from CDQF graviton theory.
+Computes c_GW from UDOF graviton theory.
 In vacuum (s→0), c_GW = c exactly.
 """
 
@@ -20,9 +20,9 @@ def compute_gw_speed(
     Lambda_rate: float = 1e23
 ) -> Dict[str, float]:
     """
-    Compute gravitational wave propagation speed from CDQF.
+    Compute gravitational wave propagation speed from UDOF.
     
-    In CDQF:
+    In UDOF:
     - In vacuum (s→0, strong-field suppression), c_GW = c exactly
     - Dispersion effects negligible at GW frequencies
     
@@ -39,7 +39,7 @@ def compute_gw_speed(
     --------
     dict with 'c_GW', 'c_GW_c_ratio', 'delta_c', etc.
     """
-    # In CDQF, GW propagation in vacuum has s→0 due to strong-field suppression
+    # In UDOF, GW propagation in vacuum has s→0 due to strong-field suppression
     # This ensures c_GW = c exactly (no modification)
     
     # For s=0 (vacuum), no dispersion
@@ -47,12 +47,12 @@ def compute_gw_speed(
         c_GW = C
         delta_c = 0.0
     else:
-        # In principle, CDQF could modify GW speed in matter
+        # In principle, UDOF could modify GW speed in matter
         # But for LIGO frequencies and vacuum propagation, effect is negligible
         # Simplified model: c_GW = c * (1 - s * (ell_eff * Lambda_rate / c))
         # This gives tiny modification that vanishes in vacuum limit
         
-        # Typical CDQF modification scale
+        # Typical UDOF modification scale
         # In vacuum limit, this should be zero anyway
         modification_factor = s * (ell_eff * Lambda_rate / C)
         c_GW = C * (1.0 - modification_factor)
@@ -75,6 +75,6 @@ def compute_gw_speed(
         'gw170817_bound': gw170817_bound,
         'compliant': compliant,
         's': float(s),
-        'method': 'CDQF graviton propagation (vacuum limit: c_GW = c)'
+        'method': 'UDOF graviton propagation (vacuum limit: c_GW = c)'
     }
 

@@ -53,7 +53,7 @@ class RXResponseStandalone:
         X0: float = X0_ESE
     ):
         """
-        Initialize with CDQF parameters and ESE structure.
+        Initialize with UDOF parameters and ESE structure.
 
         Parameters:
             H0: Hubble constant [km/s/Mpc]

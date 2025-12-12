@@ -154,7 +154,7 @@ def compute_S_ESE_cumulative(
     return S_ESE
 
 
-def compute_rotation_curve_cdqf(
+def compute_rotation_curve_udof(
     r_kpc: np.ndarray,
     v_baryon: np.ndarray,  # km/s
     g_bar: np.ndarray,     # m/s²
@@ -164,7 +164,7 @@ def compute_rotation_curve_cdqf(
     X_method: str = "acceleration"
 ) -> Tuple[np.ndarray, Dict]:
     """
-    Compute CDQF rotation curve using cumulative ESE approach.
+    Compute UDOF rotation curve using cumulative ESE approach.
     
     v²(r) = v_bar²(r) × [1 + A × S_ESE(r)] × [1 + B × R_X(k)]
     
@@ -177,7 +177,7 @@ def compute_rotation_curve_cdqf(
     g_bar : array
         Baryonic acceleration in m/s²
     locks : dict
-        CDQF parameter locks (with SPARC-derived parameters)
+        UDOF parameter locks (with SPARC-derived parameters)
     A : float
         Universal coupling constant (default: 1.90)
     B : float
@@ -257,7 +257,7 @@ def fit_single_galaxy(
         # Fit A and B
         def objective(params):
             A, B = params
-            v_model, _ = compute_rotation_curve_cdqf(
+            v_model, _ = compute_rotation_curve_udof(
                 r_obs, v_baryon, g_bar, locks, A=A, B=B
             )
             valid = (v_err > 0) & np.isfinite(v_obs) & np.isfinite(v_model)
@@ -279,7 +279,7 @@ def fit_single_galaxy(
         A_opt = A_fixed
         # Fit B only
         def objective_B(B):
-            v_model, _ = compute_rotation_curve_cdqf(
+            v_model, _ = compute_rotation_curve_udof(
                 r_obs, v_baryon, g_bar, locks, A=A_opt, B=B
             )
             valid = (v_err > 0) & np.isfinite(v_obs) & np.isfinite(v_model)
@@ -293,7 +293,7 @@ def fit_single_galaxy(
             B_opt = 0.0
     
     # Compute final model
-    v_model, diagnostics = compute_rotation_curve_cdqf(
+    v_model, diagnostics = compute_rotation_curve_udof(
         r_obs, v_baryon, g_bar, locks, A=A_opt, B=B_opt
     )
     
@@ -333,7 +333,7 @@ def fit_all_sparc_galaxies(
     rotation_curves_dir : Path
         Directory containing rotation curve .dat files
     locks : dict
-        CDQF parameter locks
+        UDOF parameter locks
     max_galaxies : int, optional
         Maximum number of galaxies to fit (None = all)
     A_fixed : float, optional

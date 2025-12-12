@@ -1,6 +1,6 @@
-# CDQF Universal Validation Runner v4.0
+# UDOF Universal Validation Runner v4.0
 
-**Self-contained validation suite for the complete CDQF model**
+**Self-contained validation suite for the complete UDOF model**
 
 ---
 
@@ -23,17 +23,17 @@ pip install -r requirements.txt
 
 **All domains:**
 ```powershell
-python cdqf_validation_runner_v4.0.py
+python udof_validation_runner_v4.0.py
 ```
 
 **Specific domains:**
 ```powershell
-python cdqf_validation_runner_v4.0.py --domain quantum_gravity --domain baryogenesis
+python udof_validation_runner_v4.0.py --domain quantum_gravity --domain baryogenesis
 ```
 
 **Quiet mode (JSON only):**
 ```powershell
-python cdqf_validation_runner_v4.0.py --quiet
+python udof_validation_runner_v4.0.py --quiet
 ```
 
 ---
@@ -71,8 +71,8 @@ python cdqf_validation_runner_v4.0.py --quiet
 ## Directory Structure
 
 ```
-cdqf_runner/
-├── cdqf_validation_runner_v4.0.py  # Production runner (MAIN - use this!)
+udof_runner/
+├── udof_validation_runner_v4.0.py  # Production runner (MAIN - use this!)
 ├── default_params.json              # Parameter configuration
 ├── requirements.txt                 # Python dependencies
 ├── README.md                       # This file
@@ -105,7 +105,7 @@ cdqf_runner/
 └── archive/                        # Archived documents, diagnostic scripts, and old runners
 ```
 
-**Note**: The `cdqf_validation_runner_v4.0.py` is the **only production runner**. Diagnostic helper scripts (like `run_validation_no_hang.py` and `run_validation_sparc_params.py`) have been archived as they were only temporary wrappers for troubleshooting.
+**Note**: The `udof_validation_runner_v4.0.py` is the **only production runner**. Diagnostic helper scripts (like `run_validation_no_hang.py` and `run_validation_sparc_params.py`) have been archived as they were only temporary wrappers for troubleshooting.
 
 ---
 
@@ -131,7 +131,7 @@ cdqf_runner/
 ## Results
 
 Results are saved to `results/` directory as JSON files:
-- Run ID: `cdqf_v4.0_TIMESTAMP.json`
+- Run ID: `udof_v4.0_TIMESTAMP.json`
 - Includes: Test results, values, errors, notes
 
 ---

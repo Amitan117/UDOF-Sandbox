@@ -1,8 +1,8 @@
 """
-Integrated CDQF Modules for Validation Runner
+Integrated UDOF Modules for Validation Runner
 ==============================================
 
-Standalone versions of upstream CDQF modules, extracted without CLASS dependency.
+Standalone versions of upstream UDOF modules, extracted without CLASS dependency.
 """
 
 from .proper_growth_standalone import ProperGrowthStandalone

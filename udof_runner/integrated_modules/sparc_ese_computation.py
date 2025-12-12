@@ -29,7 +29,7 @@ ESE_MODULES_AVAILABLE = False
 
 try:
     # Try to import from parent project
-    PROJECT_ROOT = Path("D:/CDQF Prime-0 Physics Engine")
+    PROJECT_ROOT = Path("D:/UDOF Prime-0 Physics Engine")
     if PROJECT_ROOT.exists():
         sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -249,7 +249,7 @@ def compute_S_ESE_proper(
         M_disk: Disk mass [M☉]
         M_gas: Gas mass [M☉]
         r_d: Disk scale radius [kpc]
-        locks: CDQF lock parameters (optional)
+        locks: UDOF lock parameters (optional)
         method: Method for computing S_ESE ("gradient", "enhancement", "combined", "s_activation")
 
     Returns:

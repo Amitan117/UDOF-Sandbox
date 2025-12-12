@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Updated CDQF Lagrangian for Inflation + Dark Energy
+Updated UDOF Lagrangian for Inflation + Dark Energy
 ====================================================
 
 Integrated module using MCMC-validated parameters and proper ODE integration.
@@ -29,9 +29,9 @@ N_S_PDG = 0.9649
 R_PDG_MAX = 0.10
 
 
-class CDQFLagrangian:
+class UDOFLagrangian:
     """
-    CDQF Lagrangian implementation with inflation (φ) and dark entropy (χ) fields.
+    UDOF Lagrangian implementation with inflation (φ) and dark entropy (χ) fields.
 
     Uses MCMC-validated parameters and proper ODE integration.
     """
@@ -50,7 +50,7 @@ class CDQFLagrangian:
         chi0: Optional[float] = None,
     ):
         """
-        Initialize CDQF Lagrangian.
+        Initialize UDOF Lagrangian.
 
         Parameters
         ----------
@@ -422,9 +422,9 @@ class CDQFLagrangian:
         return self.w_eff
 
 
-def create_lagrangian_from_locks(locks: Dict[str, Any]) -> CDQFLagrangian:
+def create_lagrangian_from_locks(locks: Dict[str, Any]) -> UDOFLagrangian:
     """
-    Create CDQFLagrangian from v4.0 runner locks structure.
+    Create UDOFLagrangian from v4.0 runner locks structure.
 
     Parameters
     ----------
@@ -433,7 +433,7 @@ def create_lagrangian_from_locks(locks: Dict[str, Any]) -> CDQFLagrangian:
 
     Returns
     -------
-    CDQFLagrangian
+    UDOFLagrangian
         Initialized Lagrangian instance
     """
     cosmology = locks.get('cosmology', {})
@@ -447,7 +447,7 @@ def create_lagrangian_from_locks(locks: Dict[str, Any]) -> CDQFLagrangian:
     alpha_geom = dark_sector.get('alpha_geom', -0.1885)
     p_op = dark_sector.get('p_op', 0.7577)
 
-    return CDQFLagrangian(
+    return UDOFLagrangian(
         H0=H0,
         Omega_m=Omega_m,
         Omega_b=Omega_b,

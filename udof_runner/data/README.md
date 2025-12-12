@@ -1,6 +1,6 @@
-# CDQF Validation Runner Data Directory
+# UDOF Validation Runner Data Directory
 
-This directory contains all observational data files required for CDQF validation tests.
+This directory contains all observational data files required for UDOF validation tests.
 
 ## Directory Structure
 
@@ -68,7 +68,7 @@ bibliographic citations for all data sources listed below.
 ## File Verification
 
 All files are required for complete validation. The runner will:
-1. First check `cdqf_runner/data/` (this directory)
+1. First check `udof_runner/data/` (this directory)
 2. Fall back to `prime0/data/` if not found
 3. Report errors if data files are missing
 

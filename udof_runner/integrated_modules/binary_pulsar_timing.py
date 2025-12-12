@@ -1,8 +1,8 @@
 """
 Binary Pulsar Timing - Orbital Decay
 
-Computes orbital decay rate P_dot from CDQF graviton radiation.
-In vacuum (s→0), CDQF → GR → standard orbital decay.
+Computes orbital decay rate P_dot from UDOF graviton radiation.
+In vacuum (s→0), UDOF → GR → standard orbital decay.
 """
 
 import numpy as np
@@ -74,7 +74,7 @@ def compute_orbital_decay_gr(
     }
 
 
-def compute_cdqf_orbital_decay(
+def compute_udof_orbital_decay(
     M1_Msun: float,
     M2_Msun: float,
     P_s: float,
@@ -82,10 +82,10 @@ def compute_cdqf_orbital_decay(
     e: float = 0.617
 ) -> Dict[str, float]:
     """
-    Compute CDQF orbital decay rate.
+    Compute UDOF orbital decay rate.
     
-    In vacuum (s→0), CDQF → GR exactly.
-    CDQF modifications (if any) would be proportional to s.
+    In vacuum (s→0), UDOF → GR exactly.
+    UDOF modifications (if any) would be proportional to s.
     
     Parameters:
     -----------
@@ -100,37 +100,37 @@ def compute_cdqf_orbital_decay(
     
     Returns:
     --------
-    dict with CDQF P_dot and comparison to GR
+    dict with UDOF P_dot and comparison to GR
     """
     # GR prediction
     gr_result = compute_orbital_decay_gr(M1_Msun, M2_Msun, P_s, e)
     P_dot_GR = gr_result['P_dot']
     
-    # CDQF: In vacuum (s→0), same as GR
+    # UDOF: In vacuum (s→0), same as GR
     if abs(s) < 1e-10:
-        P_dot_CDQF = P_dot_GR
+        P_dot_UDOF = P_dot_GR
         modification = 0.0
     else:
         # If s≠0, there could be additional decay from ESE effects
         # But in binary pulsar environment (vacuum), s→0 → GR
         # Simplified: small correction proportional to s
         modification_factor = 1.0 + s * 1e-3  # Tiny correction (negligible)
-        P_dot_CDQF = P_dot_GR * modification_factor
+        P_dot_UDOF = P_dot_GR * modification_factor
         modification = (modification_factor - 1.0) * 100.0  # Percent
     
     # Observed (PSR B1913+16): P_dot ≈ -2.42e-12 s/s
     # Match to GR within ~0.2%
     
-    deviation = abs(P_dot_CDQF - P_dot_GR) / abs(P_dot_GR)
+    deviation = abs(P_dot_UDOF - P_dot_GR) / abs(P_dot_GR)
     observation_match = deviation < 0.002  # Within 0.2%
     
     return {
-        'P_dot_CDQF': float(P_dot_CDQF),  # s/s
+        'P_dot_UDOF': float(P_dot_UDOF),  # s/s
         'P_dot_GR': float(P_dot_GR),  # s/s
         'modification_percent': float(modification),
         'deviation_from_GR': float(deviation),
         'observation_match': observation_match,
         's': float(s),
-        'method': 'CDQF binary pulsar decay (vacuum: s→0 → GR)'
+        'method': 'UDOF binary pulsar decay (vacuum: s→0 → GR)'
     }
 

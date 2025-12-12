@@ -1,6 +1,6 @@
 {
-  "version": "CDQF_MASTER_LOCK_v3_SPARC",
-  "description": "Consolidated CDQF lock after rd=147.09 Mpc refit, 2-loop + thresholds RG, TSI fermions, TSI neutrinos, and dark sector v3 (rd147).",
+  "version": "udof_MASTER_LOCK_v3_SPARC",
+  "description": "Consolidated UDOF lock after rd=147.09 Mpc refit, 2-loop + thresholds RG, TSI fermions, TSI neutrinos, and dark sector v3 (rd147).",
   "cosmology": {
     "H0": 66.03,
     "Om": 0.2932,
@@ -79,13 +79,13 @@
       "X0_previous": 0.9166,
       "source": "SPARC-derived from Phase C/D/E"
     },
-    "cdqf_entropy": {
+    "udof_entropy": {
       "Omega_geom0": 0.2791,
       "alpha_geom": 0.1782,
       "p_op": -0.0439,
       "H0_km_per_s_Mpc": 69.64,
       "chi2_total": 8211.35,
-      "notes": "entropy-extended CDQF dark sector lock; w_eff ~ -1 with mild scale dependence"
+      "notes": "entropy-extended UDOF dark sector lock; w_eff ~ -1 with mild scale dependence"
     }
   }
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Unified Master Action for Complete CDQF Theory
+Unified Master Action for Complete UDOF Theory
 ===============================================
 
 Single master action S_total unifying all physics sectors:
@@ -44,7 +44,7 @@ class MasterActionComponents:
 
 class UnifiedMasterAction:
     """
-    Unified master action for complete CDQF theory.
+    Unified master action for complete UDOF theory.
     
     The master action S_total integrates all physics into a single framework
     based on the operational collapse kernel K(x,y).
@@ -485,7 +485,7 @@ class UnifiedMasterAction:
 def main() -> int:
     """Test unified master action."""
     print("=" * 70)
-    print("UNIFIED MASTER ACTION FOR COMPLETE CDQF THEORY")
+    print("UNIFIED MASTER ACTION FOR COMPLETE UDOF THEORY")
     print("=" * 70)
     print()
     

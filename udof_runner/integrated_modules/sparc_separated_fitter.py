@@ -1,7 +1,7 @@
 """
 SPARC Separated Formula Per-Galaxy Fitter
 
-Fits CDQF rotation curves to all SPARC galaxies individually.
+Fits UDOF rotation curves to all SPARC galaxies individually.
 Computes per-galaxy χ² and rotation curve profiles.
 """
 
@@ -41,7 +41,7 @@ def load_sparc_catalog(catalog_path: Optional[Path] = None) -> pd.DataFrame:
     return df
 
 
-def compute_rotation_curve_cdqf(
+def compute_rotation_curve_udof(
     r_kpc: np.ndarray,
     M_star: float,  # M☉
     M_gas: float,   # M☉
@@ -51,7 +51,7 @@ def compute_rotation_curve_cdqf(
     method: str = 'gradient'
 ) -> Tuple[np.ndarray, np.ndarray]:
     """
-    Compute CDQF rotation curve.
+    Compute UDOF rotation curve.
     
     v²(r) = v_baryon²(r) * (1 + S_ESE(r))
     
@@ -66,14 +66,14 @@ def compute_rotation_curve_cdqf(
     R_b : float, optional
         Bulge scale length
     locks : dict, optional
-        CDQF parameter locks
+        UDOF parameter locks
     method : str
         S_ESE computation method
     
     Returns:
     --------
-    v_cdqf : array
-        CDQF rotation velocities in km/s
+    v_udof : array
+        UDOF rotation velocities in km/s
     S_ESE : array
         ESE enhancement factor
     """
@@ -115,11 +115,11 @@ def compute_rotation_curve_cdqf(
     v_baryon_mps = np.sqrt(G_SI * M_enc_kg / r_m_safe)
     v_baryon_kms = v_baryon_mps / 1000.0  # Convert to km/s
     
-    # CDQF velocity: v² = v_baryon² * (1 + S_ESE)
-    v_sq_cdqf = v_baryon_kms**2 * (1.0 + S_ESE)
-    v_cdqf = np.sqrt(np.maximum(v_sq_cdqf, 0.0))
+    # UDOF velocity: v² = v_baryon² * (1 + S_ESE)
+    v_sq_udof = v_baryon_kms**2 * (1.0 + S_ESE)
+    v_udof = np.sqrt(np.maximum(v_sq_udof, 0.0))
     
-    return v_cdqf, S_ESE
+    return v_udof, S_ESE
 
 
 def fit_single_galaxy(
@@ -134,7 +134,7 @@ def fit_single_galaxy(
     locks: Optional[Dict] = None
 ) -> Dict[str, float]:
     """
-    Fit CDQF model to a single galaxy.
+    Fit UDOF model to a single galaxy.
     
     Parameters:
     -----------
@@ -153,7 +153,7 @@ def fit_single_galaxy(
     R_b : float, optional
         Bulge scale length
     locks : dict, optional
-        CDQF parameter locks
+        UDOF parameter locks
     
     Returns:
     --------
@@ -161,7 +161,7 @@ def fit_single_galaxy(
     """
     try:
         # Compute model velocities
-        v_model, S_ESE = compute_rotation_curve_cdqf(
+        v_model, S_ESE = compute_rotation_curve_udof(
             r_obs, M_star, M_gas, R_d, R_b, locks=locks
         )
         
@@ -256,7 +256,7 @@ def fit_all_sparc_galaxies(
     max_galaxies: Optional[int] = None
 ) -> Dict[str, any]:
     """
-    Fit CDQF model to all SPARC galaxies.
+    Fit UDOF model to all SPARC galaxies.
     
     Parameters:
     -----------
@@ -265,7 +265,7 @@ def fit_all_sparc_galaxies(
     rotation_curves_dir : Path, optional
         Directory containing rotation curve .dat files
     locks : dict, optional
-        CDQF parameter locks
+        UDOF parameter locks
     max_galaxies : int, optional
         Maximum number of galaxies to fit (for testing)
     
@@ -366,7 +366,7 @@ def fit_all_sparc_galaxies(
         v_err = rc_data['v_err'].values if 'v_err' in rc_data.columns else v_obs * 0.05
         
         # Fit single galaxy
-        # Note: compute_rotation_curve_cdqf expects masses in M☉
+        # Note: compute_rotation_curve_udof expects masses in M☉
         result = fit_single_galaxy(
             galaxy_name, r_obs, v_obs, v_err,
             M_star,   # Already in M☉

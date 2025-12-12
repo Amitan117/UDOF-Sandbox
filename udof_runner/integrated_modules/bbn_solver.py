@@ -1,7 +1,7 @@
 """
 BBN (Big Bang Nucleosynthesis) Solver
 
-Computes primordial abundances: Yp (He-4), D/H, Li7/H from CDQF cosmology.
+Computes primordial abundances: Yp (He-4), D/H, Li7/H from UDOF cosmology.
 """
 
 import numpy as np
@@ -36,13 +36,13 @@ class BBNResult:
     method: str
 
 
-class CDQFBBNSolver:
+class UDOFBBNSolver:
     """
-    BBN solver using CDQF cosmology.
+    BBN solver using UDOF cosmology.
     
     Computes primordial abundances using:
-    - Standard BBN network with CDQF expansion rate
-    - Baryon-to-photon ratio from CDQF baryogenesis
+    - Standard BBN network with UDOF expansion rate
+    - Baryon-to-photon ratio from UDOF baryogenesis
     - Effective neutrino species N_eff
     """
     
@@ -146,12 +146,12 @@ class CDQFBBNSolver:
     
     def run_bbn(self, locks: Optional[Dict] = None) -> BBNResult:
         """
-        Run BBN computation using CDQF parameters from locks.
+        Run BBN computation using UDOF parameters from locks.
         
         Parameters:
         -----------
         locks : dict, optional
-            CDQF parameter locks. If None, uses default values.
+            UDOF parameter locks. If None, uses default values.
         
         Returns:
         --------
@@ -179,12 +179,12 @@ def run_bbn_computation(locks: Optional[Dict] = None) -> BBNResult:
     Parameters:
     -----------
     locks : dict, optional
-        CDQF parameter locks
+        UDOF parameter locks
     
     Returns:
     --------
     BBNResult with Y_p, D/H, Li7/H, etc.
     """
-    solver = CDQFBBNSolver()
+    solver = UDOFBBNSolver()
     return solver.run_bbn(locks=locks)
 

@@ -1,8 +1,8 @@
-# CDQF Validation Runner - Run All Tests
+# UDOF Validation Runner - Run All Tests
 # PowerShell script to run full validation suite
 
 Write-Host "=" * 80 -ForegroundColor Green
-Write-Host "CDQF Validation Runner - Full Test Suite" -ForegroundColor Yellow
+Write-Host "UDOF Validation Runner - Full Test Suite" -ForegroundColor Yellow
 Write-Host "=" * 80 -ForegroundColor Green
 Write-Host ""
 
@@ -21,8 +21,8 @@ else {
 }
 
 # Check if runner exists
-if (-not (Test-Path "cdqf_validation_runner_v4.0.py")) {
-    Write-Host "ERROR: cdqf_validation_runner_v4.0.py not found!" -ForegroundColor Red
+if (-not (Test-Path "udof_validation_runner_v4.0.py")) {
+    Write-Host "ERROR: udof_validation_runner_v4.0.py not found!" -ForegroundColor Red
     exit 1
 }
 
@@ -30,7 +30,7 @@ if (-not (Test-Path "cdqf_validation_runner_v4.0.py")) {
 Write-Host "Running full validation suite..." -ForegroundColor Cyan
 Write-Host ""
 
-python cdqf_validation_runner_v4.0.py
+python udof_validation_runner_v4.0.py
 
 $exitCode = $LASTEXITCODE
 

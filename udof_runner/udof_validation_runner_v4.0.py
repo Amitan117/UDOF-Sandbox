@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-CDQF UNIVERSAL VALIDATION RUNNER v4.0
+UDOF UNIVERSAL VALIDATION RUNNER v4.0
 ================================================================================
 
-Complete validation framework for CDQF unified physics model.
+Complete validation framework for UDOF unified physics model.
 ALL TESTS ARE COMPUTED - no placeholders, no hardcoded results.
 
 AUDIT STATUS (2025-12-XX):
@@ -87,14 +87,14 @@ except ImportError:
 SCRIPT_DIR = Path(__file__).parent
 PROJECT_ROOT = SCRIPT_DIR.parent
 LOCKS_PATH = PROJECT_ROOT / "prime0" / "locks" / \
-    "cdqf_unified_x_locks_v2.1.2_COMPLETE.json"
+    "udof_unified_x_locks_v2.1.2_COMPLETE.json"
 # Dark sector locks (MCMC-validated)
 DARK_SECTOR_LOCKS_PATH = PROJECT_ROOT / "prime0" / "toe" / \
     "dark_sector_locks_entropy_v1.json"
 
-# Data root: prefer cdqf_runner/data, fallback to sandbox, then prime0/data
+# Data root: prefer udof_runner/data, fallback to sandbox, then prime0/data
 DATA_ROOT_RUNNER = SCRIPT_DIR / "data"
-DATA_ROOT_SANDBOX = Path("D:/CDQF-Sandbox/cdqf_runner/data")
+DATA_ROOT_SANDBOX = Path("D:/UDOF-Sandbox/udof_runner/data")
 DATA_ROOT_PROJECT = PROJECT_ROOT / "prime0" / "data"
 
 # Priority: runner > sandbox > project
@@ -265,11 +265,11 @@ PDG_CKM = {'theta12': (13.04, 0.05), 'theta23': (
 PDG_NEUTRINO = {'dm2_21': (7.53e-5, 0.18e-5), 'dm2_31': (2.453e-3, 0.034e-3)}
 
 # ============================================================================
-# CDQF FORMULAS
+# UDOF FORMULAS
 # ============================================================================
 
 
-class CDQFFormulas:
+class UDOFFormulas:
     def __init__(self, locks: Dict):
         self.locks = locks
         fm = locks['fermion_masses']
@@ -573,7 +573,7 @@ class CDQFFormulas:
 
     def run_rg_evolution(self, mu_end: float = 1e18) -> Dict:
         """
-        Run RG evolution from M_Z to mu_end with CDQF H4-derived threshold correction.
+        Run RG evolution from M_Z to mu_end with UDOF H4-derived threshold correction.
 
         The correction uses only pre-existing H4 geometry quantities:
         Δλ = (1/4π) × [det(Γ)/det(Σ)] × Koide(Γ)
@@ -595,7 +595,7 @@ class CDQFFormulas:
         y_vals = sol.sol(t_vals)
         mu_vals = np.exp(t_vals)
 
-        # Compute CDQF threshold correction from H4 geometry
+        # Compute UDOF threshold correction from H4 geometry
         det_gamma = np.prod(self.gamma)
         det_sigma = np.prod(self.sigma)
         tr_gamma = np.sum(self.gamma)
@@ -607,7 +607,7 @@ class CDQFFormulas:
         hbar_c = hbar_SI * c_SI  # J·m
         Lambda_star_GeV = hbar_c / ell_star / GeV_to_J  # GeV
 
-        # CDQF correction: Δλ = (1/4π) × [det(Γ)/det(Σ)] × Koide(Γ)
+        # UDOF correction: Δλ = (1/4π) × [det(Γ)/det(Σ)] × Koide(Γ)
         Delta_lambda_threshold = (1.0 / (4 * np.pi)) * \
             (det_gamma / det_sigma) * koide_gamma
 
@@ -678,7 +678,7 @@ class CDQFFormulas:
                 if str(boltzmann_dir) not in sys.path:
                     sys.path.insert(0, str(boltzmann_dir))
 
-                from cdqf_boltzmann_corrected import ProperCorrectedGrowth
+                from udof_boltzmann_corrected import ProperCorrectedGrowth
 
                 # Get dark sector params
                 dark_sector = self.locks.get('dark_sector', {})
@@ -686,7 +686,7 @@ class CDQFFormulas:
                 alpha_geom = dark_sector.get('alpha_geom', -0.1885)
                 p_op = dark_sector.get('p_op', 0.7577)
 
-                cdqf = ProperCorrectedGrowth(
+                UDOF = ProperCorrectedGrowth(
                     H0=self.cosmo['H0'],
                     Omega_m=self.cosmo['Om'],
                     Omega_b=0.046,
@@ -698,7 +698,7 @@ class CDQFFormulas:
                     use_mu_eff=True
                 )
                 a = 1.0 / (1.0 + z)
-                return cdqf.growth_factor(a)
+                return UDOF.growth_factor(a)
             except (ImportError, Exception):
                 # Fallback: try integrated standalone version (no CLASS required)
                 try:
@@ -895,14 +895,14 @@ class DataLoader:
 # DOMAIN TESTS
 # ============================================================================
 
-class CDQFTests:
+class UDOFTests:
     def __init__(self, locks: Dict, data_root: Path,
                  cosmology_method: str = 'proper',
                  use_rx: bool = True,
                  sparc_formula: str = 'separated',
                  sparc_b_prediction: bool = False):
         self.locks = locks
-        self.formulas = CDQFFormulas(locks)
+        self.formulas = UDOFFormulas(locks)
         self.data_loader = DataLoader(data_root)
         self.cosmology_method = cosmology_method
         self.use_rx = use_rx
@@ -1104,7 +1104,7 @@ class CDQFTests:
         """
         Gauge symmetry tests.
 
-        NOTE: These tests require full CDQF gauge theory implementation.
+        NOTE: These tests require full UDOF gauge theory implementation.
         Currently marked as SKIP until proper computation is available.
         """
         result = DomainResult(domain_name="gauge_symmetry")
@@ -1247,7 +1247,7 @@ class CDQFTests:
             ))
             result.n_pass += 1
 
-            # Test 3: Vacuum stability (with CDQF H4 threshold correction)
+            # Test 3: Vacuum stability (with UDOF H4 threshold correction)
             stable = rg['stable']
             result.tests.append(TestResult(
                 test_name="vacuum_stable", status="PASS" if stable else "FAIL",
@@ -1357,7 +1357,7 @@ class CDQFTests:
         n_dof = len(obs) - 2
         chi2_nu = chi2 / n_dof if n_dof > 0 else chi2
         # Note: chi2/dof ~ 4-5 reflects known H0/Om tension between Planck and DESI
-        # CDQF uses Planck cosmology, DESI prefers lower Om
+        # UDOF uses Planck cosmology, DESI prefers lower Om
         passed = chi2_nu < 6.0  # Allow for cosmological tension
 
         result.tests.append(TestResult(
@@ -1731,7 +1731,7 @@ class CDQFTests:
 
         # Use Lagrangian module for field-theoretic computation
         try:
-            from integrated_modules.lagrangian_cdqf_updated import create_lagrangian_from_locks
+            from integrated_modules.lagrangian_udof_updated import create_lagrangian_from_locks
             lag = create_lagrangian_from_locks(self.locks)
             w_eff = lag.get_w_eff_formula()
             method_note = "LAGRANGIAN: Field-theoretic computation from χ potential"
@@ -1781,7 +1781,7 @@ class CDQFTests:
         result.n_pass += 1 if passed else 0
         result.n_fail += 0 if passed else 1
 
-        # COMPUTED: BBN abundances from CDQF cosmology
+        # COMPUTED: BBN abundances from UDOF cosmology
         try:
             from integrated_modules.bbn_solver import run_bbn_computation
             # Observed BBN abundances (PDG 2022)
@@ -1807,7 +1807,7 @@ class CDQFTests:
                 test_name="bbn_preserved", status="PASS" if bbn_passed else "FAIL",
                 value=f"Yp={bbn_result.Y_p:.4f}, D/H={bbn_result.D_H:.2e}, Li7/H={bbn_result.Li7_H:.2e}",
                 expected=f"Yp={Y_P_OBS:.4f}±{Y_P_ERR:.4f}, D/H={D_H_OBS:.2e}±{D_H_ERR:.2e}",
-                notes=f"COMPUTED: BBN from CDQF cosmology - η_B={bbn_result.eta_B:.2e}, N_eff={bbn_result.N_eff:.3f}"
+                notes=f"COMPUTED: BBN from UDOF cosmology - η_B={bbn_result.eta_B:.2e}, N_eff={bbn_result.N_eff:.3f}"
             ))
             result.n_pass += 1 if bbn_passed else 0
             result.n_fail += 0 if bbn_passed else 1
@@ -1997,7 +1997,7 @@ class CDQFTests:
         result.n_pass += 1 if gr_ok else 0
         result.n_fail += 0 if gr_ok else 1
 
-        # COMPUTED: GW propagation speed from CDQF
+        # COMPUTED: GW propagation speed from UDOF
         try:
             from integrated_modules.gw_propagation_speed import compute_gw_speed
             
@@ -2011,7 +2011,7 @@ class CDQFTests:
             result.tests.append(TestResult(
                 test_name="gw_speed", status="PASS" if compliant else "FAIL",
                 value=f"c_GW/c={c_ratio:.15f}", expected="1.0 ± 1e-15 (GW170817)",
-                notes=f"COMPUTED: From CDQF graviton propagation - |c_GW/c-1|={gw_result['delta_c_ratio']:.2e}"
+                notes=f"COMPUTED: From UDOF graviton propagation - |c_GW/c-1|={gw_result['delta_c_ratio']:.2e}"
             ))
             result.n_pass += 1 if compliant else 0
             result.n_fail += 0 if compliant else 1
@@ -2085,7 +2085,7 @@ class CDQFTests:
             result.tests.append(TestResult(
                 test_name="lunar_ranging", status="PASS" if compliant else "FAIL",
                 value=f"G_dot/G={llr_result['G_dot_G_yr']:.2e} yr⁻¹", expected="< 7×10⁻¹⁴ yr⁻¹",
-                notes=f"COMPUTED: From CDQF G variation - s={s_solar:.2e} → GR limit"
+                notes=f"COMPUTED: From UDOF G variation - s={s_solar:.2e} → GR limit"
             ))
             result.n_pass += 1 if compliant else 0
             result.n_fail += 0 if compliant else 1
@@ -2106,7 +2106,7 @@ class CDQFTests:
         
         # COMPUTED: Binary pulsar timing constraint
         try:
-            from integrated_modules.binary_pulsar_timing import compute_cdqf_orbital_decay
+            from integrated_modules.binary_pulsar_timing import compute_udof_orbital_decay
             
             # PSR B1913+16 (Hulse-Taylor) parameters
             M1_Msun = 1.44  # Component masses (approximate)
@@ -2116,7 +2116,7 @@ class CDQFTests:
             
             # In vacuum: s→0 → GR limit
             s_vacuum = 0.0
-            pulsar_result = compute_cdqf_orbital_decay(
+            pulsar_result = compute_udof_orbital_decay(
                 M1_Msun, M2_Msun, P_s, s=s_vacuum, e=e
             )
             
@@ -2124,8 +2124,8 @@ class CDQFTests:
             
             result.tests.append(TestResult(
                 test_name="binary_pulsars", status="PASS" if compliant else "FAIL",
-                value=f"P_dot={pulsar_result['P_dot_CDQF']:.2e} s/s", expected="Matches GR within 0.2%",
-                notes=f"COMPUTED: From CDQF orbital decay - deviation={pulsar_result['deviation_from_GR']*100:.3f}%"
+                value=f"P_dot={pulsar_result['P_dot_UDOF']:.2e} s/s", expected="Matches GR within 0.2%",
+                notes=f"COMPUTED: From UDOF orbital decay - deviation={pulsar_result['deviation_from_GR']*100:.3f}%"
             ))
             result.n_pass += 1 if compliant else 0
             result.n_fail += 0 if compliant else 1
@@ -2174,7 +2174,7 @@ class CDQFTests:
             import camb
             import numpy as np
 
-            # Get CDQF cosmological parameters
+            # Get UDOF cosmological parameters
             locks = self.locks
             cosmo = locks.get('cosmology', {})
             dark = locks.get('dark_sector', {})
@@ -2186,11 +2186,11 @@ class CDQFTests:
             Omega_b = cosmo.get('Ob', 0.05)
             Omega_cdm = Omega_m - Omega_b
 
-            # Dark energy equation of state (CDQF approximation)
-            # w(a) ≈ w0 + wa*(1-a) where w0 ≈ -1.0 for CDQF
+            # Dark energy equation of state (UDOF approximation)
+            # w(a) ≈ w0 + wa*(1-a) where w0 ≈ -1.0 for UDOF
             w0 = -1.0 - (dark.get('alpha_geom', -0.1885)
                          * dark.get('p_op', 0.7577)) / 3.0
-            wa = 0.0  # Approximate (CDQF w(a) is approximately constant)
+            wa = 0.0  # Approximate (UDOF w(a) is approximately constant)
 
             # Set up CAMB parameters
             pars = camb.CAMBparams()
@@ -2234,7 +2234,7 @@ class CDQFTests:
                     test_name="cmb_power_spectrum", status="PASS" if passed else "FAIL",
                     value=f"ℓ_peak={ell_peak:.1f}, C_ℓ={cl_peak:.0f} μK²",
                     expected=f"ℓ_peak≈220, C_ℓ≈5000-6000 μK²",
-                    notes=f"CDQF cosmology (H0={H0:.2f}, Ωm={Omega_m:.4f}, w={w0:.3f})"
+                    notes=f"UDOF cosmology (H0={H0:.2f}, Ωm={Omega_m:.4f}, w={w0:.3f})"
                 ))
                 result.n_pass += 1 if passed else 0
                 result.n_fail += 0 if passed else 1
@@ -2253,7 +2253,7 @@ class CDQFTests:
                 from integrated_modules.cmb_internal import compute_cmb_power_spectrum_internal
                 import numpy as np
                 
-                # Get CDQF cosmological parameters
+                # Get UDOF cosmological parameters
                 locks = self.locks
                 cosmo = locks.get('cosmology', {})
                 dark = locks.get('dark_sector', {})
@@ -2280,7 +2280,7 @@ class CDQFTests:
                     test_name="cmb_power_spectrum", status="PASS" if passed else "FAIL",
                     value=f"ℓ_peak={ell_peak:.1f}, C_ℓ={cl_peak:.0f} μK²",
                     expected="ℓ_peak≈220, C_ℓ≈5000-6000 μK²",
-                    notes=f"COMPUTED: Internal CMB module (CAMB fallback) - CDQF cosmology"
+                    notes=f"COMPUTED: Internal CMB module (CAMB fallback) - UDOF cosmology"
                 ))
                 result.n_pass += 1 if passed else 0
                 result.n_fail += 0 if passed else 1
@@ -2317,7 +2317,7 @@ class CDQFTests:
 
         # Use Lagrangian module for field-theoretic computation
         try:
-            from integrated_modules.lagrangian_cdqf_updated import create_lagrangian_from_locks
+            from integrated_modules.lagrangian_udof_updated import create_lagrangian_from_locks
             lag = create_lagrangian_from_locks(self.locks)
             sr = lag.compute_inflation_observables(N_efolds=55)
             method_note = "LAGRANGIAN: Field-theoretic computation from V(φ)"
@@ -2921,14 +2921,14 @@ AVAILABLE_DOMAINS = [
 # RUNNER
 # ============================================================================
 
-class CDQFValidationRunner:
+class UDOFValidationRunner:
     def __init__(self, quiet: bool = False,
                  cosmology_method: str = 'proper',
                  use_rx: bool = True,
                  sparc_formula: str = 'separated',
                  sparc_b_prediction: bool = False):
         self.locks = load_locks()
-        self.tests = CDQFTests(
+        self.tests = UDOFTests(
             self.locks, DATA_ROOT,
             cosmology_method=cosmology_method,
             use_rx=use_rx,
@@ -2988,10 +2988,10 @@ class CDQFValidationRunner:
     def run_validation(self, domains: List[str] = None) -> Dict:
         domains = domains or AVAILABLE_DOMAINS
         timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-        run_id = f"cdqf_v4.0_{timestamp}"
+        run_id = f"udof_v4.0_{timestamp}"
 
         self.log("=" * 70)
-        self.log("CDQF UNIVERSAL VALIDATION RUNNER v4.0")
+        self.log("UDOF UNIVERSAL VALIDATION RUNNER v4.0")
         self.log("ALL TESTS COMPUTED - MCMC-Validated Parameters")
         self.log("=" * 70)
         self.log(f"Run ID: {run_id}")
@@ -3165,24 +3165,24 @@ class CDQFValidationRunner:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CDQF Validation Runner v4.0 - MCMC-Validated",
+        description="UDOF Validation Runner v4.0 - MCMC-Validated",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
   # Run all tests
-  python cdqf_validation_runner_v3.3.py
+  python udof_validation_runner_v3.3.py
 
   # Run specific domains
-  python cdqf_validation_runner_v3.3.py --domain fermion_masses sparc
+  python udof_validation_runner_v3.3.py --domain fermion_masses sparc
 
   # Use simple cosmology (fallback)
-  python cdqf_validation_runner_v3.3.py --cosmology-method simple
+  python udof_validation_runner_v3.3.py --cosmology-method simple
 
   # Disable R_X response
-  python cdqf_validation_runner_v3.3.py --no-rx
+  python udof_validation_runner_v3.3.py --no-rx
 
   # Use standard SPARC formula
-  python cdqf_validation_runner_v3.3.py --sparc-formula standard
+  python udof_validation_runner_v3.3.py --sparc-formula standard
         """)
     parser.add_argument('--domain', '-d', nargs='+',
                         help='Domain(s) to test (default: all)')
@@ -3206,7 +3206,7 @@ Examples:
     args = parser.parse_args()
 
     if args.version:
-        print("CDQF Validation Runner v4.0.0")
+        print("UDOF Validation Runner v4.0.0")
         print("MCMC-Validated Parameters (H0=70.21, Omega_m=0.3185)")
         return
 
@@ -3216,7 +3216,7 @@ Examples:
             print(f"  {i:2d}. {d}")
         return
 
-    runner = CDQFValidationRunner(
+    runner = UDOFValidationRunner(
         quiet=args.quiet,
         cosmology_method=args.cosmology_method,
         use_rx=not args.no_rx,

@@ -1,8 +1,8 @@
-# CDQF Validation Runner Environment Setup
+# UDOF Validation Runner Environment Setup
 # PowerShell script to set up virtual environment and install dependencies
 
 Write-Host "=" * 80 -ForegroundColor Green
-Write-Host "CDQF Validation Runner - Environment Setup" -ForegroundColor Yellow
+Write-Host "UDOF Validation Runner - Environment Setup" -ForegroundColor Yellow
 Write-Host "=" * 80 -ForegroundColor Green
 Write-Host ""
 
@@ -48,6 +48,6 @@ Write-Host "To activate the environment:" -ForegroundColor Yellow
 Write-Host "  .\venv\Scripts\Activate.ps1" -ForegroundColor White
 Write-Host ""
 Write-Host "To run tests:" -ForegroundColor Yellow
-Write-Host "  python cdqf_validation_runner_v3.3.py" -ForegroundColor White
+Write-Host "  python udof_validation_runner_v3.3.py" -ForegroundColor White
 Write-Host ""
 

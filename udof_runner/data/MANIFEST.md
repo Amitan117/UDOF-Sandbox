@@ -1,4 +1,4 @@
-# CDQF Validation Runner Data Manifest
+# UDOF Validation Runner Data Manifest
 
 **Last Updated:** 2025-12-10  
 **Runner Version:** 4.0.0
@@ -9,7 +9,7 @@ bibliographic information for all data sources.
 ## Directory Structure
 
 ```
-cdqf_runner/data/
+udof_runner/data/
 ├── README.md                    # This file
 ├── MANIFEST.md                  # Data manifest (this file)
 ├── bao/
@@ -62,7 +62,7 @@ All files verified and accessible:
 ## Data Usage
 
 The validation runner automatically:
-1. Checks `cdqf_runner/data/` first (this directory)
+1. Checks `udof_runner/data/` first (this directory)
 2. Falls back to `prime0/data/` if files not found
 3. Reports errors if required data files are missing
 

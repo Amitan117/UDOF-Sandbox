@@ -40,7 +40,7 @@ class ProperGrowthStandalone:
         use_mu_eff: bool = True
     ):
         """
-        Initialize with CDQF parameters.
+        Initialize with UDOF parameters.
 
         Parameters:
             H0: Hubble constant [km/s/Mpc]
@@ -79,7 +79,7 @@ class ProperGrowthStandalone:
         self._dD_dlna_growth = None
         self._growth_computed = False
 
-    def Omega_dm_cdqf(self, a: float) -> float:
+    def Omega_dm_udof(self, a: float) -> float:
         """
         Dark matter density parameter at scale factor a.
 
@@ -183,14 +183,14 @@ class ProperGrowthStandalone:
 
         # d ln H / d ln a (approximation)
         # From original ProperCorrectedGrowth._growth_ode_corrected (line 157):
-        # Uses: dlnH/dlna = 1.5 * self.Omega_dm_cdqf(a)
+        # Uses: dlnH/dlna = 1.5 * self.Omega_dm_udof(a)
         # This is for H evolution (uses total dark matter density)
-        # Note: Original uses Omega_dm_cdqf only, but should include baryons for consistency
+        # Note: Original uses Omega_dm_udof only, but should include baryons for consistency
 
-        # Matter density parameter at scale factor a (CDQF modified)
-        Omega_dm_a = self.Omega_dm_cdqf(a)
+        # Matter density parameter at scale factor a (UDOF modified)
+        Omega_dm_a = self.Omega_dm_udof(a)
 
-        # Match original: use Omega_dm_cdqf only for dlnH/dlna
+        # Match original: use Omega_dm_udof only for dlnH/dlna
         # (Original implementation uses this for H evolution)
         dlnH_dlna = 1.5 * Omega_dm_a
 
