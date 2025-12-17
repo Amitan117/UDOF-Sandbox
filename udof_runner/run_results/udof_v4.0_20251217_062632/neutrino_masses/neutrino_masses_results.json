@@ -1,0 +1,38 @@
+{
+  "domain_name": "neutrino_masses",
+  "n_pass": 3,
+  "n_fail": 0,
+  "n_error": 0,
+  "n_skip": 0,
+  "n_theoretical": 0,
+  "chi2_total": 0.0,
+  "tests": [
+    {
+      "test_name": "dm2_21",
+      "status": "PASS",
+      "value": 7.53e-05,
+      "expected": 7.53e-05,
+      "error": 0.0,
+      "chi2": 0.0,
+      "notes": "Error: 0.0%"
+    },
+    {
+      "test_name": "dm2_31",
+      "status": "PASS",
+      "value": 0.002453,
+      "expected": 0.002453,
+      "error": 0.0,
+      "chi2": 0.0,
+      "notes": "Error: 0.0%"
+    },
+    {
+      "test_name": "sum_masses",
+      "status": "PASS",
+      "value": 0.05890404512208936,
+      "expected": "< 0.12 eV",
+      "error": null,
+      "chi2": null,
+      "notes": "Cosmological bound"
+    }
+  ]
+}

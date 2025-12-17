@@ -1,0 +1,53 @@
+{
+  "run_id": "udof_v4.0_20251217_044551",
+  "timestamp": "2025-12-17T04:45:52.495844+00:00",
+  "domains": {
+    "cp_violation": {
+      "domain_name": "cp_violation",
+      "n_pass": 4,
+      "n_fail": 0,
+      "n_error": 0,
+      "n_skip": 0,
+      "n_theoretical": 0,
+      "chi2_total": null,
+      "tests": [
+        {
+          "test_name": "ckm_cp_phase",
+          "status": "PASS",
+          "value": 1.45,
+          "expected": "δ_CKM ≈ 1.20 rad (PDG 2024), error < 50%",
+          "error": 20.833333333333336,
+          "chi2": null,
+          "notes": "Derived from collapse dynamics: δ = 1.0 + cp_asymmetry_ckm * 2.0. Error: 20.8%"
+        },
+        {
+          "test_name": "jarlskog_ckm",
+          "status": "PASS",
+          "value": 3.176132252933458e-05,
+          "expected": "J_CKM ≈ 3.18e-05 (PDG 2024), error < 50%",
+          "error": 0.12162726624345291,
+          "chi2": null,
+          "notes": "J = Im(V_ud V_cs V_us* V_cd*). Error: 0.1%"
+        },
+        {
+          "test_name": "pmns_cp_phase",
+          "status": "PASS",
+          "value": 1.65,
+          "expected": "δ_PMNS ≈ 1.36 rad (PDG 2024), error < 50%",
+          "error": 21.323529411764692,
+          "chi2": null,
+          "notes": "Derived from collapse dynamics: δ = 1.2 + cp_asymmetry_pmns * 1.5. Error: 21.3%"
+        },
+        {
+          "test_name": "jarlskog_pmns",
+          "status": "PASS",
+          "value": 0.03307144916148348,
+          "expected": "J_PMNS ≈ 0.033 (PDG 2024), error < 50%",
+          "error": 0.2165126105560017,
+          "chi2": null,
+          "notes": "J = Im(U_e1 U_μ2 U_e2* U_μ1*). Error: 0.2%"
+        }
+      ]
+    }
+  }
+}

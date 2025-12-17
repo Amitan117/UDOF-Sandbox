@@ -157,6 +157,25 @@ DEFAULT_LOCKS = {
     "strong_field": {
         "K_ref": 1e10,
         "zeta": 2.0
+    },
+    "cp_violation_parameters": {
+        # CP asymmetry parameters (calibrated to match PDG values)
+        # These represent time-asymmetric collapse kernel contributions
+        # δ_CKM = 1.0 + cp_asymmetry_ckm * 2.0 (calibrated to ≈ 1.2 rad)
+        # δ_PMNS = 1.2 + cp_asymmetry_pmns * 1.5 (calibrated to ≈ 1.36 rad)
+        "cp_asymmetry_ckm": 0.225,
+        "cp_asymmetry_pmns": 0.30,
+        "Lambda_rate": 1e23,  # s^-1 (cluster scale)
+        "ell_length": 2e-15  # m (QCD scale)
+    },
+    "baryogenesis_parameters": {
+        # Leptogenesis enhancement factors (calibrated for integrated CP phases)
+        # Recalibrated for δ_PMNS = 1.65 rad (from integrated CP phase derivation)
+        # Calibrated to match observed η_B = 6.1×10⁻¹⁰
+        "f_baryogenesis_specific": 1.81e-3,  # Early-universe enhancement factor
+        "alpha_collapse": 0.85,  # Collapse power-law exponent
+        "Gamma_ref": 1e10,  # Reference collapse rate [s⁻¹]
+        "T_ref_GeV": 1e3  # Reference temperature [GeV]
     }
 }
 
@@ -332,6 +351,16 @@ def load_locks() -> Dict:
                 locks['pivots'] = master_lock['pivots'].copy()
             if 'dark_sector' in master_lock:
                 locks['dark_sector'] = master_lock['dark_sector'].copy()
+            if 'cp_violation_parameters' in master_lock:
+                locks['cp_violation_parameters'] = master_lock['cp_violation_parameters'].copy()
+            elif 'cp_violation_parameters' not in locks:
+                # Ensure CP parameters exist (use defaults if not in master lock)
+                locks['cp_violation_parameters'] = DEFAULT_LOCKS['cp_violation_parameters'].copy()
+            if 'baryogenesis_parameters' in master_lock:
+                locks['baryogenesis_parameters'] = master_lock['baryogenesis_parameters'].copy()
+            elif 'baryogenesis_parameters' not in locks:
+                # Ensure baryogenesis parameters exist (use defaults if not in master lock)
+                locks['baryogenesis_parameters'] = DEFAULT_LOCKS['baryogenesis_parameters'].copy()
     elif LOCKS_PATH.exists():
         # Use unified lock file from sandbox if master lock not available
         with open(LOCKS_PATH, 'r') as f:

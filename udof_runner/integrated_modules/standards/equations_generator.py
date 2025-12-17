@@ -66,6 +66,9 @@ EQUATIONS_BY_TEST = {
     "cmb_lcdm": r"$s_{\text{CMB}} < 0.01$ (ESE inactive at CMB scale, preserves LCDM)",
     "bbn_preserved": r"BBN abundances computed from $\eta_B = n_B/n_\gamma$ using UDOF dark sector parameters",
 
+    # Baryogenesis (via leptogenesis)
+    "eta_B_leptogenesis": r"$\eta_B = -0.01 \times \epsilon_1 \times \kappa$ where $\epsilon_1 = \frac{3}{16\pi} \frac{m_\nu}{M_N} \sin(\delta_{\text{PMNS}}) \times f_{\text{collapse}}$ and $\kappa$ is efficiency factor",
+
     # LSS (4 tests)
     "bao_sound_horizon": r"$r_d = \int_0^{z_d} \frac{c_s(z)}{H(z)} dz$ (sound horizon at drag epoch)",
     "structure_transition": r"$k_{\text{nl}}$ computed from growth factor transition where $\delta(k, z) \sim 1$",
@@ -91,9 +94,11 @@ EQUATIONS_BY_TEST = {
     "slow_roll_epsilon": r"$\epsilon = \frac{M_P^2}{2}\left(\frac{V'}{V}\right)^2$ (first slow-roll parameter)",
     "slow_roll_eta": r"$\eta = M_P^2 \frac{V''}{V}$ (second slow-roll parameter)",
 
-    # CP Violation (2 tests)
-    "jarlskog_pmns": r"$J_{\text{CP}} = \text{Im}(U_{e1} U_{\mu 2} U_{e2}^* U_{\mu 1}^*)$ (Jarlskog invariant for PMNS)",
-    "jarlskog_ckm": r"$J_{\text{CP}} = \text{Im}(V_{ud} V_{cs} V_{us}^* V_{cd}^*)$ (Jarlskog invariant for CKM)",
+    # CP Violation (4 tests)
+    "ckm_cp_phase": r"$\delta_{\text{CKM}} = 1.0 + \alpha_{\text{CKM}} \times 2.0$ where $\alpha_{\text{CKM}}$ is collapse asymmetry parameter from lock file",
+    "jarlskog_ckm": r"$J_{\text{CKM}} = \text{Im}(V_{ud} V_{cs} V_{us}^* V_{cd}^*)$ where $V$ is CKM matrix with CP phase $\delta_{\text{CKM}}$",
+    "pmns_cp_phase": r"$\delta_{\text{PMNS}} = 1.2 + \alpha_{\text{PMNS}} \times 1.5$ where $\alpha_{\text{PMNS}}$ is collapse asymmetry parameter from lock file",
+    "jarlskog_pmns": r"$J_{\text{PMNS}} = \text{Im}(U_{e1} U_{\mu 2} U_{e2}^* U_{\mu 1}^*)$ where $U$ is PMNS matrix with CP phase $\delta_{\text{PMNS}}$",
 
     # RG Evolution (4 tests)
     "no_landau_poles": r"All coupling constants remain finite for $\mu \in [\mu_0, \mu_{\max}]$",

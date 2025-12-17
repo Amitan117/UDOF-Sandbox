@@ -1,0 +1,29 @@
+{
+  "domain_name": "early_universe",
+  "n_pass": 2,
+  "n_fail": 0,
+  "n_error": 0,
+  "n_skip": 0,
+  "n_theoretical": 0,
+  "chi2_total": null,
+  "tests": [
+    {
+      "test_name": "cmb_lcdm",
+      "status": "PASS",
+      "value": 0.0,
+      "expected": "< 0.01",
+      "error": null,
+      "chi2": null,
+      "notes": "No local mixing at CMB → ESE off → ΛCDM preserved"
+    },
+    {
+      "test_name": "bbn_preserved",
+      "status": "PASS",
+      "value": "Y_p: 0.2485, D/H: 2.55e-05",
+      "expected": "Y_p: 0.2449±0.0040, D/H: 2.55e-05±2.50e-07",
+      "error": null,
+      "chi2": null,
+      "notes": "COMPUTED: Y_p within 0.9σ, D/H within 0.0σ"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "domain_name": "rg_evolution",
+  "n_pass": 4,
+  "n_fail": 0,
+  "n_error": 0,
+  "n_skip": 0,
+  "n_theoretical": 0,
+  "chi2_total": null,
+  "tests": [
+    {
+      "test_name": "no_landau_poles",
+      "status": "PASS",
+      "value": true,
+      "expected": true,
+      "error": null,
+      "chi2": null,
+      "notes": "COMPUTED: Perturbativity to 10^18 GeV"
+    },
+    {
+      "test_name": "lambda_min",
+      "status": "PASS",
+      "value": 0.004224902527687646,
+      "expected": "Computed",
+      "error": null,
+      "chi2": null,
+      "notes": "COMPUTED: At μ = 4.07e+11 GeV"
+    },
+    {
+      "test_name": "vacuum_stable",
+      "status": "PASS",
+      "value": 0.004224902527687646,
+      "expected": "> 0.0 (stable)",
+      "error": null,
+      "chi2": null,
+      "notes": "COMPUTED: λ_min = 0.0042 (H4 correction: +0.163 at Λ_* = 9.87e-02 GeV)"
+    },
+    {
+      "test_name": "gauge_crossing",
+      "status": "PASS",
+      "value": 1.0880186170557701e+17,
+      "expected": null,
+      "error": null,
+      "chi2": null,
+      "notes": "COMPUTED: g₂ = g₃ at 1.09e+17 GeV"
+    }
+  ]
+}

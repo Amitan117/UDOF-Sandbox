@@ -1,0 +1,47 @@
+{
+  "domain_name": "inflation",
+  "n_pass": 4,
+  "n_fail": 0,
+  "n_error": 0,
+  "n_skip": 0,
+  "n_theoretical": 0,
+  "chi2_total": null,
+  "tests": [
+    {
+      "test_name": "spectral_index",
+      "status": "PASS",
+      "value": 0.9621487603305785,
+      "expected": "0.9649 ± 0.0042",
+      "error": null,
+      "chi2": null,
+      "notes": "COMPUTED: N=55, ε=0.00025"
+    },
+    {
+      "test_name": "tensor_to_scalar",
+      "status": "PASS",
+      "value": 0.003966942148760331,
+      "expected": "< 0.036",
+      "error": null,
+      "chi2": null,
+      "notes": "COMPUTED: r = 16ε = 0.00397"
+    },
+    {
+      "test_name": "slow_roll_epsilon",
+      "status": "PASS",
+      "value": 0.00024793388429752067,
+      "expected": "< 0.01",
+      "error": null,
+      "chi2": null,
+      "notes": "COMPUTED from ε = 3/(4N²)"
+    },
+    {
+      "test_name": "slow_roll_eta",
+      "status": "PASS",
+      "value": -0.01818181818181818,
+      "expected": "|η| < 0.1",
+      "error": null,
+      "chi2": null,
+      "notes": "COMPUTED from η = -1/N"
+    }
+  ]
+}

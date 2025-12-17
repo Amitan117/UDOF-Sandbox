@@ -1,0 +1,29 @@
+{
+  "domain_name": "dark_energy",
+  "n_pass": 2,
+  "n_fail": 0,
+  "n_error": 0,
+  "n_skip": 0,
+  "n_theoretical": 0,
+  "chi2_total": null,
+  "tests": [
+    {
+      "test_name": "de_dominance",
+      "status": "PASS",
+      "value": 0.7068,
+      "expected": "> 0.2932",
+      "error": null,
+      "chi2": null,
+      "notes": ""
+    },
+    {
+      "test_name": "w_eos",
+      "status": "PASS",
+      "value": -0.9523911833333333,
+      "expected": "-1.0 (observed)",
+      "error": 0.04760881666666672,
+      "chi2": null,
+      "notes": "COMPUTED: w = -1 - (α_geom×p_op)/3 = -0.9524 (α=-0.1885, p_op=0.7577)"
+    }
+  ]
+}
