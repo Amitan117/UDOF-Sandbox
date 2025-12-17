@@ -1,0 +1,165 @@
+{
+  "run_id": "udof_v4.0_20251217_014648",
+  "timestamp": "2025-12-17T01:46:48.612434+00:00",
+  "runner": {
+    "file": "udof_validation_runner_v4.0.py",
+    "sha256": "ddbf60aa9609e308d690f8df084dc01347866bcde02c8e43a711c3821a2eb091",
+    "path": "D:\\CDQF-Sandbox\\udof_runner\\udof_validation_runner_v4.0.py"
+  },
+  "integrated_modules": {
+    "root": "D:\\CDQF-Sandbox\\udof_runner\\integrated_modules",
+    "file_count": 70,
+    "hashes": {
+      "baryo_collapse_cp.py": "4a7bff5c9ae0d5c1d7bda7ccc4f64fd5800334d7bf97094fcd341e22e23496a7",
+      "baryo_complete_leptogenesis.py": "1d04f8b2f7e39019f6a5d27b289344f4f65deec858405f9d5bfaebba8d936434",
+      "bbn_solver.py": "18d08b7c883df5b4921b53ed1ae8495c504dbd1ea4557693bf1a17df9b562b1f",
+      "binary_pulsar_timing.py": "c7f3bd167c443913b723869ed2f9f5bbfc020e972faedef6a997b7fde2324c72",
+      "cmb_internal.py": "5ed4df16e21d45a6360af6b76fdcd405e5b51523c83cf4724994a68af44aca34",
+      "collapse_born_rule.py": "ca09499a534df0e6290c15dd1495e15ed95d1057894b29843e30c316f94f28e7",
+      "collapse_heating_bounds.py": "e3637b271f0865fcdcbe3680273aa0685c7dc4eebb29d3576a67f8d3884d7bc5",
+      "collapse_no_signaling.py": "f192f89c5f7a9a675c2e03b159f96328622e9bd109db9d79614a5cc161793850",
+      "cp_violation_complete.py": "20aa5f12a9b44077f551bad57a24fd6f0feeb6ca10504320b8ca886c88819372",
+      "dataset_citations.py": "d34674b27d088937bb8c6fe95ca36af4645aeea38f7f5c919b568e29478e024c",
+      "gauge_rg_evolution.py": "e2d3e58d5f0e13f49e833e5d9e1450a3e7872f73371c650d3fd5a8f4e14e32b5",
+      "gauge_unification_complete.py": "aae4557f05f5b85d3f89ce201a94cfbeed172a6a36ff58fa79d79815b3b3d479",
+      "gw_propagation_speed.py": "753beac1a0d520f3d1630a7afdbf8a8114f1aa24ed505f202094d49c955e80a1",
+      "lagrangian_udof_updated.py": "473e4ebc8779eb1a776260a56bc5f41722252e0fe7a637186e4eed05a8a94a43",
+      "llr_precision_gravity.py": "3db06462ff6b52fe0e53cd4a6c62b9b5f264b2578aaec37cc5b430eecc60769b",
+      "lss_transition.py": "3b08070a4aa925efa38c544764c3f4e177fd8f36e88a059bf2c4ed9fa8a86981",
+      "master_action_total.py": "1aeb11d27663d8085d5db269fae6472da85242ba331a3e06991223d2b97ca471",
+      "proper_growth_standalone.py": "69fa026c5f88349288385885a08547f3be6713b060233174ca093452a9025c8e",
+      "qg_derive_g.py": "e5fb464a4ce35e5eeb6fcf9f3577c0e68c1964d21f5d0e224feaad0471352cce",
+      "qg_graviton_from_kernel.py": "98669f4f2becba78f0f12b3720a6c54bd32efcce5c185e6ab4be169303cf421a",
+      "qg_graviton_operators.py": "d1f3b24aec7f506c3b147039f8fc284d3462355016bc59507ef27e3acc47b78d",
+      "qg_spin2_field_quantization.py": "344aa0373429216447d708647d5e2e81c5b55caa280c23d837c7f7ecf8cea762",
+      "qg_wheeler_dewitt.py": "5411b9323754f393462fc346d0aefcc86306369d2819808f9944a1d92994aee2",
+      "rx_response_standalone.py": "6e7cb7bf69277a10f83950dc318cc52773c28e526c95a99512e6b2bf722e99a2",
+      "sigma8_computation.py": "30d937a480ec02807e19139e5d45a452b05baff2202aec63a766aabe98783453",
+      "sparc_ese_computation.py": "e94453b8889c5a1243904111ac5837e26af7315d78634bafb68ace9e46c770f8",
+      "sparc_separated_fitter.py": "7de2c080c5c5409db42a14ea894022fd2842bfd22e631d984631956813d43cde",
+      "sparc_separated_fitter_v2_cumulative.py": "43b5ba8e0008ef914810cca8bd732568e198446d8573b90c5422e185fc1e4390",
+      "test_output_generators.py": "19eb78b5a8aa4f80c9d3635486522e38bd02846aacf826a6b648fa8e1d71cb95",
+      "test_standards_compliance.py": "cedb89cbe8fbf6f028d1901ab8bd14b7d740589b8c07a73591985bb0cacecf9f",
+      "three_body_sun_earth_moon.py": "d9f39f090f78fa2fc66c9b0ee52787038454b8206290c7bedcce51d5e96d48c1",
+      "types.py": "fc0bd6a65dad30cfc5aa38d152d6c7b4f021d9f29ebe50acdb74fdab63dfddfa",
+      "__init__.py": "d2b4c982674842d73b2a7e2192215992f2c0b705d839d574982c2ee28b1d788c",
+      "core/constants.py": "208cf5df1077ce9c06f814c5cfb0fd2ff0931e6e94930fb7072cc4b8fbdda115",
+      "core/cosmology.py": "4657ad4cdef45a0828fae4469ba19235edc9e1b1197b4e5841a56e876dbc6a71",
+      "core/ese.py": "7e95ebc98934f6049372d7b4f5409c9e26e526be67c280fa5bd4bdbcc08b8716",
+      "core/formulas.py": "a67c422698ef61ad1512051a4001b2490ba2eb0b2bc7254d382cedd0f852bdca",
+      "core/lss.py": "0d5498d4362998e64a7820845ebecab7920e88fe4c32309f5a74c641ccc63a15",
+      "core/tsi.py": "5a9c5235d796971b75fb365db0716490cf264bce5b5aed636dc1698e07a9d8f7",
+      "core/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/loaders.py": "3cd9489f28c2baf544bd97a019890a27ded69647872bab412885ae9e2c997e80",
+      "data/registry.py": "e20490038967a18b831512d596e64f39083dcf16c5e2813b89f93484c8389c48",
+      "data/__init__.py": "9e5fa0b8fe9aa306f0a4130c17ac5ee9aa5a9344e3760c82c72bf10f35ae3a79",
+      "domains/bao.py": "6b42f27491a1d999e25923141b57ffef7a02a02d4b90b658ed1e5c475e3943f3",
+      "domains/ckm_mixing.py": "c43d16e4074afe321c72f370391013e6dfa8e3be71097e74d27ba79d62d9c452",
+      "domains/cmb.py": "4754b9816bf0389a32f7ba0c0070206e243a81e5bed790365146cef61fd7d558",
+      "domains/context.py": "bcd6037f4ac117d6593473ecee7deb443b029bb719890a8f54f70c4f26491b14",
+      "domains/cp_violation.py": "4ab17846601aeb3f68e8c40695897845a16d292bcf5312a7b2ad65bbbff245c8",
+      "domains/dark_energy.py": "e79ca2ef2457e9516c3067d24af06da44551b8aa225572cef71c1683b69ec0d1",
+      "domains/dark_matter.py": "a1a3d9858b16a8e6531580b11832a8f1c6d623dce5b5dbfdc786939eac14fae8",
+      "domains/early_universe.py": "4be557ccda6eeecec0ba64b1d394c9a0a3485a6bd5aae5e0706b3c06e597b13c",
+      "domains/fermion_masses.py": "382be5e3a9e53e09057998a71d78daf2ee059152de2bd3be3346bd24e254bf2a",
+      "domains/gauge_symmetry.py": "aa18760347ff20ab393339607c18579e96d284a424d234ae10c40c1fc7b43942",
+      "domains/gw_ringdown.py": "e5bad643f529d1334908c5a89f89cf747d322c9ad3f0d5710c5723410920cd37",
+      "domains/h4_geometry.py": "761989f02031a8302b9b07dbccfa9b2f9c26fb10e3f440224d8da1009f56a899",
+      "domains/inflation.py": "b071dae56f78bcdb903627cbfc43e14729e61c77cfefc453fb25e99197f403f5",
+      "domains/lss.py": "376c748a960687a83467a286f1a840663cb7abc59aa5eabfbf78c915788cd7f3",
+      "domains/microphysics.py": "abae7dbdcfb11539e6dfbb79e9356542f27678bc843205aa9743e70acfa56aa4",
+      "domains/neutrino_masses.py": "701078f39273e5052dd7415936a9bd271ca4149ec546958517c6303f9e2a4295",
+      "domains/pmns_mixing.py": "005dd60ee7a3ae7c9368651d3d2ff28d9fa70e00e305c57fbd09d9ba333f1cf8",
+      "domains/precision_tests.py": "1a7aba28bbb6eba1b6d0eb14236390b69a451f12ca40703223e0643ba2087bf6",
+      "domains/rg_evolution.py": "3339fcd68b4d00e58df18fed98e3f36e44bffa0befe9165810d485e2c13ad047",
+      "domains/sne.py": "cb1ebe6922e17e7ff5b140267950378f40f39c7d833f4f20030ae905c420b037",
+      "domains/sparc.py": "327e1bd92b2e98d68588d24ec318c17ccd1581445f03f6d89d1346c1265d9762",
+      "domains/strong_field.py": "de4c925f657ed3f47807098bcc43ac5664d7a72bde9d451124aef0c018cfe384",
+      "domains/ward_identities.py": "368a0127035cc95d1d7600eea7840b9869a661fd9393dce764a27b6c62959f64",
+      "domains/__init__.py": "925c88a57100ddd2e9f60fdf5816cb09b613a02c3d400b79425a526198b2032d",
+      "standards/equations_generator.py": "3646834f974aa8fb258916e66f3d20267db8601ad1104127b1ae85c0da57700b",
+      "standards/runtime.py": "9e74232911c092a8f679962ce178a8f2d2738dfbe99c6ad63bf21efbcc09c9b8",
+      "standards/__init__.py": "9072918a9f221d2ca30d16d249830feca4a23907d83180e32976d197daf9e999"
+    }
+  },
+  "udof_version": "4.0.0_mcmc_validated",
+  "domains_executed": [
+    "fermion_masses"
+  ],
+  "domain_count": 1,
+  "master_lock": {
+    "filename": "udof_MASTER_LOCK_v3_SPARC.json",
+    "path": "D:\\CDQF-Sandbox\\udof_runner\\data\\locks\\udof_MASTER_LOCK_v3_SPARC.json",
+    "sha256": "97a6d22ef8dc65281c85e19e92dde8d1c509485176997dc5dc50a3a806e3a669"
+  },
+  "datasets": {
+    "bao": {
+      "dataset": "DESI DR1 BAO",
+      "path": "D:\\CDQF-Sandbox\\udof_runner\\data\\bao\\desi_dr1_all",
+      "files": {
+        "mean.txt": {
+          "sha256": "dd2873a0b88459a491af3c0c0307ba059f62df9211d5b976760f310565a1be68",
+          "size_bytes": 376
+        },
+        "cov.txt": {
+          "sha256": "bbafa9074b51cf1a45e0d10e4f37db8c0e80a5d1d1788857abb7fc49fb21abcc",
+          "size_bytes": 2170
+        }
+      },
+      "version": "DESI DR1",
+      "citation": "DESI Collaboration (2024), arXiv:2404.03002"
+    },
+    "sne": {
+      "dataset": "Pantheon+SH0ES",
+      "path": "D:\\CDQF-Sandbox\\udof_runner\\data\\sne\\pantheon_plus\\Pantheon+SH0ES.dat",
+      "sha256": "1cb0fc379ef066afdc2ffd1857681cc478024570d8a3eba284fb645775198cf8",
+      "size_bytes": 579283,
+      "version": "Pantheon+SH0ES",
+      "citation": "Scolnic et al. (2022), ApJ 938, 113, arXiv:2112.03863"
+    },
+    "sparc": {
+      "dataset": "SPARC",
+      "path": "D:\\CDQF-Sandbox\\udof_runner\\data\\sparc\\sparc_full_catalog.csv",
+      "sha256": "b8e2575ab97be317657289d64b9c17bf3f5e1091af7ebe688438282bda3de925",
+      "size_bytes": 26753,
+      "version": "SPARC v2.0",
+      "citation": "Lelli et al. (2016), AJ 152, 157, arXiv:1606.09251"
+    },
+    "pdg": {
+      "dataset": "PDG 2024",
+      "path": "D:\\CDQF-Sandbox\\udof_runner\\data\\pdg\\pdg_masses_2024.json",
+      "sha256": "0d0b470a88b9c5059a8776ef115f606ea3418fc0e54438abfe58e989e740f03d",
+      "size_bytes": 2821,
+      "version": "PDG 2024",
+      "citation": "Workman et al. (2024), PTEP 2024, 083C01"
+    }
+  },
+  "environment": {
+    "python_version": "3.12.7",
+    "python_full": "3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "architecture": "64bit",
+    "dependencies": {
+      "camb": "1.6.5",
+      "mpmath": "1.3.0",
+      "numpy": "2.3.5",
+      "packaging": "25.0",
+      "pip": "25.3",
+      "scipy": "1.16.3",
+      "sympy": "1.14.0"
+    }
+  },
+  "total_pass": 9,
+  "total_tests": 9,
+  "total_fail": 0,
+  "total_error": 0,
+  "total_skip": 0,
+  "total_theoretical": 0,
+  "cosmology_method": "proper",
+  "use_rx": true,
+  "sparc_formula": "separated",
+  "sparc_b_prediction": false,
+  "git_commit_hash": "21bce39997c59cdc62bbdb0a07d19087f84de300"
+}

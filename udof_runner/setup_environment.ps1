@@ -48,6 +48,6 @@ Write-Host "To activate the environment:" -ForegroundColor Yellow
 Write-Host "  .\venv\Scripts\Activate.ps1" -ForegroundColor White
 Write-Host ""
 Write-Host "To run tests:" -ForegroundColor Yellow
-Write-Host "  python udof_validation_runner_v3.3.py" -ForegroundColor White
+Write-Host "  python udof_validation_runner_v4.0.py" -ForegroundColor White
 Write-Host ""
 

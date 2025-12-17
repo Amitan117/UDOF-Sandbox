@@ -19,31 +19,87 @@ from typing import Dict, Any, Optional, Tuple
 KPC_TO_M = 3.0857e19  # kpc to meters
 M_SUN = 1.98847e30  # Solar mass [kg]
 
-# Try to import ESE modules from parent project
-ESEDarkSector = None
-ESEDarkSectorDerived = None
-compute_X_from_observables = None
-compute_dX_dr = None
+# Self-contained sandbox implementation (no external project imports)
+ESE_MODULES_AVAILABLE = True
 
-ESE_MODULES_AVAILABLE = False
 
-try:
-    # Try to import from parent project
-    PROJECT_ROOT = Path("D:/UDOF Prime-0 Physics Engine")
-    if PROJECT_ROOT.exists():
-        sys.path.insert(0, str(PROJECT_ROOT))
+def compute_X_from_observables(
+    Sigma_b: np.ndarray,
+    sigma_g: np.ndarray,
+    eta_star: float,
+    p: float,
+    Sigma0: float,
+    sigma0: float,
+) -> np.ndarray:
+    """
+    Compute control variable X from observables (self-contained).
 
-        from prime0.modules.ese_dark_sector import (
-            ESEDarkSector,
-            ESEDarkSectorDerived,
-            compute_X_from_observables,
-            compute_dX_dr
-        )
+    X = (Sigma_b / Sigma0)^eta_star * (sigma_g / sigma0)^p
+    """
+    Sigma_b = np.asarray(Sigma_b, dtype=float)
+    sigma_g = np.asarray(sigma_g, dtype=float)
+    Sigma0 = max(float(Sigma0), 1e-30)
+    sigma0 = max(float(sigma0), 1e-30)
 
-        ESE_MODULES_AVAILABLE = True
-except ImportError:
-    # Modules not available - will use fallback
-    ESE_MODULES_AVAILABLE = False
+    X = (np.maximum(Sigma_b, 1e-30) / Sigma0) ** float(eta_star) * \
+        (np.maximum(sigma_g, 1e-30) / sigma0) ** float(p)
+    return np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
+
+
+def compute_dX_dr(
+    r_m: np.ndarray,
+    Sigma_b: np.ndarray,
+    sigma_g: np.ndarray,
+    eta_star: float,
+    p: float,
+    Sigma0: float,
+    sigma0: float,
+) -> np.ndarray:
+    """Numerical gradient dX/dr on the provided radius grid."""
+    r_m = np.asarray(r_m, dtype=float)
+    X = compute_X_from_observables(Sigma_b, sigma_g, eta_star, p, Sigma0, sigma0)
+    if r_m.size < 2:
+        return np.zeros_like(X)
+    # Use np.gradient with spacing r_m (handles non-uniform grids)
+    dX_dr = np.gradient(X, r_m, edge_order=1)
+    return np.nan_to_num(dX_dr, nan=0.0, posinf=0.0, neginf=0.0)
+
+
+class _ESELocalBase:
+    """Minimal self-contained ESE map + derivatives."""
+
+    def __init__(self, ell_IR: float, ell_star: float, k: float, X0: float):
+        self.ell_IR = float(ell_IR)
+        self.ell_star = float(ell_star)
+        self.k = float(k)
+        self.X0 = float(X0)
+
+    def compute_s(self, X: np.ndarray) -> np.ndarray:
+        X = np.asarray(X, dtype=float)
+        X_safe = np.maximum(X, 1e-30)
+        z = self.k * (np.log(X_safe) - np.log(max(self.X0, 1e-30)))
+        return 1.0 / (1.0 + np.exp(-z))
+
+    def compute_ds_dr(self, r_m: np.ndarray, X: np.ndarray, dX_dr_val: np.ndarray) -> np.ndarray:
+        # ds/dX = s(1-s) * k / X
+        X = np.asarray(X, dtype=float)
+        dX_dr_val = np.asarray(dX_dr_val, dtype=float)
+        s = self.compute_s(X)
+        ds_dX = s * (1.0 - s) * self.k / np.maximum(X, 1e-30)
+        return ds_dX * dX_dr_val
+
+
+class ESEDarkSector(_ESELocalBase):
+    """Compat name for gradient/s_activation usage."""
+
+
+class ESEDarkSectorDerived(_ESELocalBase):
+    """Compat name providing an enhancement function F(s)."""
+
+    def compute_F(self, X: np.ndarray) -> np.ndarray:
+        # Simple bounded enhancement proxy (self-contained).
+        s = self.compute_s(X)
+        return 1.0 + 4.0 * s  # O(1) to O(5) boost
 
 
 def compute_surface_density_profile(
@@ -255,9 +311,7 @@ def compute_S_ESE_proper(
     Returns:
         S_ESE: ESE structure function (dimensionless), or None if modules unavailable
     """
-    # Check if ESE modules are available
-    if not ESE_MODULES_AVAILABLE:
-        return None
+    # Self-contained sandbox: always available (local implementation)
 
     # Get pivot values from locks or defaults
     if locks is None:

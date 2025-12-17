@@ -257,5 +257,72 @@
         "rms_improvement": 4.433097074105117
       }
     }
+  },
+  "runner_v4_compat": {
+    "ese_map": {
+      "ell_IR": 4.7e-05,
+      "ell_star": 2e-15,
+      "k": 1.1190412939023862,
+      "X0": 10.0,
+      "A": 1.9
+    },
+    "calibrated_locks": {
+      "eta_star": 0.171,
+      "X0": 10.0
+    },
+    "pivots": {
+      "Sigma0_kg_m2": 1.0,
+      "sigma0_m_s": 10000.0,
+      "p": 0.2
+    },
+    "strong_field": {
+      "K_ref": 10000000000.0
+    },
+    "collapse": {
+      "Lambda_rate_sinv": 1e23,
+      "ell_length_m": 1e-15
+    },
+    "fermion_masses": {
+      "geometry_eigenvalues": {
+        "g": [
+          1.469331,
+          1.75,
+          1.594506
+        ],
+        "sigma": [
+          0.118172,
+          1.651012,
+          3.416979
+        ]
+      },
+      "lambda_0": 0.5402843356,
+      "beta_ql": 0.2490199059,
+      "hierarchy_parameters": {
+        "a_u": 0.9001618624,
+        "b_u": 2.4458799362,
+        "a_d": 2.5521020889,
+        "b_d": 1.4932316542,
+        "a_e": 2.0461301804,
+        "b_e": 1.5361510515,
+        "c_tau": 1.4212117197
+      },
+      "neutrino_v8_mixing_parameters": {
+        "epsilon_comm": -2.000082277364097,
+        "epsilon_diff": -0.9576239196736189,
+        "Delta_a": 0.46774550986231506,
+        "Delta_b": 5.641001373829542
+      },
+      "neutrino_v9_mass_parameters": {
+        "a_nu": 0.7605450153,
+        "b_nu": 0.9570662379,
+        "S_nu": 1.131419e-12
+      },
+      "ckm_mixing_parameters": {
+        "epsilon_comm": -13.407168247988992,
+        "epsilon_diff": -2.1395858079636887,
+        "Delta_a": -26.16069197838864,
+        "Delta_b": 10.162448648190658
+      }
+    }
   }
 }

@@ -19,9 +19,9 @@ import numpy as np
 from typing import Dict, Any, Tuple, Optional
 from dataclasses import dataclass
 
-# Import CP violation from collapse
+# Import CP violation from collapse (self-contained sandbox)
 try:
-    from prime0.toe.baryo_collapse_cp import CollapseCPViolation
+    from .baryo_collapse_cp import CollapseCPViolation
     HAS_COLLAPSE_CP = True
 except ImportError:
     HAS_COLLAPSE_CP = False
@@ -86,10 +86,19 @@ class CompleteLeptogenesis:
         """
         Compute CP asymmetry ε_1 from collapse-modified decay.
 
-        With collapse dynamics:
-            ε_1 = (3/16π) × (M_N/M_P) × (Δm²/M_N²) × sin(δ) × f_collapse(Γ)
+        Per UDOF Technical Specification v1.0 (Section 6: Early Universe and Baryogenesis):
+        The canonical asymmetry scales as: ε ∝ m_ν/M_N
+        
+        This replaces the deprecated Δm²/M_N² scaling.
 
-        Where f_collapse(Γ) accounts for collapse-modified decay rates.
+        With collapse dynamics:
+            ε_1 = (3/16π) × (m_ν/M_N) × sin(δ) × f_collapse(Γ) × F(T, Γ_coll)
+
+        Where:
+        - m_ν is the light neutrino mass scale (NOT Δm²)
+        - M_N is the heavy neutrino mass scale (~10¹² GeV)
+        - f_collapse(Γ) accounts for collapse-modified decay rates
+        - F(T, Γ_coll) is the early-universe enhancement factor
 
         Parameters
         ----------
@@ -114,11 +123,12 @@ class CompleteLeptogenesis:
         m_nu_max = max(m1, m2, m3)  # eV
         m_nu_max_GeV = m_nu_max * 1e-9  # Convert to GeV
 
-        # Base CP asymmetry (corrected leptogenesis formula)
-        # Standard form: ε₁ ≈ (3/16π) × (M_N/M_P) × (m_ν/M_N) × sin(δ)
-        # This simplifies to: ε₁ ≈ (3/16π) × (m_ν/M_P) × sin(δ)
-        # But we keep M_N dependence for scale-dependent effects
-        epsilon_base = (3.0 / (16.0 * np.pi)) * (M_N / self.M_Pl) * \
+        # Base CP asymmetry (per UDOF spec v1.0 - corrected scaling)
+        # Canonical form: ε ∝ m_ν/M_N (NOT Δm²/M_N² which is deprecated)
+        # Standard leptogenesis form: ε₁ ≈ (3/16π) × (m_ν/M_N) × f(δ, M_N)
+        # For scale-dependent effects, we use: ε₁ ≈ (3/16π) × (m_ν/M_N) × sin(δ) × g(M_N)
+        # This maintains the correct m_ν/M_N scaling as specified
+        epsilon_base = (3.0 / (16.0 * np.pi)) * \
             (m_nu_max_GeV / M_N) * np.sin(delta_pmns)
 
         # Collapse modification factor
