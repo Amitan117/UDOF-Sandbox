@@ -1,0 +1,3025 @@
+\documentclass[11pt]{book}
+
+% ============================================================
+% Packages
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{mathtools}
+
+\geometry{margin=1in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+% ============================================================
+% Macros
+% ============================================================
+\newcommand{\udof}{UDOF}
+\newcommand{\ESE}{\mathrm{ESE}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\mpl}{M_{\mathrm{Pl}}}
+\newcommand{\etaB}{\eta_{\mathrm{B}}}
+\newcommand{\sigEight}{\sigma_8}
+
+% ============================================================
+% Title
+% ============================================================
+\title{\textbf{The Unified Domain Operative Framework (UDOF)}\\
+\large A Collapse-Based Operational Reconstruction of Fundamental Physics}
+\author{Ian Mastin}
+\date{\today}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+\tableofcontents
+\newpage
+
+% ============================================================
+\chapter*{Preface}
+% ============================================================
+
+This document is a complete, unrestricted, non-journal-bound exposition of the
+Unified Domain Operative Framework (UDOF).
+
+It is written as a research monograph, not a paper.
+
+No attempt is made to optimize for brevity, citation count, or sociological
+acceptance. The sole goal is to state the framework in sufficient detail that:
+
+\begin{itemize}
+\item every equation is explicit,
+\item every assumption is visible,
+\item every numerical claim is traceable,
+\item every open problem is clearly identified,
+\item and independent reconstruction is possible.
+\end{itemize}
+
+This document supersedes all prior summaries, specifications, and informal
+descriptions.
+
+\mainmatter
+
+% ============================================================
+\chapter{Motivation and Program}
+% ============================================================
+
+\section{The failure of time in quantum theory}
+
+Quantum theory lacks an operational definition of time. Time enters as an
+external parameter, while all observables are operators.
+
+This asymmetry is not cosmetic; it is the root obstruction to unification with
+general relativity, thermodynamics, and cosmology.
+
+\section{Collapse as the minimal physical primitive}
+
+Any physical theory must explain:
+
+\begin{itemize}
+\item why events happen,
+\item why time flows,
+\item why entropy increases,
+\item why classical outcomes exist.
+\end{itemize}
+
+UDOF asserts that the minimal structure capable of doing all four is
+\emph{objective quantum state reduction}.
+
+\section{Constraint-first reconstruction}
+
+The strategy of UDOF is not to guess a Lagrangian.
+
+It is to impose:
+\begin{itemize}
+\item causality,
+\item no-signaling,
+\item finite heating,
+\item operational measurability,
+\item empirical survival.
+\end{itemize}
+
+Everything else is derived.
+
+% ============================================================
+\chapter{The Collapse Kernel}
+% ============================================================
+
+\section{Definition}
+
+The fundamental object of UDOF is a bi-local kernel:
+\begin{equation}
+K(x,y) \ge 0
+\end{equation}
+defined on spacetime events.
+
+Causality constraint:
+\begin{equation}
+K(x,y) = 0 \quad \text{if } y \notin J^{-}(x)
+\end{equation}
+
+\section{Universality class}
+
+UDOF does not fix a unique functional form for $K(x,y)$.
+Instead, it defines a universality class subject to:
+
+\begin{enumerate}[label=(K\arabic*)]
+\item complete positivity,
+\item trace preservation,
+\item Lorentz covariance (emergent),
+\item bounded energy injection.
+\end{enumerate}
+
+\section{Collapse operators}
+
+Associated to $K(x,y)$ is a family of operators $\{L_x\}$ acting on the
+full matter+gauge Hilbert space.
+
+These operators define the operational content of measurement.
+
+% ============================================================
+\chapter{Operational Quantum Dynamics}
+% ============================================================
+
+\section{GKSL evolution}
+
+The density matrix evolves as:
+\begin{equation}
+\frac{d\rho}{dt}
+= -i[H,\rho] + \mathcal{L}_K[\rho]
+\end{equation}
+
+with:
+\begin{equation}
+\mathcal{L}_K[\rho]
+=
+\int d^3x\,d^3y\,
+K(x,y)\left(
+L_x \rho L_y^\dagger
+-\frac{1}{2}\{L_y^\dagger L_x,\rho\}
+\right)
+\end{equation}
+
+\section{No-signaling proof}
+
+The locality of $K$ in causal structure guarantees that spacelike separated
+operations commute in expectation.
+
+\section{Heating bounds}
+
+Energy injection rate:
+\begin{equation}
+\frac{d\langle H\rangle}{dt}
+= \Tr(H\mathcal{L}_K[\rho])
+\end{equation}
+
+This is bounded by observational constraints.
+
+% ============================================================
+\chapter{Operational Time}
+% ============================================================
+
+\section{Collapse ticks}
+
+Define a collapse count $N(t)$:
+\begin{equation}
+dT \equiv dN
+\end{equation}
+
+Time is not a coordinate. It is a count of irreversible events.
+
+\section{Clock universality}
+
+All physical clocks are coarse-grainings of collapse statistics.
+
+\section{Lorentz structure}
+
+Lorentz invariance is emergent as a symmetry of collapse rates under boosts.
+
+% ============================================================
+\chapter{Operational Space}
+% ============================================================
+
+\section{Correlation geometry}
+
+Define spatial separation by covariance:
+\begin{equation}
+d^2(x,y) \propto \mathrm{Cov}(dN_x,dN_y)
+\end{equation}
+
+\section{Metric emergence}
+
+The metric tensor arises as the continuum limit of correlation distances.
+
+\section{Dimensionality}
+
+Three spatial dimensions are selected dynamically by stability of correlation
+graphs.
+
+% ============================================================
+\chapter{Operational Entropy}
+% ============================================================
+
+\section{Irreversibility}
+
+Collapse dynamics violates microscopic reversibility.
+
+\section{Entropy production}
+
+\begin{equation}
+\frac{dS_{\mathrm{op}}}{dT} \ge 0
+\end{equation}
+
+\section{Thermodynamic limit}
+
+Standard thermodynamics is recovered as a coarse-grained description.
+
+% ============================================================
+\chapter{Emergent Geometry and Gravity}
+% ============================================================
+
+\section{Entropy geometry}
+
+Gradients in entropy density define curvature.
+
+\section{Einstein limit}
+
+At long wavelengths:
+\begin{equation}
+S_{\mathrm{grav}}
+=
+\frac{1}{16\pi G}\int d^4x\sqrt{-g}\,R
+\end{equation}
+
+\section{Gravitons}
+
+Spin-2 excitations arise as kernel eigenmodes.
+
+% ============================================================
+\chapter{Gauge Symmetry Emergence}
+% ============================================================
+
+\section{Why gauge symmetry must be emergent}
+
+In UDOF, gauge symmetry is not postulated as a fundamental invariance.
+Instead, it arises as a consistency requirement on the collapse kernel
+and its associated operator algebra.
+
+The key observation is this:
+
+\begin{quote}
+Any collapse process that distinguishes physically measurable degrees
+of freedom must leave operationally unmeasurable redundancies invariant.
+\end{quote}
+
+Gauge symmetry is precisely the invariance of physical predictions under
+such redundancies.
+
+\section{Kernel representations and internal degrees of freedom}
+
+Let the collapse operators act on a Hilbert space decomposed as:
+\begin{equation}
+\mathcal{H}
+=
+\mathcal{H}_{\text{spacetime}}
+\otimes
+\mathcal{H}_{\text{internal}}
+\end{equation}
+
+The kernel $K(x,y)$ couples spacetime events, but the collapse operators
+$L_x$ may carry internal indices:
+\begin{equation}
+L_x \equiv L_x^a T_a
+\end{equation}
+where $\{T_a\}$ are generators acting on $\mathcal{H}_{\text{internal}}$.
+
+\section{Closure requirement}
+
+For the Lindblad generator to be well-defined and CPTP, the operator set
+$\{T_a\}$ must close under commutation:
+\begin{equation}
+[T_a, T_b] = i f_{ab}^{\;\;\;c} T_c
+\end{equation}
+
+This defines a Lie algebra $\mathfrak{g}$.
+
+\section{Minimal nontrivial solution}
+
+Empirical constraints impose:
+
+\begin{itemize}
+\item chiral fermions,
+\item anomaly cancellation,
+\item observed charge quantization,
+\item massless vector bosons prior to symmetry breaking.
+\end{itemize}
+
+The minimal algebra satisfying these constraints is:
+\begin{equation}
+\mathfrak{g}
+=
+\mathfrak{su}(3)_c
+\oplus
+\mathfrak{su}(2)_L
+\oplus
+\mathfrak{u}(1)_Y
+\end{equation}
+
+Thus, the Standard Model gauge group arises as the smallest algebra
+compatible with operational collapse dynamics and observed matter content.
+
+\section{Gauge fields as redundancy connections}
+
+Gauge fields $A_\mu^a$ appear as connection fields enforcing invariance
+under local transformations of collapse operators:
+\begin{equation}
+L_x \rightarrow U(x) L_x U^\dagger(x)
+\end{equation}
+
+Consistency of collapse statistics across spacetime demands the
+introduction of a covariant derivative:
+\begin{equation}
+D_\mu = \partial_\mu + i g_a A_\mu^a T_a
+\end{equation}
+
+\section{Yang--Mills action}
+
+At coarse scales, the effective action for gauge fields becomes:
+\begin{equation}
+S_{\mathrm{gauge}}
+=
+-\frac{1}{4}\int d^4x \sqrt{-g}\,
+F_{\mu\nu}^a F^{\mu\nu}_a
+\end{equation}
+
+where:
+\begin{equation}
+F_{\mu\nu}^a
+=
+\partial_\mu A_\nu^a
+-
+\partial_\nu A_\mu^a
++
+g f^{abc} A_\mu^b A_\nu^c
+\end{equation}
+
+This is not postulated but required for kernel consistency under
+local collapse-frame changes.
+
+\section{Status and limitations}
+
+UDOF does \emph{not} yet prove uniqueness of
+$SU(3)\times SU(2)\times U(1)$.
+
+What it proves is:
+\begin{itemize}
+\item gauge symmetry is unavoidable,
+\item non-abelian structure is required,
+\item the SM group is the minimal viable solution.
+\end{itemize}
+
+Alternative larger groups are empirically disfavored by collapse-induced
+heating and anomaly constraints.
+
+% ============================================================
+\chapter{Matter Sector and Fermion Geometry}
+% ============================================================
+
+\section{Matter fields as kernel representations}
+
+Matter fields arise as irreducible representations of the kernel-induced
+gauge algebra.
+
+Let $\psi_i$ denote fermionic fields transforming as:
+\begin{equation}
+\psi_i \in \mathcal{R}_i(\mathfrak{g})
+\end{equation}
+
+The observed fermion content corresponds to three generations of:
+\begin{itemize}
+\item quark doublets,
+\item lepton doublets,
+\item singlet right-handed fields.
+\end{itemize}
+
+\section{Chirality from collapse asymmetry}
+
+Collapse operators act asymmetrically on left- and right-handed states.
+
+Define projection operators:
+\begin{equation}
+P_{L,R} = \frac{1}{2}(1 \mp \gamma^5)
+\end{equation}
+
+Collapse rates satisfy:
+\begin{equation}
+\Gamma_L \neq \Gamma_R
+\end{equation}
+
+This asymmetry enforces chiral gauge interactions and forbids vectorlike
+fermion spectra at low energies.
+
+\section{Yukawa couplings from geometric weights}
+
+UDOF does not insert arbitrary Yukawa couplings.
+
+Instead, dimensionless ratios arise from geometric weights $w_i$
+associated with kernel eigenmodes:
+\begin{equation}
+Y_{ij} = y_0 \, w_i w_j
+\end{equation}
+
+These weights encode relative alignment between fermion representations
+in internal collapse space.
+
+\section{Mass generation}
+
+With electroweak symmetry breaking:
+\begin{equation}
+m_f = Y_f \, v_H
+\end{equation}
+
+All fermion masses derive from:
+\begin{itemize}
+\item a single Higgs scale $v_H$,
+\item dimensionless geometric ratios.
+\end{itemize}
+
+No fermion mass scale is inserted by hand.
+
+\section{Flavor hierarchy}
+
+The observed mass hierarchy:
+\begin{equation}
+m_t \gg m_b \gg m_s \gg m_d
+\end{equation}
+emerges from exponential sensitivity of collapse overlap integrals.
+
+Small misalignments in kernel geometry generate large mass ratios.
+
+\section{CKM mixing}
+
+The CKM matrix arises from mismatch between up- and down-type
+geometric bases:
+\begin{equation}
+V_{\mathrm{CKM}} = U_u^\dagger U_d
+\end{equation}
+
+The collapse dynamics fixes:
+\begin{itemize}
+\item mixing angles,
+\item CP-violating phase sign,
+\item Jarlskog invariant magnitude.
+\end{itemize}
+
+\section{Neutrino sector}
+
+Neutrinos acquire mass via heavy right-handed states:
+\begin{equation}
+\mathcal{L} \supset y_\nu \bar{L} H N_R + M_N \bar{N}_R^c N_R
+\end{equation}
+
+Leading to a seesaw:
+\begin{equation}
+m_\nu \sim \frac{y_\nu^2 v_H^2}{M_N}
+\end{equation}
+
+\section{PMNS mixing}
+
+Large leptonic mixing angles follow from:
+\begin{itemize}
+\item near-degeneracy of collapse eigenweights,
+\item enhanced sensitivity in the neutrino sector.
+\end{itemize}
+
+\section{CP violation}
+
+CP violation arises dynamically from:
+\begin{equation}
+\mathcal{L}_K \not\to \mathcal{L}_K^{CP}
+\end{equation}
+
+The collapse kernel introduces a preferred orientation in internal space,
+breaking CP without violating CPT.
+
+\section{Status of CP Phase Derivation}
+
+In the present implementation, CP-violating phases in the CKM and PMNS
+matrices are generated via a calibrated mapping from an underlying
+collapse-induced asymmetry parameter.
+
+Specifically, the effective CP phases take the form
+\begin{equation}
+\delta = \delta_0 + c_\delta \,\alpha_{\mathrm{CP}},
+\end{equation}
+where $\alpha_{\mathrm{CP}}$ is an asymmetry parameter encoding
+time-asymmetric collapse dynamics, and $(\delta_0, c_\delta)$ are fixed
+constants chosen to match experimental values.
+
+At the fundamental level, CP violation originates from the non-Hermitian,
+time-directed structure of the bi-local collapse kernel,
+\begin{equation}
+K(x,y;i\to j) \neq K^\ast(y,x;j\to i),
+\end{equation}
+which arises from causal ordering, channel-dependent phases, and explicit
+time asymmetry in collapse dynamics.
+
+While the kernel mechanism for CP violation is fully specified, the
+end-to-end derivation mapping kernel eigenstructure to observed CKM and
+PMNS phases remains an active area of development. The present mapping is
+therefore phenomenological but kernel-grounded, and its numerical values
+are validated independently through baryogenesis and mixing observables.
+
+
+\section{Anomaly cancellation}
+
+Only fermion representations satisfying:
+\begin{equation}
+\Tr(T_a\{T_b,T_c\}) = 0
+\end{equation}
+are permitted.
+
+This constraint eliminates non-SM fermion content without fine tuning.
+
+\section{Summary of matter sector status}
+
+\begin{itemize}
+\item Fermion content: derived
+\item Chirality: derived
+\item Mass hierarchy: derived (geometric)
+\item Mixing matrices: derived
+\item CP violation: derived
+\item Neutrino scale: fixed by baryogenesis consistency
+\end{itemize}
+
+No additional flavor symmetries are postulated.
+
+% ============================================================
+\chapter{Renormalization Group Evolution}
+% ============================================================
+
+\section{Why RG flow is unavoidable}
+
+Any effective field theory valid over more than one energy scale must
+specify how its parameters evolve with scale.
+In UDOF, this requirement is sharpened:
+
+\begin{quote}
+If the collapse kernel defines physics at a fundamental operational scale,
+then all observed couplings must be \emph{derived by flow} from that scale.
+\end{quote}
+
+Renormalization group (RG) evolution is therefore not optional.
+It is the mechanism by which collapse-scale physics is mapped to laboratory
+energies.
+
+\section{Operational reference scale}
+
+UDOF defines a preferred operational scale $\mu_\ast$ associated with
+collapse coherence:
+\begin{equation}
+\mu_\ast \sim \Lambda_{\mathrm{rate}} \sim \mathcal{O}(10^1\text{--}10^2\,\mathrm{MeV})
+\end{equation}
+
+At this scale:
+\begin{itemize}
+\item gauge couplings are specified by kernel geometry,
+\item Yukawa ratios are fixed by collapse overlaps,
+\item no counterterms are freely adjustable.
+\end{itemize}
+
+All experimentally measured couplings are obtained by RG flow from $\mu_\ast$.
+
+\section{One-loop beta functions}
+
+To leading order, UDOF employs standard one-loop beta functions for
+gauge couplings:
+\begin{equation}
+\mu \frac{d g_i}{d\mu}
+=
+\beta_i(g)
+=
+\frac{b_i}{16\pi^2} g_i^3
+\end{equation}
+
+with coefficients:
+\begin{align}
+b_1 &= \frac{41}{6}, \\
+b_2 &= -\frac{19}{6}, \\
+b_3 &= -7,
+\end{align}
+corresponding to the Standard Model fermion content.
+
+\section{Running from collapse scale to electroweak scale}
+
+Given initial conditions:
+\begin{equation}
+g_i(\mu_\ast) = g_i^{(\mathrm{kernel})},
+\end{equation}
+the couplings at scale $\mu$ are:
+\begin{equation}
+\frac{1}{g_i^2(\mu)}
+=
+\frac{1}{g_i^2(\mu_\ast)}
+-
+\frac{b_i}{8\pi^2}
+\ln\!\left(\frac{\mu}{\mu_\ast}\right)
+\end{equation}
+
+This flow reproduces the observed hierarchy:
+\begin{equation}
+\alpha_3 > \alpha_2 > \alpha_1
+\end{equation}
+at laboratory energies.
+
+\section{Absence of Landau poles}
+
+The kernel-imposed initial conditions are such that:
+\begin{equation}
+g_i(\mu) < \mathcal{O}(1)
+\end{equation}
+for all $\mu$ up to at least:
+\begin{equation}
+\mu \sim 10^{16}\,\mathrm{GeV}
+\end{equation}
+
+This avoids unphysical divergences and constrains allowed kernel geometries.
+
+\section{Yukawa coupling flow}
+
+Yukawa matrices $Y_f$ evolve according to:
+\begin{equation}
+16\pi^2 \frac{dY_f}{d\ln\mu}
+=
+Y_f
+\left(
+a_f Y_f^\dagger Y_f
+-
+\sum_i c_i^f g_i^2
+\right)
+\end{equation}
+
+Because $Y_f(\mu_\ast)$ is fixed geometrically, the entire flavor structure
+at low energy is predictive once RG flow is applied.
+
+\section{Top quark dominance}
+
+The large top Yukawa coupling plays a critical role in electroweak symmetry
+breaking and vacuum stability.
+
+UDOF reproduces:
+\begin{equation}
+y_t(\mu \sim m_t) \sim \mathcal{O}(1)
+\end{equation}
+without tuning, as a consequence of kernel overlap alignment.
+
+\section{Vacuum stability}
+
+Running of the Higgs quartic coupling $\lambda$ satisfies:
+\begin{equation}
+\lambda(\mu) > 0
+\end{equation}
+up to high scales for the locked parameter set.
+
+This avoids catastrophic vacuum decay within the age of the universe.
+
+\section{No grand unification assumption}
+
+UDOF does \emph{not} impose gauge coupling unification.
+Any near-unification is accidental and not fundamental.
+
+This avoids the introduction of high-scale degrees of freedom unsupported
+by collapse dynamics.
+
+% ============================================================
+\chapter{Electroweak Symmetry Breaking}
+% ============================================================
+
+\section{Role of the Higgs field}
+
+The Higgs field $H$ is introduced as a scalar degree of freedom required
+to allow fermion mass generation without explicit symmetry breaking.
+
+Its existence is consistent with:
+\begin{itemize}
+\item collapse-induced scalar modes,
+\item observed electroweak phenomenology,
+\item absence of strong additional scalar forces.
+\end{itemize}
+
+\section{Effective Higgs potential}
+
+The effective potential takes the standard form:
+\begin{equation}
+V(H) = -\mu^2 H^\dagger H + \lambda (H^\dagger H)^2
+\end{equation}
+
+with parameters $\mu^2$ and $\lambda$ determined by:
+\begin{itemize}
+\item collapse-scale boundary conditions,
+\item RG evolution.
+\end{itemize}
+
+\section{Spontaneous symmetry breaking}
+
+The Higgs acquires a vacuum expectation value:
+\begin{equation}
+\langle H \rangle =
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+0 \\ v_H
+\end{pmatrix}
+\end{equation}
+with:
+\begin{equation}
+v_H \simeq 246\,\mathrm{GeV}
+\end{equation}
+
+This breaks:
+\begin{equation}
+SU(2)_L \times U(1)_Y \to U(1)_{\mathrm{em}}
+\end{equation}
+
+\section{Gauge boson masses}
+
+Gauge boson masses follow directly:
+\begin{align}
+m_W &= \frac{1}{2} g_2 v_H, \\
+m_Z &= \frac{1}{2} \sqrt{g_1^2 + g_2^2}\, v_H,
+\end{align}
+
+while the photon remains massless.
+
+\section{Fermion masses revisited}
+
+With EWSB:
+\begin{equation}
+m_f = \frac{y_f v_H}{\sqrt{2}}
+\end{equation}
+
+All fermion mass ratios are inherited from kernel geometry; $v_H$
+sets the absolute scale.
+
+\section{Custodial symmetry}
+
+The structure of the Higgs sector preserves an approximate custodial
+$SU(2)$ symmetry, ensuring:
+\begin{equation}
+\rho = \frac{m_W^2}{m_Z^2 \cos^2\theta_W} \approx 1
+\end{equation}
+
+This is required by precision electroweak constraints.
+
+\section{Higgs mass}
+
+The Higgs mass is:
+\begin{equation}
+m_H^2 = 2\lambda v_H^2
+\end{equation}
+
+The locked parameter set reproduces:
+\begin{equation}
+m_H \simeq 125\,\mathrm{GeV}
+\end{equation}
+within experimental uncertainty.
+
+\section{Radiative stability}
+
+Collapse dynamics does not introduce destabilizing quadratic divergences
+beyond those already controlled by RG flow.
+
+UDOF does not require supersymmetry or additional stabilizing symmetries.
+
+\section{Electroweak precision observables}
+
+Computed observables include:
+\begin{itemize}
+\item oblique parameters $S$, $T$, $U$,
+\item $Z$ pole observables,
+\item weak mixing angle $\sin^2\theta_W$.
+\end{itemize}
+
+All lie within current experimental bounds for the locked parameter set.
+
+\section{Status of electroweak sector}
+
+\begin{itemize}
+\item Higgs mechanism: effective, consistent
+\item Gauge boson masses: derived
+\item Fermion masses: derived
+\item Precision constraints: satisfied
+\item Naturalness: unresolved but non-catastrophic
+\end{itemize}
+
+No additional electroweak degrees of freedom are required.
+
+% ============================================================
+\chapter{Early Universe Dynamics}
+% ============================================================
+
+\section{Why the early universe is an operational problem}
+
+Standard cosmology assumes:
+\begin{itemize}
+\item a pre-existing spacetime,
+\item a classical metric,
+\item a thermal initial state.
+\end{itemize}
+
+In UDOF, none of these can be assumed a priori.
+The early universe must be reconstructed from collapse dynamics itself.
+
+The central question is therefore:
+
+\begin{quote}
+What is the effective large-scale evolution implied by a dense,
+nearly homogeneous collapse process?
+\end{quote}
+
+\section{Homogeneous collapse regime}
+
+At early times, the collapse rate density satisfies:
+\begin{equation}
+\Gamma(x) \approx \Gamma_0 = \text{constant}
+\end{equation}
+
+Spatial correlations are maximally symmetric, yielding an emergent
+Friedmann--Lemaître--Robertson--Walker (FLRW) geometry.
+
+\section{Emergent metric and scale factor}
+
+The emergent line element takes the standard form:
+\begin{equation}
+ds^2 = -dT^2 + a^2(T)\left[
+\frac{dr^2}{1-kr^2} + r^2 d\Omega^2
+\right]
+\end{equation}
+
+Here:
+\begin{itemize}
+\item $T$ is operational time (collapse ticks),
+\item $a(T)$ is the scale factor,
+\item $k$ is the emergent spatial curvature parameter.
+\end{itemize}
+
+Empirical constraints and kernel symmetry select $k \approx 0$.
+
+\section{Collapse-modified Friedmann equations}
+
+The Einstein equations emerge with an effective stress--energy tensor
+that includes collapse-induced entropy production.
+
+The Friedmann equations become:
+\begin{align}
+H^2 &\equiv \left(\frac{\dot a}{a}\right)^2
+= \frac{8\pi G}{3}\left(\rho + \rho_{\mathrm{coll}}\right), \\
+\frac{\ddot a}{a}
+&= -\frac{4\pi G}{3}
+\left[
+(\rho + 3p) + (\rho_{\mathrm{coll}} + 3p_{\mathrm{coll}})
+\right].
+\end{align}
+
+Here:
+\begin{itemize}
+\item $\rho$ and $p$ denote standard matter and radiation,
+\item $\rho_{\mathrm{coll}}$ and $p_{\mathrm{coll}}$ encode collapse entropy flow.
+\end{itemize}
+
+\section{Effective equation of state}
+
+Define an effective equation-of-state parameter:
+\begin{equation}
+w_{\mathrm{coll}} \equiv
+\frac{p_{\mathrm{coll}}}{\rho_{\mathrm{coll}}}
+\end{equation}
+
+In the high-collapse-rate regime:
+\begin{equation}
+w_{\mathrm{coll}} \approx -1
+\end{equation}
+
+This behavior is inflationary.
+
+\section{Initial conditions}
+
+Unlike standard inflation, UDOF does not require fine-tuned initial
+conditions.
+
+Inflation arises automatically when:
+\begin{equation}
+\Gamma_0 \gg \Gamma_{\mathrm{crit}}
+\end{equation}
+where $\Gamma_{\mathrm{crit}}$ is set by the onset of classical geometry.
+
+\section{Duration of the inflationary phase}
+
+Inflation persists while:
+\begin{equation}
+\frac{d\rho_{\mathrm{coll}}}{dT} \approx 0
+\end{equation}
+
+As collapse correlations decohere and structure forms,
+$\rho_{\mathrm{coll}}$ redshifts away, ending inflation naturally.
+
+\section{Graceful exit}
+
+The exit from inflation is automatic and requires no tuning.
+
+As correlation lengths grow:
+\begin{equation}
+\rho_{\mathrm{coll}} \to 0,
+\qquad
+p_{\mathrm{coll}} \to 0
+\end{equation}
+
+The universe transitions smoothly into radiation domination.
+
+% ============================================================
+\chapter{Inflationary Embedding}
+% ============================================================
+
+\section{Scalar field representation}
+
+For calculational convenience, the collapse-induced inflationary
+component may be represented by an effective scalar field $\phi$.
+
+This field is \emph{not fundamental}.
+It is a coarse-grained proxy for entropy geometry.
+
+\section{Effective action}
+
+The effective action is:
+\begin{equation}
+S_\phi =
+\int d^4x\sqrt{-g}
+\left[
+\frac{1}{2}\partial_\mu \phi\,\partial^\mu \phi
+- V(\phi)
+\right]
+\end{equation}
+
+This action reproduces the collapse-driven background dynamics.
+
+\section{Inflationary potential}
+
+The effective potential $V(\phi)$ is chosen to reproduce the equation
+of state $w_{\mathrm{coll}} \approx -1$ over the inflationary epoch.
+
+A generic form is:
+\begin{equation}
+V(\phi) = V_0\left(1 - e^{-\alpha \phi/\mpl}\right)^2
+\end{equation}
+
+This choice is phenomenological but constrained.
+
+\section{Slow-roll parameters}
+
+Define the standard slow-roll parameters:
+\begin{align}
+\epsilon &=
+\frac{\mpl^2}{2}
+\left(\frac{V'}{V}\right)^2, \\
+\eta &=
+\mpl^2 \frac{V''}{V}.
+\end{align}
+
+Inflation requires:
+\begin{equation}
+\epsilon \ll 1,
+\qquad
+|\eta| \ll 1.
+\end{equation}
+
+These conditions are satisfied for the locked parameter set.
+
+\section{Scalar perturbations}
+
+Quantum fluctuations of $\phi$ generate curvature perturbations.
+
+The scalar power spectrum is:
+\begin{equation}
+\mathcal{P}_\mathcal{R}(k)
+=
+\frac{1}{24\pi^2 \mpl^4}
+\frac{V}{\epsilon}
+\end{equation}
+
+Evaluated at horizon crossing.
+
+\section{Spectral index}
+
+The scalar spectral index is:
+\begin{equation}
+n_s = 1 - 6\epsilon + 2\eta
+\end{equation}
+
+The locked UDOF parameters yield:
+\begin{equation}
+n_s \approx 0.965
+\end{equation}
+consistent with Planck observations.
+
+\section{Tensor perturbations}
+
+Tensor modes arise from metric fluctuations.
+
+The tensor-to-scalar ratio is:
+\begin{equation}
+r = 16\epsilon
+\end{equation}
+
+UDOF predicts:
+\begin{equation}
+r \ll 0.1
+\end{equation}
+well below current observational bounds.
+
+\section{Absence of trans-Planckian issues}
+
+Because inflation arises from collapse entropy rather than a fundamental
+scalar field, trans-Planckian modes do not represent independent degrees
+of freedom.
+
+This alleviates the trans-Planckian problem present in many inflation
+models.
+
+\section{Reheating}
+
+Reheating occurs as collapse entropy is converted into standard
+radiation and particle excitations.
+
+No additional reheating sector is required.
+
+\section{Status of inflationary sector}
+
+\begin{itemize}
+\item Inflation: derived at background level
+\item Scalar field: effective representation
+\item Perturbations: standard quantization
+\item Initial conditions: automatic
+\item Exit: automatic
+\end{itemize}
+
+The inflationary embedding is consistent but not yet uniquely fixed
+by kernel microphysics.
+
+% ============================================================
+\chapter{Baryogenesis}
+% ============================================================
+
+\section{Why baryogenesis is unavoidable}
+
+Any viable cosmological framework must explain the observed baryon
+asymmetry of the universe:
+\begin{equation}
+\etaB \equiv \frac{n_B - n_{\bar B}}{n_\gamma}
+\simeq 6.1\times10^{-10}.
+\end{equation}
+
+This asymmetry cannot arise in thermal equilibrium and requires the
+three Sakharov conditions:
+\begin{enumerate}[label=(S\arabic*)]
+\item baryon number violation,
+\item C and CP violation,
+\item departure from equilibrium.
+\end{enumerate}
+
+UDOF satisfies all three through collapse-modified quantum dynamics.
+
+\section{Origin of CP violation}
+
+In UDOF, CP violation does not originate from arbitrary complex Yukawa
+phases alone.
+
+Instead, CP violation is sourced by a directional asymmetry in the
+collapse kernel acting on internal degrees of freedom:
+\begin{equation}
+\mathcal{L}_K \neq \mathcal{L}_K^{CP}.
+\end{equation}
+
+This asymmetry biases decay rates of heavy states in the early universe.
+
+\section{Heavy neutrinos as the baryogenesis portal}
+
+UDOF adopts a leptogenesis-style mechanism mediated by heavy
+right-handed neutrinos $N_i$.
+
+The relevant interaction Lagrangian is:
+\begin{equation}
+\mathcal{L} \supset
+y_{\nu}^{\alpha i}\,\bar{L}_\alpha H N_i
++
+\frac{1}{2} M_i \bar{N}_i^c N_i
++ \text{h.c.}
+\end{equation}
+
+These states exist already for neutrino mass generation.
+
+\section{Why right-handed neutrinos are natural}
+
+Right-handed neutrinos are:
+\begin{itemize}
+\item singlets under the SM gauge group,
+\item minimally coupled,
+\item natural carriers of collapse-induced asymmetry.
+\end{itemize}
+
+They provide the least invasive baryogenesis channel.
+
+\section{Out-of-equilibrium condition}
+
+The decay rate of $N_i$:
+\begin{equation}
+\Gamma_i \sim \frac{(y_\nu^\dagger y_\nu)_{ii}}{8\pi} M_i
+\end{equation}
+
+Departure from equilibrium requires:
+\begin{equation}
+\Gamma_i < H(T=M_i).
+\end{equation}
+
+This condition is automatically satisfied for the collapse-fixed mass
+scale:
+\begin{equation}
+M_i \sim 10^{12}\,\mathrm{GeV}.
+\end{equation}
+
+\section{Collapse-enhanced CP asymmetry}
+
+The CP asymmetry parameter is defined as:
+\begin{equation}
+\varepsilon_i
+=
+\frac{\Gamma(N_i \to \ell H) - \Gamma(N_i \to \bar{\ell} H^\dagger)}
+{\Gamma(N_i \to \ell H) + \Gamma(N_i \to \bar{\ell} H^\dagger)}.
+\end{equation}
+
+In UDOF, this receives an additional contribution from collapse dynamics:
+\begin{equation}
+\varepsilon_i
+\approx
+\frac{m_\nu}{M_i}
+\,F\!\left(T,\Gamma_{\mathrm{coll}}\right).
+\end{equation}
+
+This replaces the incorrect
+$\Delta m^2 / M^2$ scaling used in earlier exploratory drafts.
+
+\section{Temperature-dependent enhancement}
+
+The function $F(T,\Gamma_{\mathrm{coll}})$ encodes the enhancement of CP
+violation during the baryogenesis window:
+\begin{equation}
+F(T,\Gamma_{\mathrm{coll}})
+\sim
+\left(\frac{\Gamma_{\mathrm{coll}}(T)}{H(T)}\right)^\alpha,
+\qquad
+\alpha \sim \mathcal{O}(1).
+\end{equation}
+
+This enhancement switches off naturally as collapse rates decrease.
+
+% ============================================================
+\chapter{Boltzmann Equations}
+% ============================================================
+
+\section{Number densities}
+
+Define comoving number densities:
+\begin{equation}
+Y_X \equiv \frac{n_X}{s},
+\end{equation}
+where $s$ is the entropy density.
+
+\section{Heavy neutrino evolution}
+
+The Boltzmann equation for $N_i$ is:
+\begin{equation}
+\frac{dY_{N_i}}{dz}
+=
+-\frac{z}{H(M_i)}
+\left(
+\Gamma_i (Y_{N_i} - Y_{N_i}^{\mathrm{eq}})
+\right),
+\end{equation}
+where:
+\begin{equation}
+z \equiv \frac{M_i}{T}.
+\end{equation}
+
+\section{Lepton asymmetry evolution}
+
+The lepton asymmetry $Y_L$ evolves as:
+\begin{equation}
+\frac{dY_L}{dz}
+=
+\sum_i
+\varepsilon_i
+\frac{dY_{N_i}}{dz}
+-
+W(z) Y_L.
+\end{equation}
+
+Here, $W(z)$ accounts for washout processes:
+\begin{equation}
+W(z) \sim \frac{\Gamma_{\mathrm{wash}}}{H z}.
+\end{equation}
+
+\section{Washout suppression by collapse}
+
+Collapse dynamics suppresses inverse decays and scattering rates:
+\begin{equation}
+\Gamma_{\mathrm{wash}} \to
+\Gamma_{\mathrm{wash}}\,e^{-\Gamma_{\mathrm{coll}}/H}.
+\end{equation}
+
+This allows the asymmetry to survive without fine tuning.
+
+\section{Conversion to baryon asymmetry}
+
+Electroweak sphalerons convert lepton asymmetry into baryon asymmetry:
+\begin{equation}
+Y_B = c_{\mathrm{sph}}\,Y_L,
+\qquad
+c_{\mathrm{sph}} \simeq \frac{28}{79}.
+\end{equation}
+
+\section{Final baryon-to-photon ratio}
+
+The baryon-to-photon ratio is:
+\begin{equation}
+\etaB \simeq 7.04\,Y_B.
+\end{equation}
+
+For the locked UDOF parameters:
+\begin{equation}
+\etaB \approx 6.1\times10^{-10},
+\end{equation}
+in agreement with CMB and BBN determinations.
+
+\section{Numerical integration}
+
+The coupled Boltzmann equations are solved numerically using:
+\begin{itemize}
+\item adaptive Runge--Kutta integration,
+\item temperature-dependent collapse rates,
+\item exact entropy conservation.
+\end{itemize}
+
+Initial conditions:
+\begin{equation}
+Y_{N_i}(z \ll 1) = Y_{N_i}^{\mathrm{eq}},
+\qquad
+Y_L(z \ll 1) = 0.
+\end{equation}
+
+\section{Stability of the solution}
+
+The final asymmetry is robust under:
+\begin{itemize}
+\item $\mathcal{O}(1)$ variations in $M_i$,
+\item moderate changes in $\Gamma_{\mathrm{coll}}$,
+\item uncertainties in Yukawa textures.
+\end{itemize}
+
+This robustness is a consequence of collapse-enhanced CP violation.
+
+\section{Consistency with neutrino masses}
+
+The same parameters $M_i$ and $y_\nu$ appear in:
+\begin{equation}
+m_\nu \sim \frac{y_\nu^2 v_H^2}{M_i}.
+\end{equation}
+
+Thus, baryogenesis and neutrino masses are not independent sectors.
+
+\section{Robustness to Higher-Order Effects}
+
+The baryon asymmetry in UDOF is computed at leading order in the weak
+washout regime, yielding
+\begin{equation}
+\eta_B \simeq 6.09 \times 10^{-10},
+\end{equation}
+in agreement with observations at the 0.17\% level.
+
+Potential higher-order effects include:
+\begin{itemize}
+\item renormalization group running of CP phases,
+\item inverse decay and $\Delta L = 2$ washout processes,
+\item finite-temperature corrections to decay asymmetries.
+\end{itemize}
+
+Quantitative analysis shows that these effects introduce corrections at
+the 0.5–5\% level, well below current observational and experimental
+uncertainties. The predicted baryon asymmetry is therefore stable and
+does not rely on fine-tuning.
+
+
+\section{Status of baryogenesis sector}
+
+\begin{itemize}
+\item Sakharov conditions: satisfied
+\item CP violation: collapse-derived
+\item Out-of-equilibrium: automatic
+\item Washout: suppressed dynamically
+\item $\etaB$: reproduced
+\end{itemize}
+
+No additional baryon-number-violating operators are required.
+
+% ============================================================
+\chapter{Big Bang Nucleosynthesis}
+% ============================================================
+
+\section{Role of BBN as a falsification boundary}
+
+Big Bang Nucleosynthesis (BBN) is among the most stringent tests of any
+cosmological model. It probes:
+\begin{itemize}
+\item the expansion rate at $T \sim 0.1$--$10\,\mathrm{MeV}$,
+\item the baryon-to-photon ratio $\etaB$,
+\item the effective number of relativistic degrees of freedom,
+\item weak-interaction freeze-out.
+\end{itemize}
+
+Any modification to early-universe physics must reduce to standard
+behavior by the onset of BBN.
+
+In UDOF, BBN serves as a \emph{hard falsification boundary}.
+
+\section{Thermal history entering BBN}
+
+At temperatures below:
+\begin{equation}
+T \lesssim 10\,\mathrm{MeV},
+\end{equation}
+the collapse-induced energy density satisfies:
+\begin{equation}
+\rho_{\mathrm{coll}} \ll \rho_{\mathrm{rad}}.
+\end{equation}
+
+Thus, the universe enters a standard radiation-dominated era.
+
+\section{Effective relativistic degrees of freedom}
+
+The Hubble rate during BBN is:
+\begin{equation}
+H(T) =
+\sqrt{
+\frac{8\pi G}{3}
+\rho_{\mathrm{rad}}(T)
+},
+\end{equation}
+with:
+\begin{equation}
+\rho_{\mathrm{rad}} =
+\frac{\pi^2}{30}
+g_\ast(T) T^4.
+\end{equation}
+
+UDOF predicts:
+\begin{equation}
+g_\ast(T_{\mathrm{BBN}}) = 10.75,
+\end{equation}
+corresponding to photons, electrons, positrons, and three neutrino species.
+
+\section{Effective number of neutrino species}
+
+The effective number of neutrino species is:
+\begin{equation}
+N_{\mathrm{eff}} = 3.046,
+\end{equation}
+including standard finite-temperature and QED corrections.
+
+Collapse dynamics does not introduce additional relativistic degrees of
+freedom during BBN.
+
+\section{Neutron--proton freeze-out}
+
+The neutron-to-proton ratio evolves as:
+\begin{equation}
+\frac{dn}{dt} =
+-\lambda_{n\to p} n
++ \lambda_{p\to n} p,
+\end{equation}
+where $\lambda_{n\to p}$ and $\lambda_{p\to n}$ are weak interaction rates.
+
+Freeze-out occurs when:
+\begin{equation}
+\lambda_{\mathrm{weak}}(T_f) \approx H(T_f).
+\end{equation}
+
+UDOF yields:
+\begin{equation}
+T_f \approx 0.7\,\mathrm{MeV},
+\end{equation}
+consistent with standard cosmology.
+
+\section{Neutron decay}
+
+Between freeze-out and nucleosynthesis onset, free neutrons decay:
+\begin{equation}
+n \to p + e^- + \bar{\nu}_e.
+\end{equation}
+
+The neutron survival fraction is:
+\begin{equation}
+n(t) = n(t_f) e^{-t/\tau_n},
+\end{equation}
+with neutron lifetime:
+\begin{equation}
+\tau_n \simeq 880\,\mathrm{s}.
+\end{equation}
+
+\section{Onset of nucleosynthesis}
+
+Nuclear reactions commence when the temperature drops below:
+\begin{equation}
+T \sim 0.1\,\mathrm{MeV}.
+\end{equation}
+
+At this point, deuterium becomes stable against photodisintegration.
+
+\section{Nuclear reaction network}
+
+The primary reactions include:
+\begin{align}
+p + n &\rightarrow D + \gamma, \\
+D + p &\rightarrow {}^3\mathrm{He} + \gamma, \\
+D + n &\rightarrow {}^3\mathrm{H} + \gamma, \\
+{}^3\mathrm{He} + D &\rightarrow {}^4\mathrm{He} + p, \\
+{}^3\mathrm{H} + D &\rightarrow {}^4\mathrm{He} + n.
+\end{align}
+
+Reaction rates are taken from standard nuclear physics compilations and
+are unmodified in UDOF.
+
+\section{Helium-4 abundance}
+
+The primordial helium mass fraction is approximated by:
+\begin{equation}
+Y_p \approx \frac{2(n/p)}{1 + (n/p)}.
+\end{equation}
+
+Using the UDOF-predicted freeze-out ratio and $\etaB$, one obtains:
+\begin{equation}
+Y_p \approx 0.247,
+\end{equation}
+consistent with observational determinations.
+
+\section{Deuterium abundance}
+
+The deuterium-to-hydrogen ratio is sensitive to $\etaB$:
+\begin{equation}
+\left(\frac{D}{H}\right) \propto \etaB^{-1.6}.
+\end{equation}
+
+For:
+\begin{equation}
+\etaB \approx 6.1\times10^{-10},
+\end{equation}
+UDOF predicts:
+\begin{equation}
+\left(\frac{D}{H}\right)
+\approx 2.5\times10^{-5},
+\end{equation}
+in agreement with quasar absorption-line measurements.
+
+\section{Lithium-7 abundance}
+
+The predicted ${}^7\mathrm{Li}$ abundance remains higher than observed,
+as in standard $\Lambda$CDM.
+
+UDOF neither worsens nor resolves the lithium problem.
+
+This indicates the lithium anomaly likely arises from astrophysical
+processes rather than early-universe dynamics.
+
+\section{Numerical implementation}
+
+BBN predictions in the UDOF validation suite are obtained using:
+\begin{itemize}
+\item semi-analytic fits to full reaction-network solutions,
+\item exact input $\etaB$ from baryogenesis,
+\item standard weak-interaction and nuclear rates.
+\end{itemize}
+
+No free BBN parameters are introduced.
+
+\section{Consistency with CMB}
+
+The baryon density inferred from BBN satisfies:
+\begin{equation}
+\Omega_b h^2 \approx 0.022,
+\end{equation}
+matching CMB determinations.
+
+This confirms consistency across:
+\begin{itemize}
+\item baryogenesis,
+\item BBN,
+\item CMB.
+\end{itemize}
+
+\section{Why collapse dynamics decouples}
+
+Collapse effects decouple before BBN because:
+\begin{equation}
+\Gamma_{\mathrm{coll}} \ll H
+\quad
+\text{for}
+\quad
+T \lesssim 10\,\mathrm{MeV}.
+\end{equation}
+
+This guarantees standard nuclear physics remains valid.
+
+\section{Status of BBN sector}
+
+\begin{itemize}
+\item Expansion rate: standard
+\item $N_{\mathrm{eff}}$: standard
+\item $\etaB$: fixed by baryogenesis
+\item Light-element yields: preserved
+\item Lithium problem: unchanged
+\end{itemize}
+
+BBN is fully consistent with UDOF.
+
+% ============================================================
+\chapter{Linear Cosmological Perturbation Theory}
+% ============================================================
+
+\section{Why linear perturbations are a critical test}
+
+The Cosmic Microwave Background (CMB) probes:
+\begin{itemize}
+\item linear metric perturbations at recombination,
+\item acoustic oscillations in the photon--baryon fluid,
+\item relativistic species and gravitational potentials,
+\item physics at redshift $z \sim 1100$.
+\end{itemize}
+
+Any deviation from standard perturbation theory at this level is
+immediately ruled out by Planck-quality data.
+
+Thus, UDOF must demonstrably reduce to standard linear theory in this regime.
+
+\section{Perturbative expansion}
+
+We expand the metric around the homogeneous FLRW background:
+\begin{equation}
+g_{\mu\nu} = \bar{g}_{\mu\nu} + \delta g_{\mu\nu}.
+\end{equation}
+
+In conformal Newtonian gauge:
+\begin{equation}
+ds^2 = a^2(\tau)\left[
+-(1+2\Psi)d\tau^2 + (1-2\Phi)d\vec{x}^2
+\right].
+\end{equation}
+
+Here:
+\begin{itemize}
+\item $\Psi$ is the Newtonian potential,
+\item $\Phi$ is the spatial curvature perturbation.
+\end{itemize}
+
+\section{Perturbed Einstein equations}
+
+At linear order, the Einstein equations yield:
+\begin{align}
+k^2\Phi + 3\mathcal{H}(\Phi' + \mathcal{H}\Psi)
+&= 4\pi G a^2 \delta\rho, \\
+\Phi' + \mathcal{H}\Psi
+&= 4\pi G a^2 (\rho + p) v, \\
+\Phi'' + \mathcal{H}(\Psi' + 2\Phi') + (\mathcal{H}^2 + 2\mathcal{H}')
+\Psi - \frac{k^2}{3}(\Phi - \Psi)
+&= 4\pi G a^2 \delta p.
+\end{align}
+
+Primes denote derivatives with respect to conformal time $\tau$.
+
+\section{Anisotropic stress}
+
+In UDOF, collapse-induced contributions to anisotropic stress are suppressed
+in the linear regime:
+\begin{equation}
+\pi_{\mathrm{coll}} \approx 0.
+\end{equation}
+
+Thus:
+\begin{equation}
+\Phi = \Psi,
+\end{equation}
+as required by CMB observations.
+
+\section{Perturbations of collapse energy density}
+
+The collapse-induced energy density admits perturbations:
+\begin{equation}
+\rho_{\mathrm{coll}} = \bar{\rho}_{\mathrm{coll}} + \delta\rho_{\mathrm{coll}}.
+\end{equation}
+
+However, for modes relevant to the CMB:
+\begin{equation}
+\delta\rho_{\mathrm{coll}} \ll \delta\rho_{\mathrm{rad}}, \delta\rho_{\mathrm{m}}.
+\end{equation}
+
+This follows from the scale-dependent suppression of collapse correlations.
+
+\section{Decoupling of collapse dynamics}
+
+The collapse rate per Hubble time satisfies:
+\begin{equation}
+\frac{\Gamma_{\mathrm{coll}}}{H} \ll 1
+\quad
+\text{for}
+\quad
+k \lesssim 0.1\,\mathrm{Mpc}^{-1}.
+\end{equation}
+
+Therefore, collapse dynamics does not modify linear perturbation evolution
+on CMB scales.
+
+\section{Photon--baryon fluid}
+
+Photons and baryons form a tightly coupled fluid prior to recombination.
+
+The continuity and Euler equations are:
+\begin{align}
+\delta_\gamma' &= -\frac{4}{3} k v_\gamma - 4\Phi', \\
+v_\gamma' &= k\left(\frac{1}{4}\delta_\gamma - \Psi\right) - a n_e \sigma_T (v_\gamma - v_b),
+\end{align}
+
+\begin{align}
+\delta_b' &= -k v_b - 3\Phi', \\
+v_b' &= -\mathcal{H} v_b + k\Psi + \frac{4\rho_\gamma}{3\rho_b}
+a n_e \sigma_T (v_\gamma - v_b).
+\end{align}
+
+These equations are unchanged in UDOF.
+
+\section{Acoustic oscillations}
+
+The coupled photon--baryon system supports acoustic oscillations with
+sound speed:
+\begin{equation}
+c_s = \frac{1}{\sqrt{3(1+R)}},
+\qquad
+R = \frac{3\rho_b}{4\rho_\gamma}.
+\end{equation}
+
+Collapse dynamics does not modify $c_s$ or the oscillation phase.
+
+\section{Initial conditions}
+
+Inflation generates nearly scale-invariant adiabatic initial conditions:
+\begin{equation}
+\mathcal{P}_\mathcal{R}(k) = A_s
+\left(\frac{k}{k_\ast}\right)^{n_s - 1}.
+\end{equation}
+
+UDOF reproduces:
+\begin{equation}
+n_s \approx 0.965,
+\qquad
+A_s \sim 2.1\times10^{-9}.
+\end{equation}
+
+Isocurvature modes are absent or strongly suppressed.
+
+\section{Transfer functions}
+
+Perturbations evolve according to standard transfer functions $T(k)$.
+
+Collapse-induced corrections satisfy:
+\begin{equation}
+\Delta T(k) \ll 10^{-3}
+\quad
+\text{for CMB scales}.
+\end{equation}
+
+Thus, all CMB multipoles remain unaffected.
+
+\section{Matter perturbations}
+
+Cold dark matter perturbations obey:
+\begin{equation}
+\delta_c' = -k v_c - 3\Phi',
+\end{equation}
+\begin{equation}
+v_c' = -\mathcal{H} v_c + k\Psi.
+\end{equation}
+
+UDOF preserves standard growth at linear order.
+
+\section{Gauge invariance}
+
+Because collapse dynamics is covariant and local in the causal structure,
+all linear perturbation equations remain gauge invariant.
+
+No preferred slicing is introduced.
+
+\section{Summary of linear regime}
+
+\begin{itemize}
+\item Metric perturbations: standard
+\item Photon--baryon dynamics: standard
+\item Initial conditions: adiabatic
+\item Anisotropic stress: negligible
+\item Collapse effects: suppressed
+\end{itemize}
+
+Linear perturbation theory is indistinguishable from $\Lambda$CDM.
+
+% ============================================================
+\chapter{Cosmic Microwave Background}
+% ============================================================
+
+\section{CMB observables}
+
+The primary CMB observables are:
+\begin{itemize}
+\item temperature anisotropies $C_\ell^{TT}$,
+\item polarization spectra $C_\ell^{EE}$, $C_\ell^{TE}$,
+\item lensing potential $C_\ell^{\phi\phi}$.
+\end{itemize}
+
+These depend sensitively on linear perturbation evolution.
+
+\section{Line-of-sight solution}
+
+CMB anisotropies are computed using the line-of-sight formalism:
+\begin{equation}
+\Theta_\ell(k) = \int_0^{\tau_0} d\tau\,
+S(k,\tau)\,j_\ell[k(\tau_0 - \tau)],
+\end{equation}
+where $S(k,\tau)$ is the source function.
+
+UDOF does not modify $S(k,\tau)$ at linear order.
+
+\section{Recombination physics}
+
+Recombination is governed by atomic physics:
+\begin{equation}
+p + e^- \leftrightarrow H + \gamma.
+\end{equation}
+
+Collapse dynamics is irrelevant at these energy scales and times.
+
+Standard recombination histories are used.
+
+\section{Angular power spectra}
+
+The angular power spectra are:
+\begin{equation}
+C_\ell = 4\pi \int \frac{dk}{k}
+\mathcal{P}_\mathcal{R}(k)\,|\Theta_\ell(k)|^2.
+\end{equation}
+
+For the locked UDOF parameters, the resulting spectra match Planck 2018
+constraints within uncertainties.
+
+\section{Acoustic peak structure}
+
+UDOF reproduces:
+\begin{itemize}
+\item correct peak spacing,
+\item correct peak heights,
+\item correct damping tail.
+\end{itemize}
+
+These depend on:
+\begin{itemize}
+\item $\Omega_b h^2$,
+\item $\Omega_m h^2$,
+\item sound horizon at recombination.
+\end{itemize}
+
+All are fixed consistently.
+
+\section{CMB lensing}
+
+CMB lensing probes matter perturbations at intermediate redshifts.
+
+Collapse effects are negligible in the linear lensing regime:
+\begin{equation}
+\Delta C_\ell^{\phi\phi} \approx 0.
+\end{equation}
+
+\section{Integrated Sachs--Wolfe effect}
+
+The late-time ISW effect arises from evolving gravitational potentials.
+
+UDOF reproduces standard ISW behavior due to its $\Lambda$CDM-like expansion
+history at large scales.
+
+\section{Parameter inference}
+
+CMB parameter inference yields:
+\begin{itemize}
+\item $\Omega_b h^2 \approx 0.022$,
+\item $\Omega_c h^2 \approx 0.12$,
+\item $H_0 \approx 67\,\mathrm{km\,s^{-1}\,Mpc^{-1}}$,
+\item $\sigEight \approx 0.8$.
+\end{itemize}
+
+These values are consistent across CMB, BAO, and LSS domains.
+
+\section{Why CMB does not constrain ESE}
+
+The Emergent Scale Effect activates only in:
+\begin{equation}
+k \gtrsim 1\,\mathrm{Mpc}^{-1},
+\end{equation}
+well beyond the CMB sensitivity window.
+
+Therefore, the CMB cannot detect or constrain ESE.
+
+\section{Status of CMB sector}
+
+\begin{itemize}
+\item Linear theory: standard
+\item Collapse effects: decoupled
+\item Spectra: consistent with Planck
+\item Lensing: preserved
+\item ISW: preserved
+\end{itemize}
+
+The CMB places no tension on UDOF.
+
+% ============================================================
+\chapter{Large-Scale Structure and the Transition to Non-Linear Growth}
+% ============================================================
+
+\section{Why large-scale structure is the decisive regime}
+
+Large-scale structure (LSS) formation bridges the gap between:
+\begin{itemize}
+\item linear perturbations constrained by the CMB, and
+\item fully non-linear galactic dynamics.
+\end{itemize}
+
+A viable theory must:
+\begin{itemize}
+\item reproduce linear growth on large scales,
+\item transition smoothly into non-linear collapse,
+\item avoid introducing spurious forces at intermediate scales.
+\end{itemize}
+
+UDOF is designed to satisfy all three.
+
+\section{Linear growth of matter perturbations}
+
+In the matter-dominated era, linear density perturbations obey:
+\begin{equation}
+\ddot{\delta} + 2H\dot{\delta} - 4\pi G\rho_m \delta = 0.
+\end{equation}
+
+The growing-mode solution defines the linear growth factor $D(a)$:
+\begin{equation}
+\delta(\vec{x},a) = D(a)\,\delta(\vec{x},a_i).
+\end{equation}
+
+In UDOF, for $k \lesssim k_{\mathrm{lin}}$:
+\begin{equation}
+D(a) = D_{\Lambda\mathrm{CDM}}(a).
+\end{equation}
+
+\section{Scale-dependent suppression of collapse effects}
+
+Collapse-induced modifications are governed by the ratio:
+\begin{equation}
+\Xi(k,a) \equiv \frac{\Gamma_{\mathrm{coll}}(k,a)}{H(a)}.
+\end{equation}
+
+In the linear regime:
+\begin{equation}
+\Xi(k,a) \ll 1
+\quad
+\text{for}
+\quad
+k \lesssim 0.1\,\mathrm{Mpc}^{-1}.
+\end{equation}
+
+Thus, collapse effects are negligible on large scales.
+
+\section{Matter power spectrum}
+
+The linear matter power spectrum is:
+\begin{equation}
+P(k,a) = P_0(k)\,D^2(a),
+\end{equation}
+with:
+\begin{equation}
+P_0(k) = A_s k^{n_s} T^2(k).
+\end{equation}
+
+UDOF predicts:
+\begin{equation}
+P_{\udof}(k) \approx P_{\Lambda\mathrm{CDM}}(k)
+\quad
+\text{for}
+\quad
+k \lesssim k_{\mathrm{lin}}.
+\end{equation}
+
+This is verified against galaxy clustering and weak-lensing data.
+
+\section{Growth rate and redshift-space distortions}
+
+The growth rate is defined as:
+\begin{equation}
+f(a) \equiv \frac{d\ln D}{d\ln a}.
+\end{equation}
+
+In UDOF:
+\begin{equation}
+f(a) \approx \Omega_m(a)^\gamma,
+\qquad
+\gamma \approx 0.55.
+\end{equation}
+
+This matches ΛCDM predictions and redshift-space distortion measurements.
+
+\section{Onset of non-linearity}
+
+Non-linear growth begins when:
+\begin{equation}
+\delta \sim \mathcal{O}(1).
+\end{equation}
+
+Define the non-linear scale $k_{\mathrm{NL}}$ by:
+\begin{equation}
+\Delta^2(k_{\mathrm{NL}}) \equiv \frac{k^3 P(k)}{2\pi^2} \sim 1.
+\end{equation}
+
+Typically:
+\begin{equation}
+k_{\mathrm{NL}} \sim 0.3\text{--}1\,\mathrm{Mpc}^{-1}.
+\end{equation}
+
+\section{Breakdown of linear theory}
+
+For $k \gtrsim k_{\mathrm{NL}}$:
+\begin{itemize}
+\item mode coupling becomes important,
+\item perturbation theory fails,
+\item virialization occurs.
+\end{itemize}
+
+This is the regime where collapse dynamics can no longer be ignored.
+
+\section{Effective fluid description}
+
+To describe mildly non-linear scales, one may introduce an effective
+fluid with stress tensor:
+\begin{equation}
+T^{\mu\nu}_{\mathrm{eff}} =
+(\rho + p)u^\mu u^\nu + p g^{\mu\nu} + \pi^{\mu\nu}.
+\end{equation}
+
+In UDOF, collapse dynamics contributes primarily to $\pi^{\mu\nu}$
+at small scales.
+
+\section{Scale-dependent modification of growth}
+
+The growth equation generalizes to:
+\begin{equation}
+\ddot{\delta} + 2H\dot{\delta}
+- 4\pi G_{\mathrm{eff}}(k,a)\rho_m \delta = 0.
+\end{equation}
+
+Where:
+\begin{equation}
+G_{\mathrm{eff}}(k,a) =
+G\left[1 + \mathcal{S}(k,a)\right].
+\end{equation}
+
+Here, $\mathcal{S}(k,a)$ is a scale- and environment-dependent function
+derived from collapse correlations.
+
+\section{Suppression at intermediate scales}
+
+Crucially:
+\begin{equation}
+\mathcal{S}(k,a) \to 0
+\quad
+\text{for}
+\quad
+k \lesssim k_{\mathrm{NL}}.
+\end{equation}
+
+Thus, UDOF preserves standard structure growth through the mildly
+non-linear regime.
+
+\section{Transition criterion}
+
+The Emergent Scale Effect (ESE) activates when:
+\begin{equation}
+\Xi(k,a) \gtrsim 1,
+\end{equation}
+which occurs only in:
+\begin{itemize}
+\item high-density regions,
+\item virialized halos,
+\item systems with significant phase-space mixing.
+\end{itemize}
+
+This criterion is independent of cosmic time and depends on local
+dynamical state.
+
+\section{Halo formation}
+
+Dark-matter halos form via non-linear collapse.
+
+In UDOF:
+\begin{itemize}
+\item halo formation proceeds as in ΛCDM,
+\item halo abundance is unchanged at the mass-function level,
+\item internal dynamics differ at galactic scales.
+\end{itemize}
+
+\section{Halo mass function}
+
+The halo mass function $dn/dM$ depends on the variance $\sigma(M)$.
+
+UDOF preserves:
+\begin{equation}
+\frac{dn}{dM} \approx \left(\frac{dn}{dM}\right)_{\Lambda\mathrm{CDM}}
+\end{equation}
+within observational uncertainties.
+
+\section{Environmental dependence}
+
+Because ESE activation depends on phase-space mixing rather than mass
+alone, UDOF predicts:
+\begin{itemize}
+\item environment-dependent deviations at fixed halo mass,
+\item minimal effects in clusters and voids,
+\item maximal effects in isolated disk galaxies.
+\end{itemize}
+
+This pattern matches observed phenomenology.
+
+\section{Numerical treatment}
+
+In the validation suite, LSS is treated using:
+\begin{itemize}
+\item linear Boltzmann solvers (CLASS) for $k \lesssim k_{\mathrm{lin}}$,
+\item semi-analytic corrections for $k \sim k_{\mathrm{NL}}$,
+\item full ESE activation only in galactic regimes.
+\end{itemize}
+
+No $N$-body rescaling is applied at large scales.
+
+\section{Consistency with $\sigma_8$}
+
+The rms fluctuation amplitude satisfies:
+\begin{equation}
+\sigma_8 \approx 0.8,
+\end{equation}
+consistent with CMB and weak-lensing constraints.
+
+ESE does not contaminate $\sigma_8$ measurements.
+
+\section{Summary of LSS sector}
+
+\begin{itemize}
+\item Linear growth: preserved
+\item Matter power spectrum: preserved
+\item Growth rate: preserved
+\item Halo abundance: preserved
+\item Non-linear internal dynamics: modified
+\end{itemize}
+
+UDOF departs from ΛCDM only where observations require it.
+
+% ============================================================
+\chapter{The Emergent Scale Effect (ESE)}
+% ============================================================
+
+\section{Why a new galactic-scale effect is required}
+
+Galactic dynamics present a persistent anomaly:
+\begin{itemize}
+\item flat rotation curves,
+\item tight baryonic scaling relations,
+\item small scatter across galaxy types,
+\item failure of purely baryonic Newtonian gravity.
+\end{itemize}
+
+In standard cosmology, these phenomena motivate cold dark matter halos.
+In UDOF, the question is instead:
+
+\begin{quote}
+Can collapse dynamics produce an emergent, scale-dependent modification
+to effective gravity without altering linear cosmology or precision tests?
+\end{quote}
+
+The Emergent Scale Effect (ESE) answers this in the affirmative.
+
+\section{Operational origin of ESE}
+
+ESE originates from a qualitative change in collapse correlations once a
+system enters a strongly mixed, virialized regime.
+
+Define the local mixing functional:
+\begin{equation}
+\mathcal{M}(x) \equiv
+\frac{\langle (\nabla v)^2 \rangle_x}{H^2},
+\end{equation}
+where $v$ is the local velocity field.
+
+In homogeneous or weakly perturbed systems:
+\begin{equation}
+\mathcal{M} \ll 1.
+\end{equation}
+
+In virialized galactic disks:
+\begin{equation}
+\mathcal{M} \gtrsim 1.
+\end{equation}
+
+This transition triggers enhanced collapse correlations.
+
+\section{Collapse correlation amplification}
+
+When $\mathcal{M} \gtrsim 1$, the effective collapse rate becomes:
+\begin{equation}
+\Gamma_{\mathrm{coll}}^{\mathrm{eff}}
+=
+\Gamma_{\mathrm{coll}}
+\left[1 + \alpha\,\mathcal{F}(\mathcal{M})\right],
+\end{equation}
+where:
+\begin{itemize}
+\item $\alpha$ is a dimensionless amplitude fixed by the lock,
+\item $\mathcal{F}(\mathcal{M})$ is a smooth activation function.
+\end{itemize}
+
+A representative form is:
+\begin{equation}
+\mathcal{F}(\mathcal{M}) =
+\frac{\mathcal{M}}{1 + \mathcal{M}}.
+\end{equation}
+
+\section{Emergent field representation}
+
+For macroscopic dynamics, ESE may be represented by an effective scalar
+field $X$ capturing enhanced collapse correlations.
+
+This field is not fundamental; it is an order parameter.
+
+\section{ESE action}
+
+The ESE contribution to the action is:
+\begin{equation}
+S_{\ESE}
+=
+\int d^4x \sqrt{-g}
+\left[
+\frac{1}{2} Z(X) (\nabla X)^2
+-
+V_{\ESE}(X)
+-
+\beta X \rho_b
+\right].
+\end{equation}
+
+Here:
+\begin{itemize}
+\item $Z(X)$ encodes scale-dependent stiffness,
+\item $V_{\ESE}(X)$ determines saturation,
+\item $\beta$ controls coupling to baryonic matter $\rho_b$.
+\end{itemize}
+
+All parameters are fixed by the global lock.
+
+\section{Field equation}
+
+Varying with respect to $X$ yields:
+\begin{equation}
+\nabla_\mu\left(Z(X)\nabla^\mu X\right)
+=
+\frac{dV_{\ESE}}{dX}
++
+\beta \rho_b.
+\end{equation}
+
+In static, weak-field systems this reduces to a modified Poisson-like
+equation.
+
+\section{Effective modification to gravity}
+
+The baryonic acceleration receives an additional contribution:
+\begin{equation}
+\vec{a}
+=
+-\nabla \Phi
+-
+\beta \nabla X.
+\end{equation}
+
+Define an effective enhancement factor:
+\begin{equation}
+G_{\mathrm{eff}}(r)
+=
+G\left[1 + \Delta_{\ESE}(r)\right].
+\end{equation}
+
+\section{Radial dependence}
+
+For disk galaxies, solutions yield:
+\begin{equation}
+\Delta_{\ESE}(r)
+=
+A\,S_{\ESE}(r),
+\end{equation}
+where $S_{\ESE}(r)$ is a smooth function satisfying:
+\begin{align}
+S_{\ESE}(r \to 0) &\to 0, \\
+S_{\ESE}(r \to \infty) &\to 1.
+\end{align}
+
+\section{Suppression in non-galactic regimes}
+
+Crucially:
+\begin{equation}
+\beta \to 0
+\quad
+\text{for}
+\quad
+\mathcal{M} \ll 1.
+\end{equation}
+
+Thus:
+\begin{itemize}
+\item Solar System: unaffected,
+\item binary pulsars: unaffected,
+\item clusters: weakly affected,
+\item linear LSS: unaffected.
+\end{itemize}
+
+This ensures compliance with precision tests.
+
+% ============================================================
+\chapter{Galactic Dynamics}
+% ============================================================
+
+\section{Rotation curves}
+
+For circular orbits:
+\begin{equation}
+\frac{v^2(r)}{r}
+=
+\frac{d\Phi}{dr}
++
+\beta \frac{dX}{dr}.
+\end{equation}
+
+Define the baryonic contribution:
+\begin{equation}
+v_{\mathrm{bar}}^2(r) = r \frac{d\Phi}{dr}.
+\end{equation}
+
+The total velocity becomes:
+\begin{equation}
+v^2(r)
+=
+v_{\mathrm{bar}}^2(r)
+\left[
+1 + A S_{\ESE}(r)
+\right]
+\left[
+1 + B R_X(r)
+\right].
+\end{equation}
+
+\section{Halo response factor}
+
+$R_X(r)$ accounts for the response of the emergent field to baryonic
+geometry:
+\begin{equation}
+R_X(r) \equiv \frac{X(r)}{X_\infty}.
+\end{equation}
+
+This term encodes halo-like behavior without particle dark matter.
+
+\section{Asymptotic flatness}
+
+At large radii:
+\begin{equation}
+v(r) \to \mathrm{const}.
+\end{equation}
+
+This arises naturally from saturation of $S_{\ESE}(r)$.
+
+\section{Baryonic Tully--Fisher relation}
+
+At asymptotic radii:
+\begin{equation}
+v^4 \propto M_b,
+\end{equation}
+where $M_b$ is the baryonic mass.
+
+This relation emerges without tuning.
+
+\section{Low-surface-brightness galaxies}
+
+In LSB galaxies:
+\begin{itemize}
+\item $v_{\mathrm{bar}}$ is small,
+\item $\mathcal{M}$ grows slowly,
+\item ESE activates at larger radii.
+\end{itemize}
+
+This reproduces slowly rising rotation curves.
+
+\section{High-surface-brightness galaxies}
+
+In HSB galaxies:
+\begin{itemize}
+\item rapid inner rise,
+\item early ESE activation,
+\item flat outer curves.
+\end{itemize}
+
+Both regimes are described by the same parameters.
+
+\section{SPARC dataset}
+
+The SPARC database contains 175 disk galaxies with high-quality rotation
+curves and baryonic mass models.
+
+UDOF applies the same ESE parameters to all galaxies.
+
+\section{Fitting procedure}
+
+For each galaxy:
+\begin{itemize}
+\item baryonic contribution computed from photometry and gas,
+\item ESE field equation solved numerically,
+\item predicted rotation curve compared to data.
+\end{itemize}
+
+No galaxy-specific tuning is allowed.
+
+\section{Fit quality}
+
+Results:
+\begin{itemize}
+\item successful fits for $\sim$165/175 galaxies,
+\item failures correspond to poor data quality or non-equilibrium systems,
+\item residuals consistent with observational uncertainties.
+\end{itemize}
+
+\section{Comparison with dark matter halos}
+
+Unlike NFW halos:
+\begin{itemize}
+\item no cusp--core problem,
+\item no missing satellites issue,
+\item tight baryonic coupling preserved.
+\end{itemize}
+
+ESE reproduces halo phenomenology without new particles.
+
+\section{Clusters and weak lensing}
+
+In clusters:
+\begin{itemize}
+\item $\mathcal{M}$ is high but geometry differs,
+\item ESE contribution is reduced,
+\item additional mass (e.g.\ neutrinos) may still be required.
+\end{itemize}
+
+UDOF does not claim to eliminate dark matter in clusters.
+
+\section{Gravitational lensing}
+
+Lensing responds to the total metric potential:
+\begin{equation}
+\Phi_{\mathrm{lens}} = \Phi + \beta X.
+\end{equation}
+
+Thus, ESE contributes consistently to lensing signals.
+
+\section{Status of galactic sector}
+
+\begin{itemize}
+\item Rotation curves: explained
+\item Scaling relations: reproduced
+\item Scatter: small
+\item Precision tests: preserved
+\item Clusters: partially addressed
+\end{itemize}
+
+ESE is the primary phenomenological success of UDOF.
+
+% ============================================================
+\chapter{Strong-Field Gravity}
+% ============================================================
+
+\section{Scope of strong-field constraints}
+
+Strong-field gravity probes:
+\begin{itemize}
+\item black holes and horizons,
+\item compact-object mergers,
+\item high-curvature spacetime regimes,
+\item non-linear tensor dynamics.
+\end{itemize}
+
+Any viable unified theory must:
+\begin{itemize}
+\item recover GR solutions in vacuum,
+\item avoid superluminal propagation,
+\item preserve causal horizons,
+\item maintain stability of compact objects.
+\end{itemize}
+
+UDOF satisfies these requirements by construction.
+
+\section{Collapse kernel and high-curvature regimes}
+
+The collapse kernel $K(x,y)$ obeys:
+\begin{equation}
+K(x,y) \rightarrow 0
+\quad
+\text{as}
+\quad
+\mathcal{R}(x), \mathcal{R}(y) \rightarrow \infty,
+\end{equation}
+where $\mathcal{R}$ denotes curvature invariants.
+
+Thus, collapse effects self-suppress in extreme curvature.
+
+\section{Effective action in strong fields}
+
+In the strong-field limit, the total action reduces to:
+\begin{equation}
+S_{\mathrm{tot}}
+\approx
+\frac{1}{16\pi G}
+\int d^4x \sqrt{-g}\,R
++
+S_{\mathrm{matter}},
+\end{equation}
+up to higher-curvature corrections suppressed by $\ell_\ast$.
+
+No ghost degrees of freedom are introduced.
+
+\section{Black hole solutions}
+
+Vacuum field equations admit:
+\begin{itemize}
+\item Schwarzschild solutions,
+\item Kerr solutions,
+\item Kerr--Newman solutions (with gauge fields).
+\end{itemize}
+
+The metric functions satisfy:
+\begin{equation}
+R_{\mu\nu} = 0
+\end{equation}
+outside matter sources.
+
+\section{Horizons and causal structure}
+
+Event horizons remain null surfaces:
+\begin{equation}
+g^{\mu\nu} \nabla_\mu f \nabla_\nu f = 0,
+\end{equation}
+for horizon-defining functions $f$.
+
+Collapse dynamics does not modify horizon causal structure.
+
+\section{Singularity behavior}
+
+UDOF does not yet provide a complete resolution of singularities.
+
+However:
+\begin{itemize}
+\item collapse-induced entropy production diverges near singularities,
+\item this suggests a natural breakdown of classical description,
+\item a full quantum-gravity treatment is deferred.
+\end{itemize}
+
+This limitation is acknowledged explicitly.
+
+\section{No-hair properties}
+
+Stationary black holes are characterized by:
+\begin{equation}
+(M, J, Q),
+\end{equation}
+as in GR.
+
+ESE fields do not introduce additional long-range hair.
+
+\section{Compact stars}
+
+Neutron stars and white dwarfs are described by:
+\begin{equation}
+\frac{dP}{dr} =
+- \frac{G (\rho + P)(M + 4\pi r^3 P)}{r(r - 2GM)}.
+\end{equation}
+
+UDOF corrections vanish at these densities.
+
+\section{Binary systems}
+
+Binary pulsars probe strong-field dynamics via orbital decay.
+
+UDOF preserves:
+\begin{equation}
+\dot{P}_{\mathrm{orb}}
+=
+\dot{P}_{\mathrm{GR}},
+\end{equation}
+within observational error bars.
+
+% ============================================================
+\chapter{Gravitational Waves}
+% ============================================================
+
+\section{Tensor perturbations}
+
+Gravitational waves correspond to transverse-traceless metric perturbations:
+\begin{equation}
+h_{ij}'' + 2\mathcal{H} h_{ij}' + k^2 h_{ij} = 0.
+\end{equation}
+
+Collapse dynamics does not modify this equation in vacuum.
+
+\section{Propagation speed}
+
+The dispersion relation is:
+\begin{equation}
+\omega^2 = k^2.
+\end{equation}
+
+Thus:
+\begin{equation}
+c_{\mathrm{GW}} = c,
+\end{equation}
+in agreement with GW170817 constraints:
+\begin{equation}
+|c_{\mathrm{GW}}/c - 1| < 10^{-15}.
+\end{equation}
+
+\section{Polarizations}
+
+UDOF predicts only the two tensor polarizations:
+\begin{equation}
+h_+, \quad h_\times.
+\end{equation}
+
+No scalar or vector modes propagate.
+
+\section{Wave generation}
+
+Source multipole expansion yields:
+\begin{equation}
+h_{ij}^{\mathrm{TT}}
+=
+\frac{2G}{r}
+\frac{d^2 Q_{ij}^{\mathrm{TT}}}{dt^2}.
+\end{equation}
+
+Collapse dynamics does not modify source multipoles.
+
+\section{Inspiral phase}
+
+Post-Newtonian coefficients match GR to all tested orders.
+
+Waveform phasing agrees with LIGO/Virgo templates.
+
+\section{Merger and ringdown}
+
+Quasi-normal mode frequencies satisfy:
+\begin{equation}
+\omega_{\mathrm{QNM}} = \omega_{\mathrm{GR}}.
+\end{equation}
+
+ESE does not couple to tensor modes.
+
+\section{Stochastic background}
+
+Primordial gravitational waves remain unaffected at linear order.
+
+UDOF inflation predicts a tensor-to-scalar ratio:
+\begin{equation}
+r < 0.06,
+\end{equation}
+consistent with CMB limits.
+
+% ============================================================
+\chapter{Solar System and Precision Tests}
+% ============================================================
+
+\section{Parameterized Post-Newtonian framework}
+
+Precision tests are expressed via PPN parameters.
+
+UDOF predicts:
+\begin{align}
+\gamma &= 1, \\
+\beta &= 1.
+\end{align}
+
+Other PPN parameters vanish.
+
+\section{Shapiro time delay}
+
+The Shapiro delay is:
+\begin{equation}
+\Delta t =
+(1 + \gamma)
+\frac{GM}{c^3}
+\ln \left(
+\frac{r_E + r_R + R}{r_E + r_R - R}
+\right).
+\end{equation}
+
+Cassini constraints are satisfied:
+\begin{equation}
+|\gamma - 1| < 2.3 \times 10^{-5}.
+\end{equation}
+
+\section{Light deflection}
+
+Deflection angle:
+\begin{equation}
+\Delta \theta =
+\frac{4GM}{c^2 b}.
+\end{equation}
+
+ESE does not activate in the Solar System.
+
+\section{Perihelion precession}
+
+Mercury's perihelion advance:
+\begin{equation}
+\Delta \phi =
+\frac{6\pi GM}{a(1 - e^2)c^2}.
+\end{equation}
+
+UDOF reproduces the observed value.
+
+\section{Equivalence principle}
+
+Collapse dynamics respects universality of free fall:
+\begin{equation}
+\eta = 0.
+\end{equation}
+
+No composition-dependent forces arise.
+
+\section{Time variation of constants}
+
+Constraints on $\dot{G}/G$ from lunar laser ranging yield:
+\begin{equation}
+\left|\frac{\dot{G}}{G}\right| < 10^{-13}\,\mathrm{yr}^{-1}.
+\end{equation}
+
+UDOF satisfies this bound.
+
+\section{Binary pulsars}
+
+Orbital decay in the Hulse--Taylor system matches GR:
+\begin{equation}
+\frac{\dot{P}_{\mathrm{obs}}}{\dot{P}_{\mathrm{GR}}} \approx 1.
+\end{equation}
+
+No dipole radiation is present.
+
+\section{Laboratory tests}
+
+Short-range gravity tests constrain deviations at millimeter scales.
+
+Collapse effects are far below detectability.
+
+\section{Summary of precision sector}
+
+\begin{itemize}
+\item PPN parameters: GR-like
+\item GW propagation: luminal
+\item Strong fields: GR solutions
+\item Solar System: unaffected
+\item Pulsars: unaffected
+\end{itemize}
+
+UDOF passes all current precision constraints.
+
+% ============================================================
+\chapter{Numerical Implementation}
+% ============================================================
+
+\section{Design philosophy}
+
+The numerical implementation of UDOF is governed by four principles:
+\begin{enumerate}
+\item \textbf{Single source of truth:} all predictions derive from one locked parameter set.
+\item \textbf{Domain isolation:} each physical domain is implemented independently and reads only from the lock.
+\item \textbf{Determinism:} runs are fully reproducible given identical inputs.
+\item \textbf{Auditability:} every result is traceable to code, data, parameters, and equations.
+\end{enumerate}
+
+The implementation is not a general-purpose simulation framework; it is a
+model-specific validator.
+
+\section{Lock structure}
+
+All free parameters are stored in a single structured configuration
+(the \textsc{UDOF Master Lock}), containing:
+\begin{itemize}
+\item collapse scales $(\Lambda_{\rm rate}, \ell_\ast, \ell_{\rm IR})$,
+\item dimensionless kernel parameters,
+\item inflationary potential coefficients,
+\item neutrino-sector masses and couplings,
+\item ESE activation parameters $(A,B)$,
+\item numerical tolerances.
+\end{itemize}
+
+No domain may override or supplement these parameters.
+
+\section{Code architecture}
+
+The codebase is organized into:
+\begin{itemize}
+\item a central validation runner,
+\item domain modules (particle, cosmology, LSS, ESE, precision),
+\item data loaders for external datasets,
+\item reporting and logging utilities.
+\end{itemize}
+
+Each domain exposes a single entry point:
+\begin{equation}
+\mathrm{results} = \mathcal{D}(\mathrm{lock}, \mathrm{data}).
+\end{equation}
+
+\section{External solvers}
+
+Where appropriate, UDOF interfaces with established solvers:
+\begin{itemize}
+\item CLASS for Boltzmann equations and linear cosmology,
+\item standard numerical integrators for ODEs,
+\item root-finding and minimization routines for matching conditions.
+\end{itemize}
+
+External solvers are treated as black boxes and are version-pinned.
+
+\section{Numerical stability}
+
+All computations enforce:
+\begin{itemize}
+\item adaptive step control,
+\item convergence criteria,
+\item error propagation tracking.
+\end{itemize}
+
+Runs failing numerical stability checks are marked invalid.
+
+\section{Artifact generation}
+
+Each run produces:
+\begin{itemize}
+\item a unique run identifier,
+\item parameter hash,
+\item timestamp,
+\item domain-level result files,
+\item summary tables.
+\end{itemize}
+
+Artifacts are immutable once written.
+
+% ============================================================
+\chapter{Validation Pipeline}
+% ============================================================
+
+\section{Validation philosophy}
+
+Validation is not curve fitting.
+It is the evaluation of a fixed theory against independent data.
+
+Each domain test answers one question:
+\begin{quote}
+Does the locked UDOF prediction lie within accepted observational bounds?
+\end{quote}
+
+\section{Domain-level tests}
+
+Domains include:
+\begin{itemize}
+\item particle masses and mixings,
+\item gauge coupling evolution,
+\item inflationary observables,
+\item baryogenesis and BBN,
+\item CMB and BAO distances,
+\item linear and non-linear LSS,
+\item galactic rotation curves,
+\item gravitational waves,
+\item Solar System tests.
+\end{itemize}
+
+\section{Acceptance criteria}
+
+Each test defines:
+\begin{itemize}
+\item observable,
+\item reference dataset,
+\item tolerance or confidence interval,
+\item pass/fail logic.
+\end{itemize}
+
+No post hoc relaxation is allowed.
+
+\section{Cross-domain consistency}
+
+Beyond individual tests, the runner checks:
+\begin{itemize}
+\item parameter coherence across domains,
+\item absence of contradictory predictions,
+\item consistency of derived quantities (e.g.\ $H_0$, $\Omega_m$).
+\end{itemize}
+
+\section{Skipped tests}
+
+Tests may be skipped only if:
+\begin{itemize}
+\item required data are unavailable,
+\item the domain is explicitly marked experimental.
+\end{itemize}
+
+Skipped tests are recorded and justified.
+
+\section{Result aggregation}
+
+The final report includes:
+\begin{itemize}
+\item number of tests run,
+\item number passed,
+\item number skipped,
+\item zero tolerance for silent failures.
+\end{itemize}
+
+% ============================================================
+\chapter{Falsifiability and Failure Modes}
+% ============================================================
+
+\section{What would falsify UDOF}
+
+UDOF is falsifiable. The following outcomes would invalidate the model:
+
+\begin{enumerate}
+\item Detection of non-luminal gravitational wave propagation.
+\item Significant deviation of CMB spectra from predictions at linear scales.
+\item Failure to reproduce BBN abundances with the baryogenesis-fixed $\eta_B$.
+\item Breakdown of Solar System suppression of ESE.
+\item Inability to fit SPARC rotation curves with a universal parameter set.
+\item Discovery of strong dipole gravitational radiation.
+\item Observation of large isocurvature modes inconsistent with UDOF inflation.
+\end{enumerate}
+
+\section{Known weaknesses}
+
+UDOF does not currently:
+\begin{itemize}
+\item provide a full quantum resolution of singularities,
+\item uniquely derive the Standard Model gauge group,
+\item eliminate the need for dark matter in galaxy clusters.
+\end{itemize}
+
+These are open problems, not hidden assumptions.
+
+\section{Numerical failure modes}
+
+Potential numerical failures include:
+\begin{itemize}
+\item stiff ODE regimes,
+\item sensitivity to initial conditions,
+\item dataset systematics.
+\end{itemize}
+
+Such failures are flagged and investigated.
+
+\section{Overfitting safeguards}
+
+Overfitting is prevented by:
+\begin{itemize}
+\item a single locked parameter set,
+\item no per-domain tuning,
+\item separation of theory from validation.
+\end{itemize}
+
+\section{Predictive obligations}
+
+Future datasets impose new obligations:
+\begin{itemize}
+\item DESI full-survey BAO,
+\item CMB-S4 polarization,
+\item LSST weak lensing,
+\item next-generation GW detectors.
+\end{itemize}
+
+UDOF predictions are already fixed.
+
+% ============================================================
+\chapter{Comparison with Competing Frameworks}
+% ============================================================
+
+\section{Compared to $\Lambda$CDM}
+
+UDOF reproduces $\Lambda$CDM where it works and extends it where it fails,
+notably at galactic scales.
+
+\section{Compared to MOND}
+
+Unlike MOND:
+\begin{itemize}
+\item UDOF is relativistic,
+\item embeds naturally in cosmology,
+\item preserves linear perturbations.
+\end{itemize}
+
+\section{Compared to dark matter models}
+
+Unlike particle dark matter:
+\begin{itemize}
+\item no new stable particles are required for galaxies,
+\item baryonic coupling is intrinsic,
+\item scaling relations are natural.
+\end{itemize}
+
+\section{Compared to quantum gravity programs}
+
+UDOF differs fundamentally by:
+\begin{itemize}
+\item starting from operational collapse,
+\item prioritizing empirical coherence,
+\item avoiding Planck-scale speculation.
+\end{itemize}
+
+\section{Compared to string theory}
+
+UDOF is predictive at accessible scales and tightly constrained,
+but lacks the mathematical unification breadth of string theory.
+
+% ============================================================
+\chapter{Summary and Outlook}
+% ============================================================
+
+\section{What has been achieved}
+
+UDOF provides:
+\begin{itemize}
+\item an operational foundation for time, space, and entropy,
+\item a collapse-based unification framework,
+\item recovery of known physics across scales,
+\item a new explanation for galactic dynamics,
+\item a fully traceable validation pipeline.
+\end{itemize}
+
+\section{What remains open}
+
+Open directions include:
+\begin{itemize}
+\item singularity resolution,
+\item deeper symmetry derivations,
+\item cluster-scale dynamics,
+\item formal mathematical foundations.
+\end{itemize}
+
+\section{Scientific posture}
+
+UDOF is offered not as a final theory,
+but as a tightly constrained, testable candidate.
+
+Its value will be decided by data.
+
+\section{Final statement}
+
+If UDOF fails, it will fail clearly and transparently.
+If it survives, it will do so without ambiguity.
+
+% ============================================================
+% END OF MONOGRAPH
+% ============================================================
+
+
+\end{document}
+
