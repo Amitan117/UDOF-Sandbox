@@ -37,7 +37,8 @@ def run(ctx: DomainContext) -> DomainResult:
     ckm_angles = ctx.formulas.extract_angles(V_tsi)
 
     # Derive CP phases from collapse dynamics
-    # Uses parameters from lock file (cp_asymmetry_ckm, cp_asymmetry_pmns)
+    # Uses parameters from lock file; preferred path derives δ from the same
+    # collapse-kernel overlap phase arg(K_ij) that appears in the GKSL generator
     cp_derivation = CPViolationDerivation(ctx.locks)
     cp_result = cp_derivation.derive_complete(ckm_angles, pmns_angles)
 
@@ -54,7 +55,7 @@ def run(ctx: DomainContext) -> DomainResult:
         value=cp_result.delta_ckm,
         expected=f"δ_CKM ≈ {delta_ckm_pdg:.2f} rad (PDG 2024), error < 50%",
         error=delta_ckm_error_pct,
-        notes=f"Derived from collapse dynamics: δ = 1.0 + cp_asymmetry_ckm * 2.0. Error: {delta_ckm_error_pct:.1f}%"
+        notes=f"Derived from collapse-kernel overlap: δ = arg(K_ij) (analytic closed form when available). Error: {delta_ckm_error_pct:.1f}%"
     ))
     if ckm_phase_pass:
         result.n_pass += 1
@@ -94,7 +95,7 @@ def run(ctx: DomainContext) -> DomainResult:
         value=cp_result.delta_pmns,
         expected=f"δ_PMNS ≈ {delta_pmns_pdg:.2f} rad (PDG 2024), error < 50%",
         error=delta_pmns_error_pct,
-        notes=f"Derived from collapse dynamics: δ = 1.2 + cp_asymmetry_pmns * 1.5. Error: {delta_pmns_error_pct:.1f}%"
+        notes=f"Derived from collapse-kernel overlap: δ = arg(K_ij) (analytic closed form when available). Error: {delta_pmns_error_pct:.1f}%"
     ))
     if pmns_phase_pass:
         result.n_pass += 1
