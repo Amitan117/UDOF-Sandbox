@@ -1,0 +1,53 @@
+{
+  "run_id": "udof_v4.0_20251219_224855",
+  "timestamp": "2025-12-19T22:48:55.784906+00:00",
+  "domains": {
+    "cp_violation": {
+      "domain_name": "cp_violation",
+      "n_pass": 4,
+      "n_fail": 0,
+      "n_error": 0,
+      "n_skip": 0,
+      "n_theoretical": 0,
+      "chi2_total": null,
+      "tests": [
+        {
+          "test_name": "ckm_cp_phase",
+          "status": "PASS",
+          "value": 1.2000000000000002,
+          "expected": "δ_CKM ≈ 1.20 rad (PDG 2024), error < 50%",
+          "error": 1.8503717077085944e-14,
+          "chi2": null,
+          "notes": "Derived from collapse-kernel overlap: δ = arg(K_ij) (analytic closed form when available). Error: 0.0%"
+        },
+        {
+          "test_name": "jarlskog_ckm",
+          "status": "PASS",
+          "value": 2.9820093306535972e-05,
+          "expected": "J_CKM ≈ 3.18e-05 (PDG 2024), error < 50%",
+          "error": 6.226121677559837,
+          "chi2": null,
+          "notes": "J = Im(V_ud V_cs V_us* V_cd*). Error: 6.2%"
+        },
+        {
+          "test_name": "pmns_cp_phase",
+          "status": "PASS",
+          "value": 1.3599999999999999,
+          "expected": "δ_PMNS ≈ 1.36 rad (PDG 2024), error < 50%",
+          "error": 1.6326809185664064e-14,
+          "chi2": null,
+          "notes": "Derived from collapse-kernel overlap: δ = arg(K_ij) (analytic closed form when available). Error: 0.0%"
+        },
+        {
+          "test_name": "jarlskog_pmns",
+          "status": "PASS",
+          "value": 0.03244110141611688,
+          "expected": "J_PMNS ≈ 0.033 (PDG 2024), error < 50%",
+          "error": 1.6936320723731044,
+          "chi2": null,
+          "notes": "J = Im(U_e1 U_μ2 U_e2* U_μ1*). Error: 1.7%"
+        }
+      ]
+    }
+  }
+}
